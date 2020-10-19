@@ -1,0 +1,88 @@
+apply plugin: 'com.android.application'
+apply from: 'share.gradle'
+//apply from: 'and_res_guard.gradle'
+
+def ext = rootProject.ext
+def sign = ext.sign
+def config = ext.config
+def support = ext.support
+
+android {
+    //签名打包
+    signingConfigs {
+        debug {
+            keyAlias sign.keyAlias
+            keyPassword sign.keyPassword
+            storeFile file(sign.storeFile)
+            storePassword sign.storePassword
+        }
+        release {
+            keyAlias sign.keyAlias
+            keyPassword sign.keyPassword
+            storeFile file(sign.storeFile)
+            storePassword sign.storePassword
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+    }
+    compileSdkVersion config.compileSdkVersion
+    buildToolsVersion config.buildToolsVersion
+    defaultConfig {
+        applicationId config.applicationId
+        minSdkVersion config.minSdkVersion
+        targetSdkVersion config.targetSdkVersion
+        versionCode config.versionCode
+        versionName config.versionName
+        multiDexEnabled config.multiDexEnabled
+        useLibrary 'org.apache.http.legacy'
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled config.minifyEnabled
+            zipAlignEnabled config.zipAlignEnabled
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
+        }
+    }
+    dataBinding {
+        enabled config.dataBinding
+    }
+    //签名打包自动命名
+    android.applicationVariants.all { variant ->
+        variant.outputs.all {
+            def date = new Date().format("yyyyMMdd", TimeZone.getTimeZone("GMT+08"))
+            if (variant.buildType.name.equals('debug')) {
+                outputFileName = config.appName + "_${date}_${versionName}_${versionCode}_debug.apk"
+            }
+            if (variant.buildType.name.equals('release')) {
+                outputFileName = config.appName + "_${date}_${versionName}_${versionCode}_release.apk"
+            }
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation support["arouter"]
+    annotationProcessor support["aroutercompiler"]
+    implementation project(':AfSelector')
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}

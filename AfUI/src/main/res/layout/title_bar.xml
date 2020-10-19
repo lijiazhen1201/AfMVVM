@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:binding="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="titleBar"
+            type="cn.appoa.afui.titlebar.TitleBarViewModel" />
+
+    </data>
+
+    <RelativeLayout
+        android:id="@+id/rl_bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorTitleBarBg"
+        android:paddingTop="@{titleBar.getTitleBarModel().titleBarPaddingTop}"
+        android:visibility="@{titleBar.getTitleBarModel().titleBarVisibleObservable}">
+
+        <TextView
+            android:id="@+id/tv_bar_title"
+            style="@style/SimpleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/height_title_bar"
+            android:layout_centerHorizontal="true"
+            android:paddingLeft="@dimen/height_title_bar_padding"
+            android:paddingRight="@dimen/height_title_bar_padding"
+            android:text="@{titleBar.getTitleBarModel().titleText}"
+            android:textSize="@dimen/text_large"
+            android:visibility="@{titleBar.getTitleBarModel().titleTextVisibleObservable}" />
+
+        <TextView
+            android:id="@+id/tv_bar_back"
+            style="@style/SimpleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/height_title_bar"
+            android:layout_alignParentLeft="true"
+            android:paddingLeft="@dimen/height_title_bar_padding"
+            android:paddingRight="@dimen/height_title_bar_padding"
+            android:text="@{titleBar.getTitleBarModel().leftText}"
+            android:textSize="@dimen/text_normal"
+            android:visibility="@{titleBar.getTitleBarModel().leftTextVisibleObservable}"
+            binding:onClickCommand="@{titleBar.backOnClick}" />
+
+        <TextView
+            android:id="@+id/tv_bar_menu"
+            style="@style/SimpleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/height_title_bar"
+            android:layout_alignParentRight="true"
+            android:paddingLeft="@dimen/height_title_bar_padding"
+            android:paddingRight="@dimen/height_title_bar_padding"
+            android:text="@{titleBar.getTitleBarModel().rightText}"
+            android:textSize="@dimen/text_normal"
+            android:visibility="@{titleBar.getTitleBarModel().rightTextVisibleObservable}"
+            binding:onClickCommand="@{titleBar.menuOnClick}" />
+
+        <ImageView
+            android:id="@+id/iv_bar_back"
+            android:layout_width="@dimen/height_title_bar"
+            android:layout_height="@dimen/height_title_bar"
+            android:layout_alignParentLeft="true"
+            android:scaleType="centerInside"
+            android:src="@{titleBar.getTitleBarModel().leftImage}"
+            android:visibility="@{titleBar.getTitleBarModel().leftImageVisibleObservable}"
+            binding:onClickCommand="@{titleBar.backOnClick}" />
+
+        <ImageView
+            android:id="@+id/iv_bar_menu"
+            android:layout_width="@dimen/height_title_bar"
+            android:layout_height="@dimen/height_title_bar"
+            android:layout_alignParentRight="true"
+            android:scaleType="centerInside"
+            android:src="@{titleBar.getTitleBarModel().rightImage}"
+            android:visibility="@{titleBar.getTitleBarModel().rightImageVisibleObservable}"
+            binding:onClickCommand="@{titleBar.menuOnClick}" />
+
+        <ImageView
+            android:id="@+id/iv_bar_menu2"
+            android:layout_width="@dimen/height_title_bar"
+            android:layout_height="@dimen/height_title_bar"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/height_title_bar"
+            android:scaleType="centerInside"
+            android:src="@{titleBar.getTitleBarModel().rightImage2}"
+            android:visibility="@{titleBar.getTitleBarModel().rightImage2VisibleObservable}"
+            binding:onClickCommand="@{titleBar.menuOnClick2}" />
+
+        <View
+            android:id="@+id/line_bar"
+            style="@style/HorizontalLine"
+            android:layout_marginTop="@dimen/height_title_bar"
+            android:visibility="@{titleBar.getTitleBarModel().lineVisibleObservable}" />
+
+    </RelativeLayout>
+
+</layout>

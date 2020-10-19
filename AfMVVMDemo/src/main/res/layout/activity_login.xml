@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:binding="http://schemas.android.com/apk/res-auto"
+    xmlns:toos="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="cn.appoa.afmvvm.viewmodel.LoginViewModel" />
+
+        <import type="android.view.View" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/title_bar"
+            layout="@layout/title_bar"
+            binding:titleBar="@{viewModel.getTitleBarViewModel()}" />
+
+        <ScrollView
+            android:id="@+id/mScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorBgLighterGray"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/ll_login_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_normal"
+                    android:background="@drawable/layer_list_edittext_bg_divider"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/et_login_phone"
+                        style="@style/SimpleTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:drawablePadding="@dimen/padding_normal"
+                        android:gravity="center_vertical"
+                        android:hint="@{viewModel.getModel().phoneHint}"
+                        android:inputType="numberSigned"
+                        android:maxLength="11"
+                        android:padding="@dimen/padding_big"
+                        android:text="@={viewModel.getModel().phone}" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_login_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_normal"
+                    android:background="@drawable/layer_list_edittext_bg_divider"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:visibility="@{viewModel.getModel().loginType==0?View.VISIBLE:View.GONE}">
+
+                    <EditText
+                        android:id="@+id/et_login_code"
+                        style="@style/SimpleTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:drawablePadding="@dimen/padding_normal"
+                        android:gravity="center_vertical"
+                        android:hint="@{viewModel.getModel().codeHint}"
+                        android:inputType="numberSigned"
+                        android:maxLength="6"
+                        android:padding="@dimen/padding_big"
+                        android:text="@={viewModel.getModel().code}" />
+
+                    <TextView
+                        android:id="@+id/tv_login_code"
+                        style="@style/SimpleTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:enabled="@{viewModel.getModel().getCodeEnabled}"
+                        android:padding="@dimen/padding_big"
+                        android:text="@{viewModel.getModel().getCode}"
+                        android:textColor="@{viewModel.getModel().getCodeEnabled?@color/colorTheme:@color/colorTextDarkerGray}"
+                        binding:onClickCommand="@{viewModel.getCodeClick}" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_login_pwd"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_normal"
+                    android:background="@drawable/layer_list_edittext_bg_divider"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:visibility="@{viewModel.getModel().loginType==1?View.VISIBLE:View.GONE}">
+
+                    <EditText
+                        android:id="@+id/et_login_pwd"
+                        style="@style/SimpleTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:drawablePadding="@dimen/padding_normal"
+                        android:gravity="center_vertical"
+                        android:hint="@{viewModel.getModel().passwordHint}"
+                        android:maxLength="32"
+                        android:padding="@dimen/padding_big"
+                        android:password="true"
+                        android:text="@={viewModel.getModel().password}" />
+
+                    <TextView
+                        android:id="@+id/tv_login_find_pwd"
+                        style="@style/SimpleTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:padding="@dimen/padding_big"
+                        android:text="忘记密码？"
+                        android:textColor="@color/colorTheme"
+                        binding:onClickCommand="@{viewModel.findPwdClick}" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_login_confirm"
+                    style="@style/SimpleTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_normal"
+                    android:layout_margin="@dimen/padding_big"
+                    android:background="@drawable/shape_solid_theme_50dp"
+                    android:text="@{viewModel.getModel().loginConfirm}"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/text_big"
+                    binding:onClickCommand="@{viewModel.loginClick}" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_login_register"
+                        style="@style/SimpleTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
+                        android:padding="@dimen/padding_big"
+                        android:text="账号注册"
+                        android:textColor="@color/colorTextDarkerGray"
+                        binding:onClickCommand="@{viewModel.registerClick}" />
+
+                    <TextView
+                        android:id="@+id/tv_login_type"
+                        style="@style/SimpleTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical|right"
+                        android:padding="@dimen/padding_big"
+                        android:text="@{viewModel.getModel().loginTypeText}"
+                        android:textColor="@color/colorTextDarkerGray"
+                        binding:onClickCommand="@{viewModel.loginTypeClick}" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_login_third"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:gravity="center_horizontal|bottom"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/height_little"
+                        android:layout_marginRight="@dimen/height_little"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <View
+                            style="@style/HorizontalLine"
+                            android:layout_weight="1" />
+
+                        <TextView
+                            style="@style/SimpleTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/padding_large"
+                            android:text="第三方账号登录"
+                            android:textColor="@color/colorTextLighterGray" />
+
+                        <View
+                            style="@style/HorizontalLine"
+                            android:layout_weight="1" />
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:gravity="center"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/iv_login_qq"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:padding="@dimen/padding_big"
+                            android:src="@drawable/login_qq"
+                            binding:onClickCommand="@{viewModel.loginQqClick}" />
+
+                        <ImageView
+                            android:id="@+id/iv_login_wx"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:padding="@dimen/padding_big"
+                            android:src="@drawable/login_wx"
+                            binding:onClickCommand="@{viewModel.loginWxClick}" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</layout>

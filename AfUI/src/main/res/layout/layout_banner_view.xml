@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cn.appoa.afui.widget.layout.RatioRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mBannerRatio"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:ratio_height="1"
+    app:ratio_width="1">
+
+    <com.youth.banner.Banner
+        android:id="@+id/mBanner"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:delay_time="5000"
+        app:indicator_drawable_selected="@drawable/point_selected"
+        app:indicator_drawable_unselected="@drawable/point_normal"
+        app:is_auto_play="true" />
+
+</cn.appoa.afui.widget.layout.RatioRelativeLayout>

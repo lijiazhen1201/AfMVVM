@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#ffffff</color>
+    <color name="colorPrimaryDark">#ffffff</color>
+    <color name="colorAccent">#ffffff</color>
+    <!-- 侧滑返回渐变背景色 -->
+    <color name="sliding_back_start">#00000000</color>
+    <!-- 侧滑返回渐变背景色 -->
+    <color name="sliding_back_end">#4c000000</color>
+    <!-- app主题颜色 -->
+    <color name="colorTheme">#ffffff</color>
+    <!-- app主题颜色(按下) -->
+    <color name="colorThemePressed">#d5d5d5</color>
+    <!-- app主题颜色(深色) -->
+    <color name="colorThemeDarker">#ffffff</color>
+    <!-- app主题颜色(浅色) -->
+    <color name="colorThemeLighter">#ffffff</color>
+    <!-- 字体颜色(文字) -->
+    <color name="colorText">#333333</color>
+    <!-- 字体颜色(深灰) -->
+    <color name="colorTextDarkerGray">#666666</color>
+    <!-- 字体颜色(浅灰) -->
+    <color name="colorTextLighterGray">#aaaaaa</color>
+    <!-- 字体颜色(提示) -->
+    <color name="colorTextHint">#bbbbbb</color>
+    <!-- 背景颜色 -->
+    <color name="colorBgLighterGray">#f6f6f6</color>
+    <!-- 按下时的灰色 -->
+    <color name="colorGrayPressed">#d5d5d5</color>
+    <!-- 白色 -->
+    <color name="colorWhite">#ffffff</color>
+    <!-- 黑色 -->
+    <color name="colorBlack">#000000</color>
+    <!-- 分割线颜色 -->
+    <color name="colorDivider">#e6e6e6</color>
+    <!-- 透明色 -->
+    <color name="colorTransparent">#00000000</color>
+    <!-- 半透明色 -->
+    <color name="colorTranslucence">#50000000</color>
+    <!-- 默认图背景颜色 -->
+    <color name="colorDefaultImgBg">#eeeeee</color>
+    <!-- 默认图边框颜色 -->
+    <color name="colorDefaultImgLine">#eeeeee</color>
+    <!-- 标题栏背景色 -->
+    <color name="colorTitleBarBg">#ffffff</color>
+    <!-- 标题栏标题颜色 -->
+    <color name="colorTitleBarTextTitle">#333333</color>
+    <!-- 标题栏菜单颜色 -->
+    <color name="colorTitleBarTextMenu">#666666</color>
+</resources>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="RatioRelativeLayout">
+        <attr name="ratio" />
+        <attr name="ratio_width" />
+        <attr name="ratio_height" />
+    </declare-styleable>
+
+</resources>

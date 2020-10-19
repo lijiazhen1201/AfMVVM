@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 轮播点宽高 -->
+    <dimen name="point_width_height">8dp</dimen>
+</resources>

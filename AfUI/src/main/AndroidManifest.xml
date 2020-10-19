@@ -1,0 +1,16 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="cn.appoa.afui">
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application>
+
+        <!-- 查看大图 -->
+        <activity
+            android:name="cn.appoa.afui.activity.ShowBigImageListActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppFullTheme" />
+
+    </application>
+
+</manifest>

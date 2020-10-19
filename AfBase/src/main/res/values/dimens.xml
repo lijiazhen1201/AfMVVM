@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 侧滑返回宽度 -->
+    <dimen name="sliding_back_width">8dp</dimen>
+    <!-- 圆角 -->
+    <dimen name="radius_little">2dp</dimen>
+    <dimen name="radius_small">5dp</dimen>
+    <dimen name="radius_normal">10dp</dimen>
+    <dimen name="radius_big">20dp</dimen>
+    <dimen name="radius_large">30dp</dimen>
+    <dimen name="radius_huge">40dp</dimen>
+    <dimen name="radius_great">50dp</dimen>
+    <!-- 字体 -->
+    <dimen name="text_tiny">6sp</dimen>
+    <dimen name="text_bit">8sp</dimen>
+    <dimen name="text_little">10sp</dimen>
+    <dimen name="text_small">12sp</dimen>
+    <dimen name="text_normal">14sp</dimen>
+    <dimen name="text_big">16sp</dimen>
+    <dimen name="text_large">18sp</dimen>
+    <dimen name="text_huge">20sp</dimen>
+    <dimen name="text_great">22sp</dimen>
+    <!-- 间距 -->
+    <dimen name="padding_tiny">1dp</dimen>
+    <dimen name="padding_bit">2dp</dimen>
+    <dimen name="padding_little">3dp</dimen>
+    <dimen name="padding_small">4dp</dimen>
+    <dimen name="padding_normal">8dp</dimen>
+    <dimen name="padding_big">12dp</dimen>
+    <dimen name="padding_large">16dp</dimen>
+    <dimen name="padding_huge">20dp</dimen>
+    <dimen name="padding_great">24dp</dimen>
+    <!-- 高度 -->
+    <dimen name="height_tiny">28dp</dimen>
+    <dimen name="height_bit">32dp</dimen>
+    <dimen name="height_little">36dp</dimen>
+    <dimen name="height_small">40dp</dimen>
+    <dimen name="height_normal">48dp</dimen>
+    <dimen name="height_big">52dp</dimen>
+    <dimen name="height_large">56dp</dimen>
+    <dimen name="height_huge">60dp</dimen>
+    <dimen name="height_great">64dp</dimen>
+    <!-- 其他 -->
+    <dimen name="height_72">72dp</dimen>
+    <dimen name="height_80">80dp</dimen>
+    <dimen name="height_88">88dp</dimen>
+    <dimen name="height_96">96dp</dimen>
+    <dimen name="height_100">100dp</dimen>
+    <dimen name="height_120">120dp</dimen>
+    <dimen name="height_140">140dp</dimen>
+    <dimen name="height_160">160dp</dimen>
+    <dimen name="height_180">180dp</dimen>
+    <dimen name="height_200">200dp</dimen>
+    <dimen name="height_status_bar">20dp</dimen>
+    <dimen name="height_navigation_bar">48dp</dimen>
+    <dimen name="height_divider">0.5dp</dimen>
+    <dimen name="height_divider_large">1dp</dimen>
+    <dimen name="height_title_bar">48dp</dimen>
+    <dimen name="height_title_bar_padding">12dp</dimen>
+    <dimen name="height_title_bar_title">18sp</dimen>
+    <dimen name="height_title_bar_menu">14sp</dimen>
+
+</resources>

@@ -1,0 +1,36 @@
+apply plugin: 'com.android.library'
+
+def ext = rootProject.ext
+def sign = ext.sign
+def config = ext.config
+def support = ext.support
+
+android {
+    compileSdkVersion config.compileSdkVersion
+    buildToolsVersion config.buildToolsVersion
+    defaultConfig {
+        minSdkVersion config.minSdkVersion
+        targetSdkVersion config.targetSdkVersion
+        versionCode config.versionCode
+        versionName config.versionName
+    }
+    buildTypes {
+        release {
+            minifyEnabled config.minifyEnabled
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    dataBinding {
+        enabled config.dataBinding
+    }
+}
+
+dependencies {
+    api fileTree(dir: 'libs', include: ['*.jar'])
+    api project(':AfUtils')
+    api support["okgo"]
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}

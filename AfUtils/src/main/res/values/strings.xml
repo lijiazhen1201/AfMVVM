@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="crash_happened">很抱歉,程序出现异常,即将退出！</string>
+    <string name="open_call_phone_permission">请开启拨打电话权限</string>
+    <string name="open_send_sms_permission">请开启发短信权限</string>
+    <string name="choose_email_title">请选择邮件类应用</string>
+    <string name="no_installed_qq">尚未安装QQ，请先下载安装QQ</string>
+    <string name="no_installed_we_chat">尚未安装微信，请先下载安装微信</string>
+    <string name="copy_text_success">复制成功</string>
+    <string name="open_save_file_permission">请开启文件存储权限</string>
+    <string name="file_download_failed">下载失败</string>
+    <string name="file_download_success">下载成功，文件保存在%1$s</string>
+    <string name="clear_all_cache_already">已清除全部缓存！</string>
+    <string name="clear_all_cache_success">清除成功啦！</string>
+</resources>

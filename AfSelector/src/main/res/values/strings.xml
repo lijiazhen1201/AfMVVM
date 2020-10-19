@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="af_selector_image">图片</string>
+	<string name="af_selector_video">视频</string>
+    <string name="af_selector_image_and_video">图片和视频</string>
+    <string name="af_selector_confirm">确定</string>
+    <string name="af_selector_cancel">取消</string>
+    <string name="af_selector_preview">预览</string>
+    <string name="af_selector_camera">拍照</string>
+    <string name="af_selector_select">选择</string>
+    <string name="af_selector_preview_picture">图片预览</string>
+    <string name="af_selector_one_piece">张</string>
+    <string name="af_selector_all_image">全部图片</string>
+    <string name="af_selector_all_video">全部视频</string>
+    <string name="af_selector_all_image_video">图片和视频</string>
+    <string name="af_selector_loading_picture">正在加载图片，请稍后...</string>
+    <string name="af_selector_most_choose">最多选择</string>
+    <string name="af_selector_choose_hint">提示</string>
+    <string name="af_selector_clip_video">编辑视频</string>
+    <string name="af_selector_clip_video_msg">只能选择%1$s秒内的视频，需进行编辑</string>
+    <string name="af_selector_no_read_camera_permission">该相册需要赋予访问存储的权限，请到“设置”>“应用”>“权限”中配置权限。</string>
+    <string name="af_selector_not_found_camera_sd_card">未检测到SD卡，请先插入SD卡!</string>
+
+</resources>

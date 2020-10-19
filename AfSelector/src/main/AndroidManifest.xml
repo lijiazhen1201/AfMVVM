@@ -1,0 +1,32 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="cn.appoa.afselector" >
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+
+    <application >
+
+        <!-- 图片多选 -->
+        <activity
+            android:name="cn.appoa.afselector.ImageSelectorActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppBlackTheme" />
+        <!-- 图片多选预览 -->
+        <activity
+            android:name="cn.appoa.afselector.PreviewActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppBlackTheme" />
+        <!-- 图片多选裁剪 -->
+        <activity
+            android:name="cn.appoa.afselector.ClipImageActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppBlackTheme" />
+        <!-- 图片多选视频裁剪 -->
+        <activity
+            android:name="cn.appoa.afselector.ClipVideoActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppBlackTheme" />
+
+    </application>
+
+</manifest>

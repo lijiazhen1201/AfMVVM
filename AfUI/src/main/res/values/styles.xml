@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- pop上进 -->
+    <style name="PopAnimTopIn">
+        <item name="android:windowEnterAnimation">@anim/anim_pop_push_top_in</item>
+        <item name="android:windowExitAnimation">@anim/anim_pop_push_top_out</item>
+    </style>
+
+    <!-- dialog右进 -->
+    <style name="Dialog_Animation_Right" mce_bogus="1" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/dialog_anim_right_enter</item>
+        <item name="android:windowExitAnimation">@anim/dialog_anim_right_exit</item>
+    </style>
+
+    <!-- dialog左进 -->
+    <style name="Dialog_Animation_Left" mce_bogus="1" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/dialog_anim_left_enter</item>
+        <item name="android:windowExitAnimation">@anim/dialog_anim_left_exit</item>
+    </style>
+</resources>

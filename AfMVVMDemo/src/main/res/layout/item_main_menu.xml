@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:binding="http://schemas.android.com/apk/res-auto"
+    xmlns:toos="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="mainMenu"
+            type="cn.appoa.afmvvm.bean.MainMenu" />
+
+        <variable
+            name="viewModel"
+            type="cn.appoa.afmvvm.viewmodel.MainViewModel" />
+
+    </data>
+
+    <TextView
+        android:id="@+id/tv_main_menu"
+        style="@style/SimpleTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/pressed_bg_white_gray"
+        android:drawableRight="@drawable/next_right"
+        android:drawablePadding="@dimen/padding_normal"
+        android:gravity="center_vertical"
+        android:minHeight="@dimen/height_normal"
+        android:padding="@dimen/padding_big"
+        android:singleLine="false"
+        android:text="@{mainMenu.name}"
+        binding:onClickCommandValue="@{viewModel.menuItemClick}"
+        binding:onClickValue="@{mainMenu}"
+        toos:text="主页菜单" />
+
+</layout>

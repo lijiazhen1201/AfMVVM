@@ -1,0 +1,15 @@
+<resources>
+    <string name="dialog_hint">Hint</string>
+    <string name="dialog_cancel">Cancel</string>
+    <string name="dialog_confirm">Confirm</string>
+    <string name="upload_camera">Take Photo</string>
+    <string name="upload_album">Select Album</string>
+    <string name="upload_video_camera">Record Video</string>
+    <string name="upload_video_local">Select Video</string>
+    <string name="upload_cancel">Cancel</string>
+    <string name="baidu_map">Baidu Map</string>
+    <string name="gaode_map">Amap</string>
+    <string name="qq_map">Tencent Map</string>
+    <string name="input_pay_pwd">Input Pay Password</string>
+    <string name="forget_pay_pwd">Forget Pay Password</string>
+</resources>

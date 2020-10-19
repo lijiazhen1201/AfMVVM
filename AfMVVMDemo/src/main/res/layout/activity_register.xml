@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:binding="http://schemas.android.com/apk/res-auto"
+    xmlns:toos="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="cn.appoa.afmvvm.viewmodel.RegisterViewModel" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/title_bar"
+            layout="@layout/title_bar"
+            binding:titleBar="@{viewModel.getTitleBarViewModel()}" />
+
+        <ScrollView
+            android:id="@+id/mScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:id="@+id/ll_login_phone"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_normal"
+                    android:background="@drawable/layer_list_edittext_bg_divider"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/et_login_phone"
+                        style="@style/SimpleTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:drawablePadding="@dimen/padding_normal"
+                        android:gravity="center_vertical"
+                        android:hint="@{viewModel.getModel().phoneHint}"
+                        android:inputType="numberSigned"
+                        android:maxLength="11"
+                        android:padding="@dimen/padding_big"
+                        android:text="@={viewModel.getModel().phone}" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_login_code"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_normal"
+                    android:background="@drawable/layer_list_edittext_bg_divider"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/et_login_code"
+                        style="@style/SimpleTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:drawablePadding="@dimen/padding_normal"
+                        android:gravity="center_vertical"
+                        android:hint="@{viewModel.getModel().codeHint}"
+                        android:inputType="numberSigned"
+                        android:maxLength="6"
+                        android:padding="@dimen/padding_big"
+                        android:text="@={viewModel.getModel().code}" />
+
+                    <TextView
+                        android:id="@+id/tv_login_code"
+                        style="@style/SimpleTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:enabled="@{viewModel.getModel().getCodeEnabled}"
+                        android:padding="@dimen/padding_big"
+                        android:text="@{viewModel.getModel().getCode}"
+                        android:textColor="@{viewModel.getModel().getCodeEnabled?@color/colorTheme:@color/colorTextDarkerGray}"
+                        binding:onClickCommand="@{viewModel.getCodeClick}" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_login_pwd"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_normal"
+                    android:background="@drawable/layer_list_edittext_bg_divider"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/et_login_pwd"
+                        style="@style/SimpleTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:drawablePadding="@dimen/padding_normal"
+                        android:gravity="center_vertical"
+                        android:hint="@{viewModel.getModel().passwordHint}"
+                        android:maxLength="32"
+                        android:padding="@dimen/padding_big"
+                        android:password="true"
+                        android:text="@={viewModel.getModel().password}" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_login_pwd2"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_normal"
+                    android:background="@drawable/layer_list_edittext_bg_divider"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:visibility="@{viewModel.getModel().password2Visible}">
+
+                    <EditText
+                        android:id="@+id/et_login_pwd2"
+                        style="@style/SimpleTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:drawablePadding="@dimen/padding_normal"
+                        android:gravity="center_vertical"
+                        android:hint="@{viewModel.getModel().passwordHint2}"
+                        android:maxLength="32"
+                        android:padding="@dimen/padding_big"
+                        android:password="true"
+                        android:text="@={viewModel.getModel().password2}" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/ll_login_invite"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_normal"
+                    android:background="@drawable/layer_list_edittext_bg_divider"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:visibility="@{viewModel.getModel().registerAgreementVisible}">
+
+                    <EditText
+                        android:id="@+id/et_login_invite"
+                        style="@style/SimpleTextView"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:drawablePadding="@dimen/padding_normal"
+                        android:gravity="center_vertical"
+                        android:hint="请输入邀请码"
+                        android:padding="@dimen/padding_big"
+                        android:text="@={viewModel.getModel().inviteCode}" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tv_login_confirm"
+                    style="@style/SimpleTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_normal"
+                    android:layout_margin="@dimen/padding_big"
+                    android:background="@drawable/shape_solid_theme_50dp"
+                    android:text="@{viewModel.getModel().registerConfirm}"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/text_big"
+                    binding:onClickCommand="@{viewModel.registerClick}" />
+
+                <LinearLayout
+                    android:id="@+id/ll_login_agreement"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:visibility="@{viewModel.getModel().registerAgreementVisible}">
+
+                    <CheckBox
+                        android:id="@+id/cb_login_agreement"
+                        style="@style/SimpleTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:button="@null"
+                        android:checked="@={viewModel.getModel().registerAgreement}"
+                        android:clickable="true"
+                        android:drawableLeft="@drawable/selector_login_normal_selected"
+                        android:drawablePadding="@dimen/padding_normal"
+                        android:paddingLeft="@dimen/padding_big"
+                        android:paddingTop="@dimen/padding_big"
+                        android:paddingBottom="@dimen/padding_big"
+                        android:text="注册即表示同意"
+                        android:textColor="@color/colorTextDarkerGray" />
+
+                    <TextView
+                        android:id="@+id/tv_login_agreement1"
+                        style="@style/SimpleTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="@dimen/padding_big"
+                        android:paddingBottom="@dimen/padding_big"
+                        android:text="《用户协议》"
+                        android:textColor="@color/colorTheme"
+                        binding:onClickCommand="@{viewModel.registerAgreementClick1}" />
+
+                    <TextView
+                        style="@style/SimpleTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="@dimen/padding_big"
+                        android:paddingBottom="@dimen/padding_big"
+                        android:text="和"
+                        android:textColor="@color/colorTextDarkerGray" />
+
+                    <TextView
+                        android:id="@+id/tv_login_agreement2"
+                        style="@style/SimpleTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:paddingTop="@dimen/padding_big"
+                        android:paddingBottom="@dimen/padding_big"
+                        android:text="《隐私政策》"
+                        android:textColor="@color/colorTheme"
+                        binding:onClickCommand="@{viewModel.registerAgreementClick2}" />
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</layout>

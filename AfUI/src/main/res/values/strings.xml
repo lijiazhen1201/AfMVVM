@@ -1,0 +1,15 @@
+<resources>
+    <string name="dialog_hint">提示</string>
+    <string name="dialog_cancel">取消</string>
+    <string name="dialog_confirm">确定</string>
+    <string name="upload_camera">拍照</string>
+    <string name="upload_album">从相册选择</string>
+    <string name="upload_video_camera">拍摄视频</string>
+    <string name="upload_video_local">选择本地视频</string>
+    <string name="upload_cancel">取消</string>
+    <string name="baidu_map">百度地图</string>
+    <string name="gaode_map">高德地图</string>
+    <string name="qq_map">腾讯地图</string>
+    <string name="input_pay_pwd">输入支付密码</string>
+    <string name="forget_pay_pwd">忘记密码？</string>
+</resources>

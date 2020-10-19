@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="crash_happened">sorry, the program appears unusual, will exit!</string>
+    <string name="open_call_phone_permission">please open call phone permission</string>
+    <string name="open_send_sms_permission">please open send sms permission</string>
+    <string name="choose_email_title">Choose Email App</string>
+    <string name="no_installed_qq">no installed QQ</string>
+    <string name="no_installed_we_chat">no installed WeChat</string>
+    <string name="copy_text_success">copy success</string>
+    <string name="open_save_file_permission">please open save file permission</string>
+    <string name="file_download_failed">file download failed</string>
+    <string name="file_download_success">file download success save in %1$s</string>
+    <string name="clear_all_cache_already">clear all cache already</string>
+    <string name="clear_all_cache_success">clear all cache success</string>
+</resources>

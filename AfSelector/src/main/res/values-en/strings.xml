@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="af_selector_image">Image</string>
+	<string name="af_selector_video">Video</string>
+    <string name="af_selector_image_and_video">Image And Video</string>
+    <string name="af_selector_confirm">Confirm</string>
+    <string name="af_selector_cancel">Cancel</string>
+    <string name="af_selector_preview">Preview</string>
+    <string name="af_selector_camera">Take Photo</string>
+    <string name="af_selector_select">Select</string>
+    <string name="af_selector_preview_picture">Preview Image</string>
+    <string name="af_selector_one_piece">Piece</string>
+    <string name="af_selector_all_image">All Image</string>
+    <string name="af_selector_all_video">All Video</string>
+    <string name="af_selector_all_image_video">Image And Video</string>
+    <string name="af_selector_loading_picture">loading picture</string>
+    <string name="af_selector_most_choose">Max</string>
+    <string name="af_selector_choose_hint">Hint</string>
+    <string name="af_selector_clip_video">Edit Video</string>
+    <string name="af_selector_clip_video_msg">%1$s Seconds Video Only</string>
+    <string name="af_selector_no_read_camera_permission">No Permission</string>
+    <string name="af_selector_not_found_camera_sd_card">No SD Card</string>
+
+</resources>

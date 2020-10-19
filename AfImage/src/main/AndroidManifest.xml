@@ -1,0 +1,31 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="cn.appoa.afimage" >
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <application >
+
+        <!-- provider authorities必须为【包名+.fileprovider】 -->
+        <provider
+            android:name="cn.appoa.afimage.provider.AfFileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_provider_paths" />
+        </provider>
+
+        <!-- 图片裁剪 -->
+        <activity
+            android:name="cn.appoa.afimage.cropper.CropImageActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppFullThemeCropImage" />
+
+    </application>
+
+</manifest>

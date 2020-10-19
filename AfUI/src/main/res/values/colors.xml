@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- 轮播点(未选中) -->
+    <color name="colorPointNormal">#50000000</color>
+    <!-- 轮播点(选中) -->
+    <color name="colorPointSelected">#ffffff</color>
+</resources>

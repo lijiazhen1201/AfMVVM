@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorWhite"
+    android:gravity="center_horizontal"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_normal">
+
+        <ImageView
+            android:id="@+id/iv_close_dialog"
+            android:layout_width="@dimen/height_normal"
+            android:layout_height="@dimen/height_normal"
+            android:scaleType="centerInside"
+            android:visibility="invisible" />
+
+        <TextView
+            style="@style/SimpleTextView"
+            android:layout_centerInParent="true"
+            android:text="@string/input_pay_pwd"
+            android:textSize="@dimen/text_big" />
+
+    </RelativeLayout>
+
+    <cn.appoa.afui.widget.gridpassword.GridPasswordLayout6
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_normal">
+
+        <cn.appoa.afui.widget.gridpassword.GridPasswordView
+            android:id="@+id/mGridPasswordView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </cn.appoa.afui.widget.gridpassword.GridPasswordLayout6>
+
+    <cn.appoa.afui.widget.gridpassword.GridPasswordLayout6
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_normal">
+
+        <TextView
+            android:id="@+id/tv_forget_pwd"
+            style="@style/SimpleTextView"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:text="@string/forget_pay_pwd"
+            android:textColor="@color/colorTheme"
+            android:visibility="invisible" />
+
+    </cn.appoa.afui.widget.gridpassword.GridPasswordLayout6>
+
+</LinearLayout>

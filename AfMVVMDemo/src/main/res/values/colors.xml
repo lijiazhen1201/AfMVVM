@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#F52424</color>
+    <color name="colorPrimaryDark">#F52424</color>
+    <color name="colorAccent">#F52424</color>
+
+    <color name="colorTheme">#F52424</color>
+    <color name="colorThemePress">#c41d1d</color>
+
+    <color name="colorDefaultTitlebarBg">#FFFFFF</color>
+    <color name="colorDefaultTitlebarTextTitle">#333333</color>
+    <color name="colorDefaultTitlebarTextMenu">#666666</color>
+
+    <color name="colorShakeBg">#292d2e</color>
+    <color name="colorShakeLineBg">#555555</color>
+</resources>

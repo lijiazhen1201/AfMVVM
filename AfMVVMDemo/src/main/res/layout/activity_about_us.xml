@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:binding="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="cn.appoa.afmvvm.viewmodel.AboutUsViewModel" />
+
+        <variable
+            name="aboutUs"
+            type="cn.appoa.afmvvm.bean.AboutUs" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/title_bar"
+            layout="@layout/title_bar"
+            binding:titleBar="@{viewModel.getTitleBarViewModel()}" />
+
+        <ScrollView
+            android:id="@+id/mScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/iv_logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/height_huge"
+                    android:layout_marginBottom="@dimen/height_huge"
+                    android:src="@drawable/ic_launcher_background"
+                    binding:defaultImg="@{@drawable/ic_launcher_background}"
+                    binding:imageUrl="@{aboutUs.image}" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorWhite"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/height_normal"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/SimpleTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:paddingLeft="@dimen/padding_big"
+                            android:paddingRight="@dimen/padding_big"
+                            android:text="官方网站" />
+
+                        <TextView
+                            android:id="@+id/tv_site"
+                            style="@style/SimpleTextView"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:drawablePadding="@dimen/padding_normal"
+                            android:gravity="center_vertical|right"
+                            android:paddingLeft="@dimen/padding_big"
+                            android:paddingRight="@dimen/padding_big"
+                            android:text="@{aboutUs.site}"
+                            android:textColor="@color/colorTextDarkerGray" />
+
+                    </LinearLayout>
+
+                    <View style="@style/HorizontalLine" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/height_normal"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/SimpleTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:paddingLeft="@dimen/padding_big"
+                            android:paddingRight="@dimen/padding_big"
+                            android:text="联系邮箱" />
+
+                        <TextView
+                            android:id="@+id/tv_email"
+                            style="@style/SimpleTextView"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:drawablePadding="@dimen/padding_normal"
+                            android:gravity="center_vertical|right"
+                            android:paddingLeft="@dimen/padding_big"
+                            android:paddingRight="@dimen/padding_big"
+                            android:text="@{aboutUs.email}"
+                            android:textColor="@color/colorTextDarkerGray" />
+
+                    </LinearLayout>
+
+                    <View style="@style/HorizontalLine" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/height_normal"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/SimpleTextView"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:paddingLeft="@dimen/padding_big"
+                            android:paddingRight="@dimen/padding_big"
+                            android:text="服务电话" />
+
+                        <TextView
+                            android:id="@+id/tv_mobile"
+                            style="@style/SimpleTextView"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:drawablePadding="@dimen/padding_normal"
+                            android:gravity="center_vertical|right"
+                            android:paddingLeft="@dimen/padding_big"
+                            android:paddingRight="@dimen/padding_big"
+                            android:text="@{aboutUs.mobile}"
+                            android:textColor="@color/colorTextDarkerGray"
+                            binding:isThrottleFirst="true"
+                            binding:onClickCommand="@{viewModel.callMobileClick}" />
+
+                    </LinearLayout>
+
+                    <View style="@style/HorizontalLine" />
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:id="@+id/tv_copyRight"
+                    style="@style/SimpleTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/height_bit"
+                    android:lineSpacingExtra="@dimen/padding_normal"
+                    android:singleLine="false"
+                    android:text='@{@string/aboutUs_copyRight  + aboutUs.copyRight + "\n" + aboutUs.fillingNum}'
+                    android:textColor="@color/colorTextLighterGray" />
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</layout>

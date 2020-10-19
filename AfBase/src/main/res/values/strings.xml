@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="on_net_disconnected">网络连接断开</string>
+    <string name="on_net_setting">设置</string>
+</resources>
