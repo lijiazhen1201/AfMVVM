@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:binding="http://schemas.android.com/apk/res-auto">
+    xmlns:binding="http://schemas.android.com/apk/res-auto"
+    xmlns:toos="http://schemas.android.com/tools">
 
     <data>
 
@@ -27,8 +28,10 @@
             android:paddingLeft="@dimen/height_title_bar_padding"
             android:paddingRight="@dimen/height_title_bar_padding"
             android:text="@{titleBar.getTitleBarModel().titleText}"
+            android:textColor="@color/colorTitleBarTextTitle"
             android:textSize="@dimen/text_large"
-            android:visibility="@{titleBar.getTitleBarModel().titleTextVisibleObservable}" />
+            android:visibility="@{titleBar.getTitleBarModel().titleTextVisibleObservable}"
+            toos:text="标题" />
 
         <TextView
             android:id="@+id/tv_bar_back"
@@ -39,9 +42,11 @@
             android:paddingLeft="@dimen/height_title_bar_padding"
             android:paddingRight="@dimen/height_title_bar_padding"
             android:text="@{titleBar.getTitleBarModel().leftText}"
+            android:textColor="@color/colorTitleBarTextMenu"
             android:textSize="@dimen/text_normal"
             android:visibility="@{titleBar.getTitleBarModel().leftTextVisibleObservable}"
-            binding:onClickCommand="@{titleBar.backOnClick}" />
+            binding:onClickCommand="@{titleBar.backOnClick}"
+            toos:text="返回" />
 
         <TextView
             android:id="@+id/tv_bar_menu"
@@ -52,9 +57,11 @@
             android:paddingLeft="@dimen/height_title_bar_padding"
             android:paddingRight="@dimen/height_title_bar_padding"
             android:text="@{titleBar.getTitleBarModel().rightText}"
+            android:textColor="@color/colorTitleBarTextMenu"
             android:textSize="@dimen/text_normal"
             android:visibility="@{titleBar.getTitleBarModel().rightTextVisibleObservable}"
-            binding:onClickCommand="@{titleBar.menuOnClick}" />
+            binding:onClickCommand="@{titleBar.menuOnClick}"
+            toos:text="菜单" />
 
         <ImageView
             android:id="@+id/iv_bar_back"
