@@ -247,10 +247,21 @@ public class TitleBarViewModel<M extends TitleBarModel> extends BaseViewModel<M>
      * @param title
      */
     public void setDefaultTitleBar(int back, String title) {
+        setDefaultTitleBar(back, title, false);
+    }
+	
+    /**
+     * 设置默认标题栏（返回键+标题+分割线）
+     *
+     * @param back
+     * @param title
+	 * @param isShowLine
+     */
+    public void setDefaultTitleBar(int back, String title, boolean isShowLine) {
         setLeftImage(back);
         setTitleText(title);
         setTitleBarPaddingTop();
         setTitleBarVisible(View.VISIBLE);
-        setLineVisible(View.VISIBLE);
+        setLineVisible(isShowLine ? View.VISIBLE : View.GONE);
     }
 }
