@@ -310,10 +310,10 @@ public abstract class AfActivity<V extends ViewDataBinding, VM extends BaseViewM
 
             @Override
             public void onChanged(Map<String, Object> params) {
-                Class<?> clazz = (Class<?>) params.get(ParameterField.CLASS);
+                String canonicalName = (String) params.get(ParameterField.CANONICAL_NAME);
                 Bundle bundle = (Bundle) params.get(ParameterField.BUNDLE);
                 int requestCode = (int) params.get(ParameterField.CODE);
-                startActivityForResult(clazz, bundle, requestCode);
+                startContainerActivityForResult(canonicalName, bundle, requestCode);
             }
         });
         //跳入RouterActivity
