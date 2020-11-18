@@ -175,29 +175,40 @@ public class JsonUtils {
     public static <T> List<T> parseJson(String json, Class<T> t) {
         List<T> list = new ArrayList<>();
         if (filterJson(json)) {
-            try {
-                JSONObject obj = new JSONObject(json);
-                JSONArray array = null;
-                if (TYPE == 1) {
-                    array = obj.getJSONArray(DATA);
-                } else if (TYPE == 2) {
-                    array = obj.getJSONArray(RESULT);
-                } else if (TYPE == 3) {
-                    array = obj.getJSONArray(DATA);
+            JSONArray array = parseJSONArray(json);
+            if (array != null && array.length() > 0) {
+                if (isGson) {
+                    list = new Gson().fromJson(array.toString(), new TypeToken<List<T>>() {
+                    }.getType());
+                } else {
+                    list = JSON.parseArray(array.toString(), t);
                 }
-                if (array != null && array.length() > 0) {
-                    if (isGson) {
-                        list = new Gson().fromJson(array.toString(), new TypeToken<List<T>>() {
-                        }.getType());
-                    } else {
-                        list = JSON.parseArray(array.toString(), t);
-                    }
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
             }
         }
         return list;
+    }
+
+    /**
+     * 解析json数组
+     *
+     * @param json
+     * @return
+     */
+    public static JSONArray parseJSONArray(String json) {
+        JSONArray array = null;
+        try {
+            JSONObject obj = new JSONObject(json);
+            if (TYPE == 1) {
+                array = obj.getJSONArray(DATA);
+            } else if (TYPE == 2) {
+                array = obj.getJSONArray(RESULT);
+            } else if (TYPE == 3) {
+                array = obj.getJSONArray(DATA);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return array;
     }
 
     /**
