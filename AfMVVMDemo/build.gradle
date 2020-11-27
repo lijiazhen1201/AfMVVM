@@ -84,7 +84,7 @@ dependencies {
     annotationProcessor support["aroutercompiler"]
     implementation support["proguard"]
     //implementation project(':AfSelector')
-    implementation 'com.github.lijiazhen1201:AfMVVM:1.0.5'
+    implementation 'com.github.lijiazhen1201:AfMVVM:1.0.6'
 }
 
 repositories {

@@ -19,12 +19,6 @@ android {
             }
         }
     }
-    buildTypes {
-        release {
-            minifyEnabled config.minifyEnabled
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-        }
-    }
     dataBinding {
         enabled config.dataBinding
     }
