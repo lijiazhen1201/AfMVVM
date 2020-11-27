@@ -40,6 +40,7 @@ public class AboutUsActivity extends BaseActivity<ActivityAboutUsBinding, AboutU
 
     @Override
     public void initViewObservable() {
+        viewModel.setDefaultTitleBar(R.drawable.back_black, "关于我们", true);
         viewModel.getAboutUsEvent.observe(this, new Observer<AboutUs>() {
             @Override
             public void onChanged(AboutUs aboutUs) {

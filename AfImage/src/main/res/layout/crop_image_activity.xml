@@ -52,14 +52,13 @@
             android:padding="@dimen/padding_normal"
             android:src="@drawable/crop_image_menu_rotate_right"
             android:visibility="gone" />
-
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_margin="@dimen/padding_huge"
+        android:layout_margin="@dimen/padding_great"
         android:background="@drawable/crop_image_button_bg"
         android:orientation="horizontal">
 
@@ -73,6 +72,11 @@
             android:text="@string/crop_image_cancel"
             android:textColor="@android:color/white" />
 
+        <View
+            android:layout_width="@dimen/height_divider"
+            android:layout_height="match_parent"
+            android:background="@android:color/white" />
+
         <TextView
             android:id="@+id/confirmView"
             android:layout_width="0dp"
@@ -82,11 +86,6 @@
             android:padding="@dimen/padding_big"
             android:text="@string/crop_image_confirm"
             android:textColor="@android:color/white" />
-
-        <View
-            android:layout_width="@dimen/height_divider"
-            android:layout_height="match_parent"
-            android:background="@android:color/white" />
     </LinearLayout>
 
 </RelativeLayout>

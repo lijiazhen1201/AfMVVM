@@ -29,6 +29,7 @@ public class LoginActivity extends BaseActivity<ActivityLoginBinding, LoginViewM
 
     @Override
     public void initViewObservable() {
+        viewModel.setDefaultTitleBar(R.drawable.back_black, "登录", true);
         viewModel.loginEvent.observe(this, new Observer<UserInfo>() {
             @Override
             public void onChanged(UserInfo user) {

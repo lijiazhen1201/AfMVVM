@@ -15,8 +15,9 @@ ext {
             versionCode      : 1,
             versionName      : "1.0.1",
             multiDexEnabled  : true,
-            minifyEnabled    : false,
+            minifyEnabled    : true,
             zipAlignEnabled  : true,
+            shrinkResources  : true,
             dataBinding      : true,
     ]
     support = [
@@ -63,5 +64,6 @@ ext {
             //app
             "arouter"             : "com.alibaba:arouter-api:1.5.0",//路由框架
             "aroutercompiler"     : "com.alibaba:arouter-compiler:1.2.2",
+            "proguard"            : "com.blankj:free-proguard:1.0.2",//代码混淆
     ]
 }

@@ -35,7 +35,8 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainViewMode
 
     @Override
     public void initViewObservable() {
-
+        viewModel.setDefaultTitleBar(0, "首页", true);
+        //viewModel.setRightText("关于我们");
     }
 
     @Override

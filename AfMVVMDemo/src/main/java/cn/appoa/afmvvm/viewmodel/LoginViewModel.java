@@ -21,7 +21,6 @@ import cn.appoa.afbase.binding.command.BindingAction;
 import cn.appoa.afbase.binding.command.BindingCommand;
 import cn.appoa.afbase.constant.AfConstant;
 import cn.appoa.afbase.mvvm.SingleLiveEvent;
-import cn.appoa.afmvvm.R;
 import cn.appoa.afmvvm.activity.RegisterActivity;
 import cn.appoa.afmvvm.bean.UserInfo;
 import cn.appoa.afmvvm.event.LoginEvent;
@@ -53,11 +52,6 @@ public class LoginViewModel extends VerifyCodeViewModel<LoginModel>
 
     public LoginViewModel(@NonNull Application application, LoginModel model) {
         super(application, model);
-    }
-
-    @Override
-    protected void initTitleBar() {
-        setDefaultTitleBar(R.drawable.back_black, "登录");
     }
 
     public final BindingCommand loginTypeClick = new BindingCommand(new BindingAction() {

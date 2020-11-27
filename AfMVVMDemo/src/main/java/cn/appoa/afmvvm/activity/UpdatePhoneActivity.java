@@ -32,6 +32,8 @@ public class UpdatePhoneActivity extends BaseActivity<ActivityUpdatePhoneBinding
 
     @Override
     public void initViewObservable() {
+        viewModel.setDefaultTitleBar(R.drawable.back_black, "修改手机号", true);
+        viewModel.getModel().phoneHint.set("请输入新手机号");
         viewModel.updatePhoneEvent.observe(this, new Observer<String>() {
             @Override
             public void onChanged(String phone) {

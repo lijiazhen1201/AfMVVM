@@ -34,19 +34,6 @@ public class TitleBarViewModel<M extends TitleBarModel> extends BaseViewModel<M>
         return (TitleBarModel) getModel();
     }
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        initTitleBar();
-    }
-
-    /**
-     * 初始化标题栏
-     */
-    protected void initTitleBar() {
-
-    }
-
     public final BindingCommand backOnClick = new BindingCommand(new BindingAction() {
         @Override
         public void call() {
@@ -249,13 +236,13 @@ public class TitleBarViewModel<M extends TitleBarModel> extends BaseViewModel<M>
     public void setDefaultTitleBar(int back, String title) {
         setDefaultTitleBar(back, title, false);
     }
-	
+
     /**
      * 设置默认标题栏（返回键+标题+分割线）
      *
      * @param back
      * @param title
-	 * @param isShowLine
+     * @param isShowLine
      */
     public void setDefaultTitleBar(int back, String title, boolean isShowLine) {
         setLeftImage(back);

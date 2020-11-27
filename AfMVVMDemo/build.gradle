@@ -42,9 +42,17 @@ android {
         }
     }
     buildTypes {
+        debug {
+            minifyEnabled config.minifyEnabled
+            zipAlignEnabled config.zipAlignEnabled
+            shrinkResources config.shrinkResources
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.debug
+        }
         release {
             minifyEnabled config.minifyEnabled
             zipAlignEnabled config.zipAlignEnabled
+            shrinkResources config.shrinkResources
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.release
         }
@@ -74,7 +82,9 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation support["arouter"]
     annotationProcessor support["aroutercompiler"]
-    implementation project(':AfSelector')
+    implementation support["proguard"]
+    //implementation project(':AfSelector')
+    implementation 'com.github.lijiazhen1201:AfMVVM:1.0.5'
 }
 
 repositories {

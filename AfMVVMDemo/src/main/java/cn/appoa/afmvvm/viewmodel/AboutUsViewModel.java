@@ -6,7 +6,6 @@ import androidx.annotation.NonNull;
 import cn.appoa.afbase.binding.command.BindingAction;
 import cn.appoa.afbase.binding.command.BindingCommand;
 import cn.appoa.afbase.mvvm.SingleLiveEvent;
-import cn.appoa.afmvvm.R;
 import cn.appoa.afmvvm.bean.AboutUs;
 import cn.appoa.afmvvm.model.AboutUsModel;
 import cn.appoa.afui.titlebar.TitleBarViewModel;
@@ -19,11 +18,6 @@ public class AboutUsViewModel extends TitleBarViewModel<AboutUsModel> {
 
     public AboutUsViewModel(@NonNull Application application, AboutUsModel model) {
         super(application, model);
-    }
-
-    @Override
-    protected void initTitleBar() {
-        setDefaultTitleBar(R.drawable.back_black, "关于我们");
     }
 
     public SingleLiveEvent<AboutUs> getAboutUsEvent = new SingleLiveEvent<AboutUs>();

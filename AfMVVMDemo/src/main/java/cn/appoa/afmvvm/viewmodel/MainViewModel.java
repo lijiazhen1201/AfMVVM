@@ -21,12 +21,6 @@ public class MainViewModel extends TitleBarViewModel<MainModel> {
     }
 
     @Override
-    protected void initTitleBar() {
-        setDefaultTitleBar(0, "首页");
-        //setRightText("关于我们");
-    }
-
-    @Override
     protected void menuOnClick() {
         //startActivity(AboutUsActivity.class);
         startRouterActivity(RouterActivityPath.ACTIVITY_ABOUT_US);

@@ -8,7 +8,6 @@ import androidx.annotation.NonNull;
 import cn.appoa.afbase.binding.command.BindingAction;
 import cn.appoa.afbase.binding.command.BindingCommand;
 import cn.appoa.afbase.mvvm.SingleLiveEvent;
-import cn.appoa.afmvvm.R;
 import cn.appoa.afmvvm.model.UpdatePhoneModel;
 
 public class UpdatePhoneViewModel extends VerifyCodeViewModel<UpdatePhoneModel> {
@@ -24,12 +23,6 @@ public class UpdatePhoneViewModel extends VerifyCodeViewModel<UpdatePhoneModel> 
     @Override
     public int getVerifyCodeType() {
         return 6;
-    }
-
-    @Override
-    protected void initTitleBar() {
-        setDefaultTitleBar(R.drawable.back_black, "修改手机号");
-        getModel().phoneHint.set("请输入新手机号");
     }
 
     public SingleLiveEvent<String> updatePhoneEvent = new SingleLiveEvent<>();
