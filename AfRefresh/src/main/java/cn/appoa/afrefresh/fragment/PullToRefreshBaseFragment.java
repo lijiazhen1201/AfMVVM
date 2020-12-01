@@ -12,11 +12,13 @@ import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 
 import androidx.lifecycle.Observer;
+import cn.appoa.afbase.app.AfApplication;
 import cn.appoa.afbase.fragment.AfFragment;
 import cn.appoa.afrefresh.AfRefresh;
 import cn.appoa.afrefresh.BR;
 import cn.appoa.afrefresh.R;
 import cn.appoa.afrefresh.databinding.FragmentPullToRefreshBaseBinding;
+import cn.appoa.afrefresh.mvvm.PullToRefreshModel;
 import cn.appoa.afrefresh.mvvm.PullToRefreshViewModel;
 
 
@@ -28,6 +30,11 @@ import cn.appoa.afrefresh.mvvm.PullToRefreshViewModel;
 public abstract class PullToRefreshBaseFragment<V extends View>
         extends AfFragment<FragmentPullToRefreshBaseBinding, PullToRefreshViewModel>
         implements OnRefreshListener, OnLoadMoreListener {
+
+    @Override
+    public PullToRefreshViewModel initViewModel() {
+        return new PullToRefreshViewModel(AfApplication.getApplication(), new PullToRefreshModel());
+    }
 
     @Override
     public int initContent(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -64,7 +71,7 @@ public abstract class PullToRefreshBaseFragment<V extends View>
     /**
      * 下拉刷新头相关设置
      */
-    private void setRefreshLayoutHeader() {
+    protected void setRefreshLayoutHeader() {
         ClassicsHeader header = new ClassicsHeader(getActivity());
         AfRefresh.setClassicsHeader(header);
         binding.refreshLayout.setRefreshHeader(header);
@@ -73,7 +80,7 @@ public abstract class PullToRefreshBaseFragment<V extends View>
     /**
      * 下拉刷新脚相关设置
      */
-    private void setRefreshLayoutFooter() {
+    protected void setRefreshLayoutFooter() {
         ClassicsFooter footer = new ClassicsFooter(getActivity());
         AfRefresh.setClassicsFooter(footer);
         binding.refreshLayout.setRefreshFooter(footer);
@@ -124,7 +131,7 @@ public abstract class PullToRefreshBaseFragment<V extends View>
     /**
      * 初始化控件
      */
-    private void initView() {
+    protected void initView() {
         pageindex = 1;
         isFirst = true;
         isMore = false;

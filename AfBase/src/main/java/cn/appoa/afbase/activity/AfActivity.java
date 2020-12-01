@@ -32,6 +32,8 @@ import androidx.lifecycle.ViewModelProviders;
 import cn.appoa.afbase.R;
 import cn.appoa.afbase.dialog.DefaultLoadingDialog;
 import cn.appoa.afbase.event.AfEvent;
+import cn.appoa.afbase.mvvm.AfObserver;
+import cn.appoa.afbase.mvvm.AfObserverListener;
 import cn.appoa.afbase.mvvm.BaseViewModel;
 import cn.appoa.afbase.mvvm.IBaseView;
 import cn.appoa.afbase.mvvm.ParameterField;
@@ -47,7 +49,7 @@ import cn.appoa.afutils.toast.ToastUtils;
  * Activity基类
  */
 public abstract class AfActivity<V extends ViewDataBinding, VM extends BaseViewModel>
-        extends SlideBackActivity implements IBaseView, Foreground.ForegroundListener {
+        extends SlideBackActivity implements IBaseView, Foreground.ForegroundListener, AfObserverListener {
 
     protected Activity mActivity = null;
     protected FragmentManager mFragmentManager = null;
@@ -649,4 +651,18 @@ public abstract class AfActivity<V extends ViewDataBinding, VM extends BaseViewM
         //网络连接成功
     }
 
+    /**
+     * 获取Observer
+     *
+     * @param type
+     * @return
+     */
+    protected AfObserver getObserver(int type) {
+        return new AfObserver(type, this);
+    }
+
+    @Override
+    public void onObserverChanged(int type, Object o) {
+
+    }
 }

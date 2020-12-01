@@ -35,6 +35,8 @@ import cn.appoa.afbase.R;
 import cn.appoa.afbase.activity.AfActivity;
 import cn.appoa.afbase.dialog.DefaultLoadingDialog;
 import cn.appoa.afbase.event.AfEvent;
+import cn.appoa.afbase.mvvm.AfObserver;
+import cn.appoa.afbase.mvvm.AfObserverListener;
 import cn.appoa.afbase.mvvm.BaseViewModel;
 import cn.appoa.afbase.mvvm.IBaseView;
 import cn.appoa.afbase.mvvm.ParameterField;
@@ -46,7 +48,7 @@ import cn.appoa.afutils.listener.OnCallbackListener;
  * Fragment基类
  */
 public abstract class AfDialogFragment<V extends ViewDataBinding, VM extends BaseViewModel>
-        extends DialogFragment implements IBaseView {
+        extends DialogFragment implements IBaseView, AfObserverListener {
 
     protected Activity mActivity = null;
     protected FragmentManager mFragmentManager = null;
@@ -660,4 +662,18 @@ public abstract class AfDialogFragment<V extends ViewDataBinding, VM extends Bas
         super.show(manager, showTag);
     }
 
+    /**
+     * 获取Observer
+     *
+     * @param type
+     * @return
+     */
+    protected AfObserver getObserver(int type) {
+        return new AfObserver(type, this);
+    }
+
+    @Override
+    public void onObserverChanged(int type, Object o) {
+
+    }
 }

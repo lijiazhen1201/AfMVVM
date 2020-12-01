@@ -28,6 +28,8 @@ import androidx.lifecycle.ViewModelProviders;
 import cn.appoa.afbase.activity.AfActivity;
 import cn.appoa.afbase.dialog.DefaultLoadingDialog;
 import cn.appoa.afbase.event.AfEvent;
+import cn.appoa.afbase.mvvm.AfObserver;
+import cn.appoa.afbase.mvvm.AfObserverListener;
 import cn.appoa.afbase.mvvm.BaseViewModel;
 import cn.appoa.afbase.mvvm.IBaseView;
 import cn.appoa.afbase.mvvm.ParameterField;
@@ -38,7 +40,7 @@ import cn.appoa.afpermission.grant.PermissionsResultAction;
  * Fragment基类
  */
 public abstract class AfFragment<V extends ViewDataBinding, VM extends BaseViewModel>
-        extends Fragment implements IBaseView {
+        extends Fragment implements IBaseView, AfObserverListener {
 
     protected Activity mActivity = null;
     protected FragmentManager mFragmentManager = null;
@@ -511,5 +513,20 @@ public abstract class AfFragment<V extends ViewDataBinding, VM extends BaseViewM
         if (viewModel != null) {
             viewModel.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    /**
+     * 获取Observer
+     *
+     * @param type
+     * @return
+     */
+    protected AfObserver getObserver(int type) {
+        return new AfObserver(type, this);
+    }
+
+    @Override
+    public void onObserverChanged(int type, Object o) {
+
     }
 }
