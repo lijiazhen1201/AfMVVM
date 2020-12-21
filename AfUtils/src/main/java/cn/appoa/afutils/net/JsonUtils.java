@@ -18,6 +18,7 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import cn.appoa.afutils.AfUtils;
 import cn.appoa.afutils.toast.ToastUtils;
 
 /**
@@ -31,6 +32,7 @@ public class JsonUtils {
     private static String DATA = "data";
     private static String STATE = "state";
     private static String RESULT = "result";
+    private static String LIST = "list";
 
     /**
      * 是否用Gson解析
@@ -68,6 +70,22 @@ public class JsonUtils {
     /**
      * 初始化
      *
+     * @param code
+     * @param message
+     * @param data
+     * @param list
+     */
+    public static void init(String code, String message, String data, String list) {
+        TYPE = 1;
+        CODE = code;
+        MESSAGE = message;
+        DATA = data;
+        LIST = list;
+    }
+
+    /**
+     * 初始化
+     *
      * @param state
      * @param result
      */
@@ -89,6 +107,22 @@ public class JsonUtils {
         CODE = code;
         MESSAGE = message;
         DATA = data;
+    }
+
+    /**
+     * 初始化
+     *
+     * @param code
+     * @param message
+     * @param data
+     * @param list
+     */
+    public static void init(int type, String code, String message, String data, String list) {
+        TYPE = type;
+        CODE = code;
+        MESSAGE = message;
+        DATA = data;
+        LIST = list;
     }
 
     /**
@@ -172,17 +206,46 @@ public class JsonUtils {
      * @param t
      * @return
      */
+    public static <T> List<T> parse(String json, Class<T> t) {
+        if (isGson) {
+            return new Gson().fromJson(json, new TypeToken<List<T>>() {
+            }.getType());
+        } else {
+            return JSON.parseArray(json, t);
+        }
+    }
+
+    /**
+     * 解析json数据
+     *
+     * @param json
+     * @param t
+     * @return
+     */
     public static <T> List<T> parseJson(String json, Class<T> t) {
         List<T> list = new ArrayList<>();
         if (filterJson(json)) {
             JSONArray array = parseJSONArray(json);
             if (array != null && array.length() > 0) {
-                if (isGson) {
-                    list = new Gson().fromJson(array.toString(), new TypeToken<List<T>>() {
-                    }.getType());
-                } else {
-                    list = JSON.parseArray(array.toString(), t);
-                }
+                list = parse(array.toString(), t);
+            }
+        }
+        return list;
+    }
+
+    /**
+     * 解析json数据
+     *
+     * @param json
+     * @param t
+     * @return
+     */
+    public static <T> List<T> parseJsonList(String json, Class<T> t) {
+        List<T> list = new ArrayList<>();
+        if (filterJson(json)) {
+            JSONArray array = parseJSONArrayList(json);
+            if (array != null && array.length() > 0) {
+                list = parse(array.toString(), t);
             }
         }
         return list;
@@ -212,16 +275,23 @@ public class JsonUtils {
     }
 
     /**
-     * 弹出信息
+     * 解析json数组
      *
-     * @param context
      * @param json
+     * @return
      */
-    public static void showMsg(Context context, String json) {
-        String message = getMsg(json);
-        if (!TextUtils.isEmpty(message)) {
-            ToastUtils.showShort(context, message, false);
+    public static JSONArray parseJSONArrayList(String json) {
+        JSONArray arrayList = null;
+        try {
+            JSONArray array = parseJSONArray(json);
+            if (array != null && array.length() > 0) {
+                JSONObject obj = array.getJSONObject(0);
+                arrayList = obj.getJSONArray(LIST);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
         }
+        return arrayList;
     }
 
     /**
@@ -247,6 +317,19 @@ public class JsonUtils {
             e.printStackTrace();
         }
         return message;
+    }
+
+    /**
+     * 弹出信息
+     *
+     * @param context
+     * @param json
+     */
+    public static void showMsg(Context context, String json) {
+        String message = getMsg(json);
+        if (!TextUtils.isEmpty(message)) {
+            ToastUtils.showShort(context, message, false);
+        }
     }
 
     /**
@@ -281,6 +364,9 @@ public class JsonUtils {
      * @return
      */
     public static String getJsonString(Context context, String fileName) {
+        if (context == null) {
+            context = AfUtils.getInstance().getContext();
+        }
         StringBuilder stringBuilder = new StringBuilder();
         try {
             InputStream is = context.getAssets().open(fileName);
