@@ -332,7 +332,7 @@ public abstract class AfImageActivity<V extends ViewDataBinding, VM extends Base
      * @param aspectRatioY
      */
     protected void cropImage(Uri imageUri, int aspectRatioX, int aspectRatioY) {
-        CropImage.activity(imageUri).setAspectRatio(1, 1).start(this);
+        CropImage.activity(imageUri).setAspectRatio(aspectRatioX, aspectRatioY).start(this);
     }
 
     /**

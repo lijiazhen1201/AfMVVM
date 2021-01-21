@@ -50,16 +50,16 @@ import cn.appoa.afrecorder.R;
  * =====================================
  */
 public class JCameraView extends FrameLayout implements CameraInterface.CameraOpenOverCallback, SurfaceHolder
-        .Callback, CameraView {
-//    private static final String TAG = "JCameraView";
+        .Callback, CameraView, CaptureListener, TypeListener {
+//    protected static final String TAG = "JCameraView";
 
     //Camera状态机
-    private CameraMachine machine;
+    protected CameraMachine machine;
 
     //闪关灯状态
-    private static final int TYPE_FLASH_ON = 0x021;
-    private static final int TYPE_FLASH_OFF = 0x022;
-    private int type_flash = TYPE_FLASH_OFF;
+    protected static final int TYPE_FLASH_ON = 0x021;
+    protected static final int TYPE_FLASH_OFF = 0x022;
+    protected int type_flash = TYPE_FLASH_OFF;
 
     //拍照浏览时候的类型
     public static final int TYPE_PICTURE = 0x001;
@@ -83,41 +83,41 @@ public class JCameraView extends FrameLayout implements CameraInterface.CameraOp
 
 
     //回调监听
-    private JCameraListener jCameraLisenter;
-    private ClickListener leftClickListener;
-    private ClickListener rightClickListener;
+    protected JCameraListener jCameraLisenter;
+    protected ClickListener leftClickListener;
+    protected ClickListener rightClickListener;
 
-    private Context mContext;
-    private VideoView mVideoView;
-    private ImageView mPhoto;
-    private ImageView mSwitchCamera;
-    private ImageView mFlashLamp;
-    private CaptureLayout mCaptureLayout;
-    private FoucsView mFoucsView;
-    private MediaPlayer mMediaPlayer;
+    protected Context mContext;
+    protected VideoView mVideoView;
+    protected ImageView mPhoto;
+    protected ImageView mSwitchCamera;
+    protected ImageView mFlashLamp;
+    protected CaptureLayout mCaptureLayout;
+    protected FoucsView mFoucsView;
+    protected MediaPlayer mMediaPlayer;
 
-    private int layout_width;
-    private float screenProp = 0f;
+    protected int layout_width;
+    protected float screenProp = 0f;
 
-    private Bitmap captureBitmap;   //捕获的图片
-    private Bitmap firstFrame;      //第一帧图片
-    private String videoUrl;        //视频URL
-    private boolean isFlashLamp;
+    protected Bitmap captureBitmap;   //捕获的图片
+    protected Bitmap firstFrame;      //第一帧图片
+    protected String videoUrl;        //视频URL
+    protected boolean isFlashLamp;
 
 
     //切换摄像头按钮的参数
-    private int iconSize = 0;       //图标大小
-    private int iconMargin = 0;     //右上边距
-    private int iconSrc = 0;        //图标资源
-    private int iconLeft = 0;       //左图标
-    private int iconRight = 0;      //右图标
-    private int duration = 0;       //录制时间
+    protected int iconSize = 0;       //图标大小
+    protected int iconMargin = 0;     //右上边距
+    protected int iconSrc = 0;        //图标资源
+    protected int iconLeft = 0;       //左图标
+    protected int iconRight = 0;      //右图标
+    protected int duration = 0;       //录制时间
 
     //缩放梯度
-    private int zoomGradient = 0;
+    protected int zoomGradient = 0;
 
-    private boolean firstTouch = true;
-    private float firstTouchLength = 0;
+    protected boolean firstTouch = true;
+    protected float firstTouchLength = 0;
 
     public JCameraView(Context context) {
         this(context, null);
@@ -145,7 +145,7 @@ public class JCameraView extends FrameLayout implements CameraInterface.CameraOp
         initView();
     }
 
-    private void initData() {
+    protected void initData() {
         layout_width = ScreenUtils.getScreenWidth(mContext);
         //缩放梯度
         zoomGradient = (int) (layout_width / 16f);
@@ -153,7 +153,7 @@ public class JCameraView extends FrameLayout implements CameraInterface.CameraOp
         machine = new CameraMachine(getContext(), this, this);
     }
 
-    private void initView() {
+    protected void initView() {
         isFlashLamp = Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP;
         setWillNotDraw(false);
         View view = LayoutInflater.from(mContext).inflate(R.layout.camera_view, this);
@@ -188,71 +188,9 @@ public class JCameraView extends FrameLayout implements CameraInterface.CameraOp
             }
         });
         //拍照 录像
-        mCaptureLayout.setCaptureLisenter(new CaptureListener() {
-            @Override
-            public void takePictures() {
-                mSwitchCamera.setVisibility(INVISIBLE);
-                if (isFlashLamp) {
-                    mFlashLamp.setVisibility(INVISIBLE);
-                }
-                machine.capture();
-            }
-
-            @Override
-            public void recordStart() {
-                mSwitchCamera.setVisibility(INVISIBLE);
-                if (isFlashLamp) {
-                    mFlashLamp.setVisibility(INVISIBLE);
-                }
-                machine.record(mVideoView.getHolder().getSurface(), screenProp);
-            }
-
-            @Override
-            public void recordShort(final long time) {
-                mCaptureLayout.setTextWithAnimation(getContext().getResources()
-                        .getString(R.string.recording_too_short));
-                mSwitchCamera.setVisibility(VISIBLE);
-                if (isFlashLamp) {
-                    mFlashLamp.setVisibility(VISIBLE);
-                }
-                postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        machine.stopRecord(true, time);
-                    }
-                }, 1500 - time);
-            }
-
-            @Override
-            public void recordEnd(long time) {
-                machine.stopRecord(false, time);
-            }
-
-            @Override
-            public void recordZoom(float zoom) {
-                LogUtil.i("recordZoom");
-                machine.zoom(zoom, CameraInterface.TYPE_RECORDER);
-            }
-
-            @Override
-            public void recordError() {
-                if (errorLisenter != null) {
-                    errorLisenter.AudioPermissionError();
-                }
-            }
-        });
+        mCaptureLayout.setCaptureLisenter(this);
         //确认 取消
-        mCaptureLayout.setTypeLisenter(new TypeListener() {
-            @Override
-            public void cancel() {
-                machine.cancle(mVideoView.getHolder(), screenProp);
-            }
-
-            @Override
-            public void confirm() {
-                machine.confirm();
-            }
-        });
+        mCaptureLayout.setTypeLisenter(this);
         //退出
 //        mCaptureLayout.setReturnLisenter(new ReturnListener() {
 //            @Override
@@ -382,7 +320,7 @@ public class JCameraView extends FrameLayout implements CameraInterface.CameraOp
     }
 
     //对焦框指示器动画
-    private void setFocusViewWidthAnimation(float x, float y) {
+    protected void setFocusViewWidthAnimation(float x, float y) {
         machine.foucs(x, y, new CameraInterface.FocusCallback() {
             @Override
             public void focusSuccess() {
@@ -391,7 +329,7 @@ public class JCameraView extends FrameLayout implements CameraInterface.CameraOp
         });
     }
 
-    private void updateVideoViewSize(float videoWidth, float videoHeight) {
+    protected void updateVideoViewSize(float videoWidth, float videoHeight) {
         if (videoWidth > videoHeight) {
             LayoutParams videoViewParam;
             int height = (int) ((videoHeight / videoWidth) * getWidth());
@@ -415,7 +353,7 @@ public class JCameraView extends FrameLayout implements CameraInterface.CameraOp
     }
 
 
-    private ErrorListener errorLisenter;
+    protected ErrorListener errorLisenter;
 
     //启动Camera错误回调
     public void setErrorLisenter(ErrorListener errorLisenter) {
@@ -598,7 +536,7 @@ public class JCameraView extends FrameLayout implements CameraInterface.CameraOp
         this.rightClickListener = clickListener;
     }
 
-    private void setFlashRes() {
+    protected void setFlashRes() {
         switch (type_flash) {
             case TYPE_FLASH_ON:
                 if (isFlashLamp) {
@@ -616,7 +554,7 @@ public class JCameraView extends FrameLayout implements CameraInterface.CameraOp
     }
 
     @SuppressLint("NewApi")
-    private void setFlashMode(String mode, boolean enabled) {
+    protected void setFlashMode(String mode, boolean enabled) {
         //判断API是否大于24（安卓7.0系统对应的API）
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             try {
@@ -653,5 +591,71 @@ public class JCameraView extends FrameLayout implements CameraInterface.CameraOp
         if (mCaptureLayout != null) {
             mCaptureLayout.setDuration(duration);
         }
+    }
+
+    //==========CaptureListener回调============
+
+    @Override
+    public void takePictures() {
+        mSwitchCamera.setVisibility(INVISIBLE);
+        if (isFlashLamp) {
+            mFlashLamp.setVisibility(INVISIBLE);
+        }
+        machine.capture();
+    }
+
+    @Override
+    public void recordStart() {
+        mSwitchCamera.setVisibility(INVISIBLE);
+        if (isFlashLamp) {
+            mFlashLamp.setVisibility(INVISIBLE);
+        }
+        machine.record(mVideoView.getHolder().getSurface(), screenProp);
+    }
+
+    @Override
+    public void recordShort(final long time) {
+        mCaptureLayout.setTextWithAnimation(getContext().getResources()
+                .getString(R.string.recording_too_short));
+        mSwitchCamera.setVisibility(VISIBLE);
+        if (isFlashLamp) {
+            mFlashLamp.setVisibility(VISIBLE);
+        }
+        postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                machine.stopRecord(true, time);
+            }
+        }, 1500 - time);
+    }
+
+    @Override
+    public void recordEnd(long time) {
+        machine.stopRecord(false, time);
+    }
+
+    @Override
+    public void recordZoom(float zoom) {
+        LogUtil.i("recordZoom");
+        machine.zoom(zoom, CameraInterface.TYPE_RECORDER);
+    }
+
+    @Override
+    public void recordError() {
+        if (errorLisenter != null) {
+            errorLisenter.AudioPermissionError();
+        }
+    }
+
+    //============TypeListener回调==========
+
+    @Override
+    public void cancel() {
+        machine.cancle(mVideoView.getHolder(), screenProp);
+    }
+
+    @Override
+    public void confirm() {
+        machine.confirm();
     }
 }
