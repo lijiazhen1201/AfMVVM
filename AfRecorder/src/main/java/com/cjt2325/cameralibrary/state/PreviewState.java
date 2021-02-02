@@ -16,7 +16,7 @@ import com.cjt2325.cameralibrary.util.LogUtil;
  * 描    述：空闲状态
  * =====================================
  */
-class PreviewState implements State {
+public class PreviewState implements State {
     public static final String TAG = "PreviewState";
 
     private CameraMachine machine;

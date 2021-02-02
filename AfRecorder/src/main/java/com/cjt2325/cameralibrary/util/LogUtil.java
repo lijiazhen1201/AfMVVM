@@ -2,7 +2,7 @@ package com.cjt2325.cameralibrary.util;
 
 import android.util.Log;
 
-import static cn.appoa.afrecorder.BuildConfig.DEBUG;
+import cn.appoa.afutils.net.LogUtils;
 
 
 /**
@@ -18,22 +18,22 @@ public class LogUtil {
     private static final String DEFAULT_TAG = "CJT";
 
     public static void i(String tag, String msg) {
-        if (DEBUG)
+        if (LogUtils.isDebug)
             Log.i(tag, msg);
     }
 
     public static void v(String tag, String msg) {
-        if (DEBUG)
+        if (LogUtils.isDebug)
             Log.v(tag, msg);
     }
 
     public static void d(String tag, String msg) {
-        if (DEBUG)
+        if (LogUtils.isDebug)
             Log.d(tag, msg);
     }
 
     public static void e(String tag, String msg) {
-        if (DEBUG)
+        if (LogUtils.isDebug)
             Log.e(tag, msg);
     }
 

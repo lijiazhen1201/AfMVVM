@@ -472,6 +472,16 @@ public abstract class AfDialogFragment<V extends ViewDataBinding, VM extends Bas
     }
 
     /**
+     * 获取路由Fragment的CanonicalName
+     *
+     * @param fragmentPath
+     * @return
+     */
+    public String getRouterFragmentCanonicalName(String fragmentPath) {
+        return null;
+    }
+
+    /**
      * 显示加载框
      */
     public void showLoading(CharSequence message) {

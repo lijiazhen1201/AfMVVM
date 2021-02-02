@@ -52,12 +52,12 @@ public class CameraMachine implements State {
     }
 
     //获取浏览图片状态
-    State getBorrowPictureState() {
+    public State getBorrowPictureState() {
         return borrowPictureState;
     }
 
     //获取浏览视频状态
-    State getBorrowVideoState() {
+    public State getBorrowVideoState() {
         return borrowVideoState;
     }
 

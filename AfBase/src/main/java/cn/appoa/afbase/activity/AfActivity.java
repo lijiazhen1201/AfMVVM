@@ -515,6 +515,16 @@ public abstract class AfActivity<V extends ViewDataBinding, VM extends BaseViewM
     }
 
     /**
+     * 获取路由Fragment的CanonicalName
+     *
+     * @param fragmentPath
+     * @return
+     */
+    public String getRouterFragmentCanonicalName(String fragmentPath) {
+        return null;
+    }
+
+    /**
      * 显示加载框
      *
      * @param message
