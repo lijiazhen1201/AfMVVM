@@ -1,5 +1,6 @@
 package cn.appoa.afutils.date;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -95,4 +96,68 @@ public class TimeUtils {
         return formatData;
     }
 
+    /**
+     * 格式化时间
+     *
+     * @param createDate
+     * @return
+     */
+    public static String getCreateDate(String createDate) {
+        return getCreateDate(createDate, "yyyy-MM-dd HH:mm:ss");
+    }
+
+    /**
+     * 格式化时间
+     *
+     * @param createDate
+     * @param pattern
+     * @return
+     */
+    public static String getCreateDate(String createDate, String pattern) {
+        try {
+            long timestamp = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).parse(createDate).getTime();
+            return getCreateDate(timestamp, pattern);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return createDate;
+    }
+
+    /**
+     * 格式化时间
+     *
+     * @param timestamp 时间戳
+     * @return
+     */
+    public static String getCreateDate(long timestamp) {
+        return getCreateDate(timestamp, "yyyy-MM-dd HH:mm:ss");
+    }
+
+    /**
+     * 格式化时间
+     *
+     * @param timestamp 时间戳
+     * @return
+     */
+    public static String getCreateDate(long timestamp, String pattern) {
+        if (timestamp > 0) {
+            return new SimpleDateFormat(pattern, Locale.getDefault()).format(new Date(timestamp));
+        } else {
+            return "";
+        }
+    }
+
+    /**
+     * 格式化时间
+     *
+     * @param createDate
+     * @return
+     */
+    public static long parseCreateDate(String createDate) {
+        try {
+            return new SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault()).parse(createDate).getTime();
+        } catch (ParseException e) {
+            return 0;
+        }
+    }
 }

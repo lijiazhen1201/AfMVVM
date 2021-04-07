@@ -34,6 +34,7 @@ import android.renderscript.Allocation;
 import android.renderscript.Element;
 import android.renderscript.RenderScript;
 import android.renderscript.ScriptIntrinsicBlur;
+import android.text.TextUtils;
 import android.util.Base64;
 import android.view.View;
 
@@ -48,6 +49,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
 
 import androidx.annotation.FloatRange;
 import androidx.annotation.IntRange;
@@ -57,6 +59,87 @@ import cn.appoa.afutils.AfUtils;
  * 图片工具类
  */
 public class ImageUtils {
+
+    /**
+     * 获取图片集合（竖线拆分）
+     *
+     * @param img
+     * @return
+     */
+    public static ArrayList<String> getImgList(String img) {
+        return getImgList(img, "\\|");
+    }
+
+    /**
+     * 获取图片集合（字符拆分）
+     *
+     * @param img
+     * @param regex 分隔符
+     * @return
+     */
+    public static ArrayList<String> getImgList(String img, String regex) {
+        ArrayList<String> list = new ArrayList<>();
+        if (!TextUtils.isEmpty(img)) {
+            String[] imgs = img.split(regex);
+            if (imgs != null && imgs.length > 0) {
+                for (int i = 0; i < imgs.length; i++) {
+                    if (!TextUtils.isEmpty(imgs[i])) {
+                        list.add(imgs[i]);
+                    }
+                }
+            }
+        }
+        return list;
+    }
+
+    /**
+     * 获取图片封面（第一张）（竖线拆分）
+     *
+     * @param img
+     * @return
+     */
+    public static String getImgCover(String img) {
+        return getImgCover(img, "\\|");
+    }
+
+    /**
+     * 获取图片封面（第一张）
+     *
+     * @param img
+     * @param regex 分隔符
+     * @return
+     */
+    public static String getImgCover(String img, String regex) {
+        String cover = "";
+        ArrayList<String> list = getImgList(img, regex);
+        if (list != null && list.size() > 0) {
+            cover = list.get(0);
+        }
+        return cover;
+    }
+
+    /**
+     * 图片变灰色
+     *
+     * @param bitmap
+     * @return
+     */
+    public static Bitmap grayBitmap(Bitmap bitmap) {
+        int width = bitmap.getWidth();
+        int height = bitmap.getHeight();
+        Bitmap faceIconGreyBitmap = Bitmap
+                .createBitmap(width, height, Bitmap.Config.ARGB_8888);
+
+        Canvas canvas = new Canvas(faceIconGreyBitmap);
+        Paint paint = new Paint();
+        ColorMatrix colorMatrix = new ColorMatrix();
+        colorMatrix.setSaturation(0);
+        ColorMatrixColorFilter colorMatrixFilter = new ColorMatrixColorFilter(
+                colorMatrix);
+        paint.setColorFilter(colorMatrixFilter);
+        canvas.drawBitmap(bitmap, 0, 0, paint);
+        return faceIconGreyBitmap;
+    }
 
     /**
      * 从资源图片获取bitmap

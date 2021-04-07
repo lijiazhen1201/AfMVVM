@@ -211,4 +211,17 @@ public class AtyUtils {
         return "no " + packageName;
     }
 
+    /**
+     * 富文本组装详情
+     *
+     * @param title
+     * @param add_time
+     * @param content
+     * @return
+     */
+    public static String getWebContentDetails(String title, String add_time, String content) {
+        return "<div><font color='#333333' size='5'>" + title
+                + "</font></div><p></p><div><span><font color='#aaaaaa' size='2'>" + add_time
+                + "</font></span></div><p></p>" + content;
+    }
 }
