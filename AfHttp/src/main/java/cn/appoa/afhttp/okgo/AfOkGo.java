@@ -1,5 +1,8 @@
 package cn.appoa.afhttp.okgo;
 
+import android.text.TextUtils;
+
+import com.alibaba.fastjson.JSON;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.request.GetRequest;
 import com.lzy.okgo.request.PostRequest;
@@ -51,6 +54,59 @@ public final class AfOkGo {
             request.headers(key, headers.get(key));
         }
         return request;
+    }
+
+    /**
+     * post请求json上传
+     *
+     * @param url
+     * @param json
+     * @return
+     */
+    public static PostRequest<String> json(String url, String json) {
+        PostRequest<String> request = OkGo.<String>post(url);
+        if (!TextUtils.isEmpty(json)) {
+            request.upJson(json);
+        }
+        return request;
+    }
+
+    /**
+     * post请求json上传(带请求头)
+     *
+     * @param url
+     * @param json
+     * @param headers
+     * @return
+     */
+    public static PostRequest<String> json(String url, String json, Map<String, String> headers) {
+        PostRequest<String> request = json(url, json);
+        for (String key : headers.keySet()) {
+            request.headers(key, headers.get(key));
+        }
+        return request;
+    }
+
+    /**
+     * post请求json上传
+     *
+     * @param url    接口地址
+     * @param params 请求参数
+     */
+    public static PostRequest<String> json(String url, Map<String, String> params) {
+        return json(url, JSON.toJSONString(params));
+    }
+
+    /**
+     * post请求json上传(带请求头)
+     *
+     * @param url     接口地址
+     * @param params  请求参数
+     * @param headers 请求头
+     */
+    public static PostRequest<String> json(String url, Map<String, String> params,
+                                           Map<String, String> headers) {
+        return json(url, JSON.toJSONString(params), headers);
     }
 
     /**

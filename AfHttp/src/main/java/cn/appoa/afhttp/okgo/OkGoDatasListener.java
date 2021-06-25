@@ -19,6 +19,10 @@ public abstract class OkGoDatasListener<T> extends OkGoSuccessListener {
      * data里生成的JavaBean
      */
     private Class<T> clazz;
+    /**
+     * list的类型：0：data就是list；1：data是array，取里面的list；2：data是obj，取里面的list
+     */
+    private int listType;
 
     public OkGoDatasListener(AfView mView, Class<T> clazz) {
         super(mView);
@@ -55,10 +59,58 @@ public abstract class OkGoDatasListener<T> extends OkGoSuccessListener {
         this.clazz = clazz;
     }
 
+    public OkGoDatasListener(AfView mView, Class<T> clazz, int type) {
+        super(mView);
+        this.clazz = clazz;
+        this.listType = type;
+    }
+
+    public OkGoDatasListener(AfView mView, String tag, Class<T> clazz, int type) {
+        super(mView, tag);
+        this.clazz = clazz;
+        this.listType = type;
+    }
+
+    public OkGoDatasListener(AfView mView, String tag, String loadingMessage, Class<T> clazz, int type) {
+        super(mView, tag, loadingMessage);
+        this.clazz = clazz;
+        this.listType = type;
+    }
+
+    public OkGoDatasListener(AfView mView, String tag, String loadingMessage, int messageType, Class<T> clazz, int type) {
+        super(mView, tag, loadingMessage, messageType);
+        this.clazz = clazz;
+        this.listType = type;
+    }
+
+    public OkGoDatasListener(AfView mView, String tag, String loadingMessage, String errorMessage, Class<T> clazz, int type) {
+        super(mView, tag, loadingMessage, errorMessage);
+        this.clazz = clazz;
+        this.listType = type;
+    }
+
+    public OkGoDatasListener(AfView mView, String tag, int messageType, String errorMessage, Class<T> clazz, int type) {
+        super(mView, tag, messageType, errorMessage);
+        this.clazz = clazz;
+        this.listType = type;
+    }
+
+    public OkGoDatasListener(AfView mView, String tag, String loadingMessage, int messageType, String errorMessage, Class<T> clazz, int type) {
+        super(mView, tag, loadingMessage, messageType, errorMessage);
+        this.clazz = clazz;
+        this.listType = type;
+    }
+
     @Override
     public void onSuccessResponse(String response) {
         if (clazz != null) {
-            onDatasResponse(JsonUtils.parseJson(response, clazz));
+            if (listType == 0) {
+                onDatasResponse(JsonUtils.filterJsonParseArray(response, clazz));
+            } else if (listType == 1) {
+                onDatasResponse(JsonUtils.filterJsonParseArrayList(response, clazz));
+            } else if (listType == 2) {
+                onDatasResponse(JsonUtils.filterJsonParseObjectList(response, clazz));
+            }
         } else {
             onDatasResponse(new ArrayList<T>());
         }

@@ -40,6 +40,11 @@ public class JsonUtils {
     public static boolean isGson = false;
 
     /**
+     * 访问成功code
+     */
+    private static int SUCCESS_CODE = 200;
+
+    /**
      * 强制下线code
      */
     private static int ERROR_CODE = 401;
@@ -126,6 +131,15 @@ public class JsonUtils {
     }
 
     /**
+     * 初始化成功code
+     *
+     * @param code
+     */
+    public static void initSuccess(int code) {
+        SUCCESS_CODE = code;
+    }
+
+    /**
      * 初始化强制下线code
      *
      * @param code
@@ -133,6 +147,7 @@ public class JsonUtils {
     public static void initError(int code) {
         ERROR_CODE = code;
     }
+
 
     /**
      * 是否是下线code
@@ -181,7 +196,7 @@ public class JsonUtils {
                 JSONObject obj = new JSONObject(json);
                 if (TYPE == 1) {
                     int code = obj.getInt(CODE);
-                    if (code == 200) {
+                    if (code == SUCCESS_CODE) {
                         b = true;
                     }
                 } else if (TYPE == 2) {
@@ -199,14 +214,30 @@ public class JsonUtils {
         return b;
     }
 
+
     /**
-     * 解析json数据
+     * 解析json数据为Bean
      *
      * @param json
      * @param t
      * @return
      */
-    public static <T> List<T> parse(String json, Class<T> t) {
+    public static <T> T parseObject(String json, Class<T> t) {
+        if (isGson) {
+            return new Gson().fromJson(json, t);
+        } else {
+            return JSON.parseObject(json, t);
+        }
+    }
+
+    /**
+     * 解析json数据为List
+     *
+     * @param json
+     * @param t
+     * @return
+     */
+    public static <T> List<T> parseArray(String json, Class<T> t) {
         if (isGson) {
             return new Gson().fromJson(json, new TypeToken<List<T>>() {
             }.getType());
@@ -216,39 +247,117 @@ public class JsonUtils {
     }
 
     /**
-     * 解析json数据
+     * 过滤json数据->解析json数据为Bean
+     *
+     * @param json
+     * @param t
+     * @param <T>
+     * @return
+     */
+    public static <T> T filterJsonParseObject(String json, Class<T> t) {
+        if (filterJson(json)) {
+            JSONObject object = parseJSONObject(json);
+            if (object != null) {
+                return parseObject(object.toString(), t);
+            }
+        }
+        return null;
+    }
+
+    /**
+     * 过滤json数据->解析json数据为List
      *
      * @param json
      * @param t
      * @return
      */
-    public static <T> List<T> parseJson(String json, Class<T> t) {
+    public static <T> List<T> filterJsonParseObjectList(String json, Class<T> t) {
         List<T> list = new ArrayList<>();
         if (filterJson(json)) {
-            JSONArray array = parseJSONArray(json);
+            JSONArray array = parseJSONObjectList(json);
             if (array != null && array.length() > 0) {
-                list = parse(array.toString(), t);
+                list = parseArray(array.toString(), t);
             }
         }
         return list;
     }
 
     /**
-     * 解析json数据
+     * 过滤json数据->解析json数据为List
      *
      * @param json
      * @param t
      * @return
      */
-    public static <T> List<T> parseJsonList(String json, Class<T> t) {
+    public static <T> List<T> filterJsonParseArray(String json, Class<T> t) {
+        List<T> list = new ArrayList<>();
+        if (filterJson(json)) {
+            JSONArray array = parseJSONArray(json);
+            if (array != null && array.length() > 0) {
+                list = parseArray(array.toString(), t);
+            }
+        }
+        return list;
+    }
+
+    /**
+     * 过滤json数据->解析json数据为List
+     *
+     * @param json
+     * @param t
+     * @return
+     */
+    public static <T> List<T> filterJsonParseArrayList(String json, Class<T> t) {
         List<T> list = new ArrayList<>();
         if (filterJson(json)) {
             JSONArray array = parseJSONArrayList(json);
             if (array != null && array.length() > 0) {
-                list = parse(array.toString(), t);
+                list = parseArray(array.toString(), t);
             }
         }
         return list;
+    }
+
+    /**
+     * 解析json对象
+     *
+     * @param json
+     * @return
+     */
+    public static JSONObject parseJSONObject(String json) {
+        JSONObject object = null;
+        try {
+            JSONObject obj = new JSONObject(json);
+            if (TYPE == 1) {
+                object = obj.getJSONObject(DATA);
+            } else if (TYPE == 2) {
+                object = obj.getJSONObject(RESULT);
+            } else if (TYPE == 3) {
+                object = obj.getJSONObject(DATA);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return object;
+    }
+
+    /**
+     * 解析json对象中的数组
+     *
+     * @param json
+     * @return
+     */
+    public static JSONArray parseJSONObjectList(String json) {
+        JSONArray arrayList = null;
+        try {
+            JSONObject obj = parseJSONObject(json);
+            if (obj != null) {
+                arrayList = obj.getJSONArray(LIST);
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return arrayList;
     }
 
     /**
@@ -388,6 +497,6 @@ public class JsonUtils {
      * @return
      */
     public static String getJsonError(String msg) {
-        return "{\"msg\":\"" + msg + "\",\"status\":false,\"message\":\"" + msg + "\",\"code\":404,\"data\":[]}";
+        return "{\"" + STATE + "\":false,\"" + MESSAGE + "\":\"" + msg + "\",\"" + CODE + "\":404,\"" + DATA + "\":[]}";
     }
 }
