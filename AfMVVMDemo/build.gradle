@@ -40,6 +40,9 @@ android {
                 arguments = [AROUTER_MODULE_NAME: project.getName()]
             }
         }
+        ndk {
+            abiFilters "armeabi-v7a"
+        }
     }
     buildTypes {
         debug {
@@ -59,6 +62,11 @@ android {
     }
     dataBinding {
         enabled config.dataBinding
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
     }
     //签名打包自动命名
     android.applicationVariants.all { variant ->
@@ -83,8 +91,8 @@ dependencies {
     implementation support["arouter"]
     annotationProcessor support["aroutercompiler"]
     implementation support["proguard"]
-    //implementation project(':AfSelector')
-    implementation 'com.github.lijiazhen1201:AfMVVM:1.2.2'
+    implementation project(':AfSelector')
+    //implementation 'com.github.lijiazhen1201:AfMVVM:1.2.3'
 }
 
 repositories {

@@ -163,7 +163,7 @@ public class SnackbarUtils {
     public static SnackbarUtils Short(View view, String message) {
         /*
         <view xmlns:android="http://schemas.android.com/apk/res/android"
-          class="android.support.design.widget.Snackbar$SnackbarLayout"
+          class="com.google.android.material.snackbar.Snackbar$SnackbarLayout"
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:layout_gravity="bottom"

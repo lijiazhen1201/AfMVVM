@@ -17,6 +17,11 @@ android {
     dataBinding {
         enabled config.dataBinding
     }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
 }
 
 dependencies {

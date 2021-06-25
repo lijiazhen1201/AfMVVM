@@ -17,12 +17,17 @@ android {
     dataBinding {
         enabled config.dataBinding
     }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
 }
 
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
     api project(':AfRecorder')
-    api support["ffmpeglibrary"]
+    //api support["ffmpeglibrary"]
 }
 
 tasks.withType(JavaCompile) {

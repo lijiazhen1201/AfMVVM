@@ -103,9 +103,6 @@ public abstract class SlideBackActivity extends ActivityInterfaceImpl
 
     @Override
     public void setContentView(View view) {
-		//先移除布局，再添加布局
-        ((ViewGroup) findViewById(android.R.id.content)).removeView(view);
-		
         if (mSlideable) {
             // 如果找不到前一个activity的content view，则不能滑动，典型的场景就是由外部app打开单独的一界面
             // 例如从通知栏中打开消息中心界面，所以可能当前进程就一个消息中心的activity，此时就不能滑动退出

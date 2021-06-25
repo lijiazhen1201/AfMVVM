@@ -66,4 +66,5 @@ public class AboutUsActivity extends BaseActivity<ActivityAboutUsBinding, AboutU
             }
         });
     }
+
 }

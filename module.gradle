@@ -22,6 +22,11 @@ android {
     dataBinding {
         enabled config.dataBinding
     }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
 }
 
 tasks.withType(JavaCompile) {

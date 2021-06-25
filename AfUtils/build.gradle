@@ -17,6 +17,11 @@ android {
     dataBinding {
         enabled config.dataBinding
     }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
 }
 
 dependencies {
@@ -35,7 +40,7 @@ dependencies {
     api support["gson"]
     api support["mkkv"]
     api support["prdownloader"]
-    api support["devshape"]
+    //api support["devshape"]
 }
 
 tasks.withType(JavaCompile) {

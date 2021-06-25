@@ -72,7 +72,6 @@ public abstract class AfActivity<V extends ViewDataBinding, VM extends BaseViewM
         if (binding == null) {
             finish();
         }
-		setContentView(binding.getRoot());
         // 私有的初始化DataBinding和ViewModel方法
         initViewDataBinding(savedInstanceState);
         // 私有的ViewModel与View的契约事件回调逻辑
