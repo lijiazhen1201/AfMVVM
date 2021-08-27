@@ -2,8 +2,12 @@ package cn.appoa.afutils.res;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.ColorMatrix;
+import android.graphics.ColorMatrixColorFilter;
+import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.graphics.drawable.GradientDrawable;
+import android.view.View;
 
 import java.util.Random;
 
@@ -11,6 +15,27 @@ import java.util.Random;
  * 颜色工具类
  */
 public class ColorUtils {
+
+    /**
+     * 是否全局变灰色
+     */
+    public static boolean isGrayColor = false;
+
+    /**
+     * 控件View变灰色
+     *
+     * @param view
+     */
+    public static void setViewGray(View view) {
+        if (view == null) {
+            return;
+        }
+        Paint paint = new Paint();
+        ColorMatrix cm = new ColorMatrix();
+        cm.setSaturation(0f);
+        paint.setColorFilter(new ColorMatrixColorFilter(cm));
+        view.setLayerType(View.LAYER_TYPE_HARDWARE, paint);
+    }
 
     /**
      * 获取随机颜色

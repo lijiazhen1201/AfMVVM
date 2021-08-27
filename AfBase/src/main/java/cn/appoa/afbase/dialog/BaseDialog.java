@@ -12,6 +12,7 @@ import android.widget.EditText;
 
 import cn.appoa.afbase.R;
 import cn.appoa.afutils.listener.OnCallbackListener;
+import cn.appoa.afutils.res.ColorUtils;
 
 
 public abstract class BaseDialog implements View.OnClickListener {
@@ -166,6 +167,10 @@ public abstract class BaseDialog implements View.OnClickListener {
     public Dialog initDialog(View view, Context context, int Gravity, int animId, int width, int height,
                              float dimAmount) {
         Dialog dialog = new AfDialog(context, R.style.SimpleDialog);
+        // 全局变灰色
+        if (ColorUtils.isGrayColor) {
+            ColorUtils.setViewGray(view);
+        }
         dialog.setContentView(view);
         Window window = dialog.getWindow();
         WindowManager.LayoutParams params = window.getAttributes();

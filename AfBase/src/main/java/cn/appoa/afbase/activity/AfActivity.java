@@ -43,6 +43,7 @@ import cn.appoa.afpermission.grant.PermissionsManager;
 import cn.appoa.afpermission.grant.PermissionsResultAction;
 import cn.appoa.afutils.app.FastClickUtils;
 import cn.appoa.afutils.app.Foreground;
+import cn.appoa.afutils.res.ColorUtils;
 import cn.appoa.afutils.toast.ToastUtils;
 
 /**
@@ -86,6 +87,10 @@ public abstract class AfActivity<V extends ViewDataBinding, VM extends BaseViewM
         }
         // 前台监听
         Foreground.get(this).addForegroundListener(this);
+        // 全局变灰色
+        if (ColorUtils.isGrayColor) {
+            ColorUtils.setViewGray(getWindow().getDecorView());
+        }
     }
 
     @Override
