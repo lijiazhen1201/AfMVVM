@@ -185,24 +185,27 @@ public class Thumb {
 
             // If one of the attributes are set, but the others aren't, set the
             // attributes to default
-            if (thumbRadiusDP == -1)
+            if (thumbRadiusDP == -1) {
                 mThumbRadiusPx = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                         DEFAULT_THUMB_RADIUS_DP,
                         res.getDisplayMetrics());
-            else
+            } else {
                 mThumbRadiusPx = TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP,
                         thumbRadiusDP,
                         res.getDisplayMetrics());
+            }
 
-            if (thumbColorNormal == -1)
+            if (thumbColorNormal == -1) {
                 mThumbColorNormal = DEFAULT_THUMB_COLOR_NORMAL;
-            else
+            } else {
                 mThumbColorNormal = thumbColorNormal;
+            }
 
-            if (thumbColorPressed == -1)
+            if (thumbColorPressed == -1) {
                 mThumbColorPressed = DEFAULT_THUMB_COLOR_PRESSED;
-            else
+            } else {
                 mThumbColorPressed = thumbColorPressed;
+            }
 
             // Creates the paint and sets the Paint values
             mPaintNormal = new Paint();
@@ -304,10 +307,11 @@ public class Thumb {
         } else {
 
             // Otherwise use a circle to display.
-            if (mIsPressed)
+            if (mIsPressed) {
                 canvas.drawCircle(mX, mY, mThumbRadiusPx, mPaintPressed);
-            else
+            } else {
                 canvas.drawCircle(mX, mY, mThumbRadiusPx, mPaintNormal);
+            }
         }
     }
 }

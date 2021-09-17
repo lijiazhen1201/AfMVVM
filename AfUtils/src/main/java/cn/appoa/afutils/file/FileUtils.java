@@ -98,13 +98,21 @@ public class FileUtils {
      */
     public static boolean rename(File file, String newName) {
         // 文件为空返回false
-        if (file == null) return false;
+        if (file == null) {
+            return false;
+        }
         // 文件不存在返回false
-        if (!file.exists()) return false;
+        if (!file.exists()) {
+            return false;
+        }
         // 新的文件名为空返回false
-        if (isSpace(newName)) return false;
+        if (isSpace(newName)) {
+            return false;
+        }
         // 如果文件名没有改变返回true
-        if (newName.equals(file.getName())) return true;
+        if (newName.equals(file.getName())) {
+            return true;
+        }
         File newFile = new File(file.getParent() + File.separator + newName);
         // 如果重命名的文件已存在返回false
         return !newFile.exists()
@@ -189,10 +197,16 @@ public class FileUtils {
      * @return {@code true}: 存在或创建成功<br>{@code false}: 不存在或创建失败
      */
     public static boolean createOrExistsFile(File file) {
-        if (file == null) return false;
+        if (file == null) {
+            return false;
+        }
         // 如果存在，是文件则返回true，是目录则返回false
-        if (file.exists()) return file.isFile();
-        if (!createOrExistsDir(file.getParentFile())) return false;
+        if (file.exists()) {
+            return file.isFile();
+        }
+        if (!createOrExistsDir(file.getParentFile())) {
+            return false;
+        }
         try {
             return file.createNewFile();
         } catch (IOException e) {
@@ -208,11 +222,17 @@ public class FileUtils {
      * @return {@code true}: 创建成功<br>{@code false}: 创建失败
      */
     public static boolean createFileByDeleteOldFile(File file) {
-        if (file == null) return false;
+        if (file == null) {
+            return false;
+        }
         // 文件存在并且删除失败返回false
-        if (file.exists() && file.isFile() && !file.delete()) return false;
+        if (file.exists() && file.isFile() && !file.delete()) {
+            return false;
+        }
         // 创建目录失败返回false
-        if (!createOrExistsDir(file.getParentFile())) return false;
+        if (!createOrExistsDir(file.getParentFile())) {
+            return false;
+        }
         try {
             return file.createNewFile();
         } catch (IOException e) {
@@ -242,27 +262,39 @@ public class FileUtils {
      * @return {@code true}: 复制或移动成功<br>{@code false}: 复制或移动失败
      */
     private static boolean copyOrMoveDir(File srcDir, File destDir, boolean isMove) {
-        if (srcDir == null || destDir == null) return false;
+        if (srcDir == null || destDir == null) {
+            return false;
+        }
         // 如果目标目录在源目录中则返回false，看不懂的话好好想想递归怎么结束
         // srcPath : F:\\MyGithub\\AndroidUtilCode\\utilcode\\src\\test\\res
         // destPath: F:\\MyGithub\\AndroidUtilCode\\utilcode\\src\\test\\res1
         // 为防止以上这种情况出现出现误判，须分别在后面加个路径分隔符
         String srcPath = srcDir.getPath() + File.separator;
         String destPath = destDir.getPath() + File.separator;
-        if (destPath.contains(srcPath)) return false;
+        if (destPath.contains(srcPath)) {
+            return false;
+        }
         // 源文件不存在或者不是目录则返回false
-        if (!srcDir.exists() || !srcDir.isDirectory()) return false;
+        if (!srcDir.exists() || !srcDir.isDirectory()) {
+            return false;
+        }
         // 目标目录不存在返回false
-        if (!createOrExistsDir(destDir)) return false;
+        if (!createOrExistsDir(destDir)) {
+            return false;
+        }
         File[] files = srcDir.listFiles();
         for (File file : files) {
             File oneDestFile = new File(destPath + file.getName());
             if (file.isFile()) {
                 // 如果操作失败返回false
-                if (!copyOrMoveFile(file, oneDestFile, isMove)) return false;
+                if (!copyOrMoveFile(file, oneDestFile, isMove)) {
+                    return false;
+                }
             } else if (file.isDirectory()) {
                 // 如果操作失败返回false
-                if (!copyOrMoveDir(file, oneDestFile, isMove)) return false;
+                if (!copyOrMoveDir(file, oneDestFile, isMove)) {
+                    return false;
+                }
             }
         }
         return !isMove || deleteDir(srcDir);
@@ -289,13 +321,21 @@ public class FileUtils {
      * @return {@code true}: 复制或移动成功<br>{@code false}: 复制或移动失败
      */
     private static boolean copyOrMoveFile(File srcFile, File destFile, boolean isMove) {
-        if (srcFile == null || destFile == null) return false;
+        if (srcFile == null || destFile == null) {
+            return false;
+        }
         // 源文件不存在或者不是文件则返回false
-        if (!srcFile.exists() || !srcFile.isFile()) return false;
+        if (!srcFile.exists() || !srcFile.isFile()) {
+            return false;
+        }
         // 目标文件存在且是文件则返回false
-        if (destFile.exists() && destFile.isFile()) return false;
+        if (destFile.exists() && destFile.isFile()) {
+            return false;
+        }
         // 目标目录不存在返回false
-        if (!createOrExistsDir(destFile.getParentFile())) return false;
+        if (!createOrExistsDir(destFile.getParentFile())) {
+            return false;
+        }
         try {
             return IOUtils.writeFileFromIS(destFile, new FileInputStream(srcFile), false)
                     && !(isMove && !deleteFile(srcFile));
@@ -410,19 +450,29 @@ public class FileUtils {
      * @return {@code true}: 删除成功<br>{@code false}: 删除失败
      */
     public static boolean deleteDir(File dir) {
-        if (dir == null) return false;
+        if (dir == null) {
+            return false;
+        }
         // 目录不存在返回true
-        if (!dir.exists()) return true;
+        if (!dir.exists()) {
+            return true;
+        }
         // 不是目录返回false
-        if (!dir.isDirectory()) return false;
+        if (!dir.isDirectory()) {
+            return false;
+        }
         // 现在文件存在且是文件夹
         File[] files = dir.listFiles();
         if (files != null && files.length != 0) {
             for (File file : files) {
                 if (file.isFile()) {
-                    if (!deleteFile(file)) return false;
+                    if (!deleteFile(file)) {
+                        return false;
+                    }
                 } else if (file.isDirectory()) {
-                    if (!deleteDir(file)) return false;
+                    if (!deleteDir(file)) {
+                        return false;
+                    }
                 }
             }
         }
@@ -466,19 +516,29 @@ public class FileUtils {
      * @return {@code true}: 删除成功<br>{@code false}: 删除失败
      */
     public static boolean deleteFilesInDir(File dir) {
-        if (dir == null) return false;
+        if (dir == null) {
+            return false;
+        }
         // 目录不存在返回true
-        if (!dir.exists()) return true;
+        if (!dir.exists()) {
+            return true;
+        }
         // 不是目录返回false
-        if (!dir.isDirectory()) return false;
+        if (!dir.isDirectory()) {
+            return false;
+        }
         // 现在文件存在且是文件夹
         File[] files = dir.listFiles();
         if (files != null && files.length != 0) {
             for (File file : files) {
                 if (file.isFile()) {
-                    if (!deleteFile(file)) return false;
+                    if (!deleteFile(file)) {
+                        return false;
+                    }
                 } else if (file.isDirectory()) {
-                    if (!deleteDir(file)) return false;
+                    if (!deleteDir(file)) {
+                        return false;
+                    }
                 }
             }
         }
@@ -504,8 +564,12 @@ public class FileUtils {
      * @return 文件链表
      */
     public static List<File> listFilesInDir(File dir, boolean isRecursive) {
-        if (!isDir(dir)) return null;
-        if (isRecursive) return listFilesInDir(dir);
+        if (!isDir(dir)) {
+            return null;
+        }
+        if (isRecursive) {
+            return listFilesInDir(dir);
+        }
         List<File> list = new ArrayList<>();
         File[] files = dir.listFiles();
         if (files != null && files.length != 0) {
@@ -531,7 +595,9 @@ public class FileUtils {
      * @return 文件链表
      */
     public static List<File> listFilesInDir(File dir) {
-        if (!isDir(dir)) return null;
+        if (!isDir(dir)) {
+            return null;
+        }
         List<File> list = new ArrayList<>();
         File[] files = dir.listFiles();
         if (files != null && files.length != 0) {
@@ -571,8 +637,12 @@ public class FileUtils {
      * @return 文件链表
      */
     public static List<File> listFilesInDirWithFilter(File dir, String suffix, boolean isRecursive) {
-        if (isRecursive) return listFilesInDirWithFilter(dir, suffix);
-        if (dir == null || !isDir(dir)) return null;
+        if (isRecursive) {
+            return listFilesInDirWithFilter(dir, suffix);
+        }
+        if (dir == null || !isDir(dir)) {
+            return null;
+        }
         List<File> list = new ArrayList<>();
         File[] files = dir.listFiles();
         if (files != null && files.length != 0) {
@@ -606,7 +676,9 @@ public class FileUtils {
      * @return 文件链表
      */
     public static List<File> listFilesInDirWithFilter(File dir, String suffix) {
-        if (dir == null || !isDir(dir)) return null;
+        if (dir == null || !isDir(dir)) {
+            return null;
+        }
         List<File> list = new ArrayList<>();
         File[] files = dir.listFiles();
         if (files != null && files.length != 0) {
@@ -643,8 +715,12 @@ public class FileUtils {
      * @return 文件链表
      */
     public static List<File> listFilesInDirWithFilter(File dir, FilenameFilter filter, boolean isRecursive) {
-        if (isRecursive) return listFilesInDirWithFilter(dir, filter);
-        if (dir == null || !isDir(dir)) return null;
+        if (isRecursive) {
+            return listFilesInDirWithFilter(dir, filter);
+        }
+        if (dir == null || !isDir(dir)) {
+            return null;
+        }
         List<File> list = new ArrayList<>();
         File[] files = dir.listFiles();
         if (files != null && files.length != 0) {
@@ -676,7 +752,9 @@ public class FileUtils {
      * @return 文件链表
      */
     public static List<File> listFilesInDirWithFilter(File dir, FilenameFilter filter) {
-        if (dir == null || !isDir(dir)) return null;
+        if (dir == null || !isDir(dir)) {
+            return null;
+        }
         List<File> list = new ArrayList<>();
         File[] files = dir.listFiles();
         if (files != null && files.length != 0) {
@@ -713,7 +791,9 @@ public class FileUtils {
      * @return 文件链表
      */
     public static List<File> searchFileInDir(File dir, String fileName) {
-        if (dir == null || !isDir(dir)) return null;
+        if (dir == null || !isDir(dir)) {
+            return null;
+        }
         List<File> list = new ArrayList<>();
         File[] files = dir.listFiles();
         if (files != null && files.length != 0) {
@@ -746,7 +826,9 @@ public class FileUtils {
      * @return 文件最后修改的毫秒时间戳
      */
     public static long getFileLastModified(File file) {
-        if (file == null) return -1;
+        if (file == null) {
+            return -1;
+        }
         return file.lastModified();
     }
 
@@ -816,13 +898,17 @@ public class FileUtils {
             if (LINE_SEP.endsWith("\n")) {
                 while ((readChars = is.read(buffer, 0, 1024)) != -1) {
                     for (int i = 0; i < readChars; ++i) {
-                        if (buffer[i] == '\n') ++count;
+                        if (buffer[i] == '\n') {
+                            ++count;
+                        }
                     }
                 }
             } else {
                 while ((readChars = is.read(buffer, 0, 1024)) != -1) {
                     for (int i = 0; i < readChars; ++i) {
-                        if (buffer[i] == '\r') ++count;
+                        if (buffer[i] == '\r') {
+                            ++count;
+                        }
                     }
                 }
             }
@@ -893,7 +979,9 @@ public class FileUtils {
      * @return 目录长度
      */
     public static long getDirLength(File dir) {
-        if (!isDir(dir)) return -1;
+        if (!isDir(dir)) {
+            return -1;
+        }
         long len = 0;
         File[] files = dir.listFiles();
         if (files != null && files.length != 0) {
@@ -925,7 +1013,9 @@ public class FileUtils {
      * @return 文件长度
      */
     public static long getFileLength(File file) {
-        if (!isFile(file)) return -1;
+        if (!isFile(file)) {
+            return -1;
+        }
         return file.length();
     }
 
@@ -968,7 +1058,9 @@ public class FileUtils {
      * @return 文件的MD5校验码
      */
     public static byte[] getFileMD5(File file) {
-        if (file == null) return null;
+        if (file == null) {
+            return null;
+        }
         DigestInputStream dis = null;
         try {
             FileInputStream fis = new FileInputStream(file);
@@ -976,7 +1068,9 @@ public class FileUtils {
             dis = new DigestInputStream(fis, md);
             byte[] buffer = new byte[1024 * 256];
             while (true) {
-                if (!(dis.read(buffer) > 0)) break;
+                if (!(dis.read(buffer) > 0)) {
+                    break;
+                }
             }
             md = dis.getMessageDigest();
             return md.digest();
@@ -995,7 +1089,9 @@ public class FileUtils {
      * @return filePath最长目录
      */
     public static String getDirName(File file) {
-        if (file == null) return null;
+        if (file == null) {
+            return null;
+        }
         return getDirName(file.getPath());
     }
 
@@ -1006,7 +1102,9 @@ public class FileUtils {
      * @return filePath最长目录
      */
     public static String getDirName(String filePath) {
-        if (isSpace(filePath)) return filePath;
+        if (isSpace(filePath)) {
+            return filePath;
+        }
         int lastSep = filePath.lastIndexOf(File.separator);
         return lastSep == -1 ? "" : filePath.substring(0, lastSep + 1);
     }
@@ -1018,7 +1116,9 @@ public class FileUtils {
      * @return 文件名
      */
     public static String getFileName(File file) {
-        if (file == null) return null;
+        if (file == null) {
+            return null;
+        }
         return getFileName(file.getPath());
     }
 
@@ -1029,7 +1129,9 @@ public class FileUtils {
      * @return 文件名
      */
     public static String getFileName(String filePath) {
-        if (isSpace(filePath)) return filePath;
+        if (isSpace(filePath)) {
+            return filePath;
+        }
         int lastSep = filePath.lastIndexOf(File.separator);
         return lastSep == -1 ? filePath : filePath.substring(lastSep + 1);
     }
@@ -1041,7 +1143,9 @@ public class FileUtils {
      * @return 不带拓展名的文件名
      */
     public static String getFileNameNoExtension(File file) {
-        if (file == null) return null;
+        if (file == null) {
+            return null;
+        }
         return getFileNameNoExtension(file.getPath());
     }
 
@@ -1052,7 +1156,9 @@ public class FileUtils {
      * @return 不带拓展名的文件名
      */
     public static String getFileNameNoExtension(String filePath) {
-        if (isSpace(filePath)) return filePath;
+        if (isSpace(filePath)) {
+            return filePath;
+        }
         int lastPoi = filePath.lastIndexOf('.');
         int lastSep = filePath.lastIndexOf(File.separator);
         if (lastSep == -1) {
@@ -1071,7 +1177,9 @@ public class FileUtils {
      * @return 文件拓展名
      */
     public static String getFileExtension(File file) {
-        if (file == null) return null;
+        if (file == null) {
+            return null;
+        }
         return getFileExtension(file.getPath());
     }
 
@@ -1082,10 +1190,14 @@ public class FileUtils {
      * @return 文件拓展名
      */
     public static String getFileExtension(String filePath) {
-        if (isSpace(filePath)) return filePath;
+        if (isSpace(filePath)) {
+            return filePath;
+        }
         int lastPoi = filePath.lastIndexOf('.');
         int lastSep = filePath.lastIndexOf(File.separator);
-        if (lastPoi == -1 || lastSep >= lastPoi) return "";
+        if (lastPoi == -1 || lastSep >= lastPoi) {
+            return "";
+        }
         return filePath.substring(lastPoi + 1);
     }
 
@@ -1093,7 +1205,7 @@ public class FileUtils {
     // copy from ConvertUtils
     ///////////////////////////////////////////////////////////////////////////
 
-    private static final char hexDigits[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
+    private static final char[] hexDigits = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
 
     /**
      * byteArr转hexString
@@ -1104,9 +1216,13 @@ public class FileUtils {
      * @return 16进制大写字符串
      */
     private static String bytes2HexString(byte[] bytes) {
-        if (bytes == null) return null;
+        if (bytes == null) {
+            return null;
+        }
         int len = bytes.length;
-        if (len <= 0) return null;
+        if (len <= 0) {
+            return null;
+        }
         char[] ret = new char[len << 1];
         for (int i = 0, j = 0; i < len; i++) {
             ret[j++] = hexDigits[bytes[i] >>> 4 & 0x0f];
@@ -1138,7 +1254,9 @@ public class FileUtils {
     }
 
     private static boolean isSpace(String s) {
-        if (s == null) return true;
+        if (s == null) {
+            return true;
+        }
         for (int i = 0, len = s.length(); i < len; ++i) {
             if (!Character.isWhitespace(s.charAt(i))) {
                 return false;

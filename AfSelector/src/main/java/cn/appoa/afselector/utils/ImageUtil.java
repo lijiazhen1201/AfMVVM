@@ -4,7 +4,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
 import android.media.ExifInterface;
-import android.text.format.DateFormat;
 import android.util.Log;
 
 import java.io.File;
@@ -12,7 +11,6 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
@@ -20,7 +18,7 @@ public class ImageUtil {
 
     public static String saveImage(Bitmap bitmap, String path) {
 
-        String name = new DateFormat().format("yyyyMMdd_hhmmss", Calendar.getInstance(Locale.CHINA)) + ".png";
+        String name = new SimpleDateFormat("yyyyMMdd_hhmmss", Locale.CHINA).format(System.currentTimeMillis()) + ".png";
         FileOutputStream b = null;
         File file = new File(path);
         if (!file.exists()) {
@@ -31,7 +29,8 @@ public class ImageUtil {
 
         try {
             b = new FileOutputStream(fileName);
-            bitmap.compress(Bitmap.CompressFormat.JPEG, 75, b);// 把数据写入文件
+            // 把数据写入文件
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 75, b);
             return fileName;
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -90,6 +89,8 @@ public class ImageUtil {
                     break;
                 case ExifInterface.ORIENTATION_ROTATE_270:
                     degree = 270;
+                    break;
+                default:
                     break;
             }
         } catch (IOException e) {
@@ -164,9 +165,9 @@ public class ImageUtil {
 
         return inSampleSize;
     }
-    
+
     public static String formatTime(long milliseconds) {
-		return new SimpleDateFormat("yyyyMMddHHmmssSSS",Locale.getDefault()).format(new Date(milliseconds));
-	}
+        return new SimpleDateFormat("yyyyMMddHHmmssSSS", Locale.getDefault()).format(new Date(milliseconds));
+    }
 
 }

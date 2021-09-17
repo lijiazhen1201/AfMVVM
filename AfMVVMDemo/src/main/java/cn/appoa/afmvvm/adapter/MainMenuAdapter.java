@@ -12,18 +12,18 @@ import androidx.databinding.DataBindingUtil;
 import cn.appoa.afmvvm.R;
 import cn.appoa.afmvvm.bean.MainMenu;
 import cn.appoa.afmvvm.databinding.ItemMainMenuBinding;
-import cn.appoa.afmvvm.viewmodel.MainViewModel;
+import cn.appoa.afmvvm.viewmodel.MainMenuViewModel;
 
 public class MainMenuAdapter extends BaseQuickAdapter<MainMenu, BaseDataBindingHolder> {
 
     private int viewModelId;
-    private MainViewModel viewModel;
+    private MainMenuViewModel viewModel;
 
     public MainMenuAdapter(@Nullable List<MainMenu> data) {
         this(data, 0, null);
     }
 
-    public MainMenuAdapter(@Nullable List<MainMenu> data, int viewModelId, MainViewModel viewModel) {
+    public MainMenuAdapter(@Nullable List<MainMenu> data, int viewModelId, MainMenuViewModel viewModel) {
         super(R.layout.item_main_menu, data);
         this.viewModelId = viewModelId;
         this.viewModel = viewModel;

@@ -59,6 +59,7 @@ public class JzvdStd extends Jzvd {
     public TextView mRetryBtn;
     public LinearLayout mRetryLayout;
     public BroadcastReceiver battertReceiver = new BroadcastReceiver() {
+        @Override
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             if (Intent.ACTION_BATTERY_CHANGED.equals(action)) {
@@ -94,7 +95,9 @@ public class JzvdStd extends Jzvd {
         public void onReceive(Context context, Intent intent) {
             if (ConnectivityManager.CONNECTIVITY_ACTION.equals(intent.getAction())) {
                 boolean isWifi = JZUtils.isWifiConnected(context);
-                if (mIsWifi == isWifi) return;
+                if (mIsWifi == isWifi) {
+                    return;
+                }
                 mIsWifi = isWifi;
                 if (!mIsWifi && !WIFI_TIP_DIALOG_SHOWED && state == STATE_PLAYING) {
                     startButton.performClick();
@@ -180,6 +183,7 @@ public class JzvdStd extends Jzvd {
         mRetryBtn.setOnClickListener(this);
     }
 
+    @Override
     public void setUp(JZDataSource jzDataSource, int screen, Class mediaInterfaceClass) {
         if ((System.currentTimeMillis() - gobakFullscreenTime) < 200) {
             return;
@@ -227,11 +231,13 @@ public class JzvdStd extends Jzvd {
         changeUiToPreparing();
     }
 
+    @Override
     public void onStatePreparingPlaying() {
         super.onStatePreparingPlaying();
         changeUIToPreparingPlaying();
     }
 
+    @Override
     public void onStatePreparingChangeUrl() {
         super.onStatePreparingChangeUrl();
         changeUIToPreparingChangeUrl();
@@ -313,6 +319,8 @@ public class JzvdStd extends Jzvd {
                     }
                     lastClickTime = currentTimeMillis;
                     break;
+                default:
+                    break;
             }
         } else if (id == R.id.bottom_seek_progress) {
             switch (event.getAction()) {
@@ -321,6 +329,8 @@ public class JzvdStd extends Jzvd {
                     break;
                 case MotionEvent.ACTION_UP:
                     startDismissControlViewTimer();
+                    break;
+                default:
                     break;
             }
         }
@@ -622,13 +632,17 @@ public class JzvdStd extends Jzvd {
     @Override
     public void onProgress(int progress, long position, long duration) {
         super.onProgress(progress, position, duration);
-        if (progress != 0) bottomProgressBar.setProgress(progress);
+        if (progress != 0) {
+            bottomProgressBar.setProgress(progress);
+        }
     }
 
     @Override
     public void setBufferProgress(int bufferProgress) {
         super.setBufferProgress(bufferProgress);
-        if (bufferProgress != 0) bottomProgressBar.setSecondaryProgress(bufferProgress);
+        if (bufferProgress != 0) {
+            bottomProgressBar.setSecondaryProgress(bufferProgress);
+        }
     }
 
     @Override
@@ -648,6 +662,8 @@ public class JzvdStd extends Jzvd {
                 break;
             case SCREEN_TINY:
                 break;
+            default:
+                break;
         }
     }
 
@@ -660,6 +676,8 @@ public class JzvdStd extends Jzvd {
                 updateStartImage();
                 break;
             case SCREEN_TINY:
+                break;
+            default:
                 break;
         }
     }
@@ -674,6 +692,8 @@ public class JzvdStd extends Jzvd {
                 break;
             case SCREEN_TINY:
                 break;
+            default:
+                break;
         }
     }
 
@@ -686,6 +706,8 @@ public class JzvdStd extends Jzvd {
                 updateStartImage();
                 break;
             case SCREEN_TINY:
+                break;
+            default:
                 break;
         }
     }
@@ -700,6 +722,8 @@ public class JzvdStd extends Jzvd {
                 break;
             case SCREEN_TINY:
                 break;
+            default:
+                break;
         }
 
     }
@@ -712,6 +736,8 @@ public class JzvdStd extends Jzvd {
                         View.INVISIBLE, View.INVISIBLE, View.VISIBLE, View.INVISIBLE);
                 break;
             case SCREEN_TINY:
+                break;
+            default:
                 break;
         }
 
@@ -727,6 +753,8 @@ public class JzvdStd extends Jzvd {
                 break;
             case SCREEN_TINY:
                 break;
+            default:
+                break;
         }
     }
 
@@ -738,6 +766,8 @@ public class JzvdStd extends Jzvd {
                         View.INVISIBLE, View.INVISIBLE, View.VISIBLE, View.INVISIBLE);
                 break;
             case SCREEN_TINY:
+                break;
+            default:
                 break;
         }
 
@@ -752,6 +782,8 @@ public class JzvdStd extends Jzvd {
                 updateStartImage();
                 break;
             case SCREEN_TINY:
+                break;
+            default:
                 break;
         }
 
@@ -770,6 +802,8 @@ public class JzvdStd extends Jzvd {
                 updateStartImage();
                 break;
             case SCREEN_TINY:
+                break;
+            default:
                 break;
         }
 
@@ -968,14 +1002,18 @@ public class JzvdStd extends Jzvd {
     }
 
     public void registerWifiListener(Context context) {
-        if (context == null) return;
+        if (context == null) {
+            return;
+        }
         mIsWifi = JZUtils.isWifiConnected(context);
         IntentFilter intentFilter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
         context.registerReceiver(wifiReceiver, intentFilter);
     }
 
     public void unregisterWifiListener(Context context) {
-        if (context == null) return;
+        if (context == null) {
+            return;
+        }
         try {
             context.unregisterReceiver(wifiReceiver);
         } catch (IllegalArgumentException e) {

@@ -280,6 +280,8 @@ public class ClipImageView extends AppCompatImageView {
             case MotionEvent.ACTION_POINTER_UP:
                 CURR_MODE = MODE_POINTER_UP;
                 break;
+            default:
+                break;
         }
         setImageMatrix(mMatrix);
         return true;

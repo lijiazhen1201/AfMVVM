@@ -32,8 +32,9 @@ public final class AtyManager {
      * 获取Activity管理实例 ,单例模式
      */
     public static AtyManager getInstance() {
-        if (instance == null)
+        if (instance == null) {
             instance = new AtyManager();
+        }
         return instance;
     }
 

@@ -75,6 +75,8 @@ public class UpdatePayPwdViewModel extends VerifyCodeViewModel<UpdatePayPwdModel
                 case 3:
                     getModel().findPayPwd(updatePayPwdEvent);
                     break;
+                default:
+                    break;
             }
         }
     });

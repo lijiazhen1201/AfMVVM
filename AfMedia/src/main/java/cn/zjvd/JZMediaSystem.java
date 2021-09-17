@@ -138,11 +138,15 @@ public class JZMediaSystem extends JZMediaInterface implements MediaPlayer.OnPre
 
     @Override
     public void setVolume(final float leftVolume, final float rightVolume) {
-        if (mMediaHandler == null) return;
+        if (mMediaHandler == null) {
+            return;
+        }
         mMediaHandler.post(new Runnable() {
             @Override
             public void run() {
-                if (mediaPlayer != null) mediaPlayer.setVolume(leftVolume, rightVolume);
+                if (mediaPlayer != null) {
+                    mediaPlayer.setVolume(leftVolume, rightVolume);
+                }
             }
         });
     }

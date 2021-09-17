@@ -28,6 +28,7 @@ public interface WheelViewAdapter extends WheelAdapter {
      *
      * @return the count of wheel items
      */
+    @Override
     public int getItemsCount();
 
     /**

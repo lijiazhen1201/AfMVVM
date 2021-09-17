@@ -5,7 +5,7 @@ package cn.appoa.afmvvm.net;
  */
 public final class API extends APIUtils {
 
-    public static final String IP = "http://47.104.16.194:6089";
+    public static final String IP = "";
 
     public static final String URL = IP + "/api/";
 
@@ -13,5 +13,7 @@ public final class API extends APIUtils {
 
     public static final String others = URL + "others/";
     public static final String getAbout = others + "getAbout";
+    public static final String faq_list = URL + "faq_list";
+    public static final String posterlist = URL + "posterlist";
 
 }

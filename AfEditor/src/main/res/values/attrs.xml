@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="IMGColorRadio">
+        <attr name="image_color" format="color" />
+        <attr name="image_stroke_color" format="color" />
+    </declare-styleable>
+
+</resources>

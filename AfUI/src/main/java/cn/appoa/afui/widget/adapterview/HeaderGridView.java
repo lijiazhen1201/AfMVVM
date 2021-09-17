@@ -311,6 +311,7 @@ public class HeaderGridView extends GridView {
         return 0;
     }
 
+    @Override
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     public int getVerticalSpacing() {
         int value = 0;
@@ -331,6 +332,7 @@ public class HeaderGridView extends GridView {
         return value;
     }
 
+    @Override
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     public int getHorizontalSpacing() {
         int value = 0;

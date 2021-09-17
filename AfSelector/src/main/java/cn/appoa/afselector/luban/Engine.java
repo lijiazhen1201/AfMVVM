@@ -62,7 +62,9 @@ class Engine {
   }
 
   private Bitmap rotatingImage(Bitmap bitmap) {
-    if (srcExif == null) return bitmap;
+    if (srcExif == null) {
+        return bitmap;
+    }
 
     Matrix matrix = new Matrix();
     int angle = 0;
@@ -76,6 +78,8 @@ class Engine {
         break;
       case ExifInterface.ORIENTATION_ROTATE_270:
         angle = 270;
+        break;
+      default:
         break;
     }
 

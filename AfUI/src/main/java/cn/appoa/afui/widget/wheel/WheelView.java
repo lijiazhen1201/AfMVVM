@@ -165,8 +165,9 @@ public class WheelView extends View {
     }
 
     public void setAdapter(WheelAdapter adapter) {
-        if (adapter == null)
+        if (adapter == null) {
             return;
+        }
         this.adapter = adapter;
         invalidateLayouts();
         invalidate();
@@ -835,6 +836,7 @@ public class WheelView extends View {
     }
 
     private SimpleOnGestureListener gestureListener = new SimpleOnGestureListener() {
+        @Override
         public boolean onDown(MotionEvent e) {
             if (isScrollingPerformed) {
                 scroller.forceFinished(true);
@@ -844,12 +846,14 @@ public class WheelView extends View {
             return false;
         }
 
+        @Override
         public boolean onScroll(MotionEvent e1, MotionEvent e2, float distanceX, float distanceY) {
             startScrolling();
             doScroll((int) -distanceY);
             return true;
         }
 
+        @Override
         public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
             lastScrollY = currentItem * getItemHeight() + scrollingOffset;
             int maxY = isCyclic ? 0x7FFFFFFF : adapter.getItemsCount() * getItemHeight();
@@ -922,10 +926,11 @@ public class WheelView extends View {
         int itemHeight = getItemHeight();
         boolean needToIncrease = offset > 0 ? currentItem < adapter.getItemsCount() : currentItem > 0;
         if ((isCyclic || needToIncrease) && Math.abs((float) offset) > (float) itemHeight / 2) {
-            if (offset < 0)
+            if (offset < 0) {
                 offset += itemHeight + MIN_DELTA_FOR_SCROLLING;
-            else
+            } else {
                 offset -= itemHeight + MIN_DELTA_FOR_SCROLLING;
+            }
         }
         if (Math.abs(offset) > MIN_DELTA_FOR_SCROLLING) {
             scroller.startScroll(0, 0, 0, offset, SCROLLING_DURATION);

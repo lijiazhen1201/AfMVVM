@@ -16,8 +16,9 @@ public class DateUtils {
     private static final long INTERVAL_IN_MILLISECONDS = 30000L;
 
     public static String getTimestampString(Date date) {
-        if (date == null)
+        if (date == null) {
             return "";
+        }
         String str1 = null;
         String str2 = Locale.getDefault().getLanguage();
         boolean bool = str2.startsWith("zh");
@@ -48,21 +49,25 @@ public class DateUtils {
                 }
             }
         } else if (isYesterday(l)) {
-            if (bool)
+            if (bool) {
                 str1 = "昨天HH:mm";
-            else
+            } else {
                 return "Yesterday " + new SimpleDateFormat("HH:mm", Locale.ENGLISH).format(date);
+            }
         } else if (isBeforeYesterday(l)) {
-            if (bool)
+            if (bool) {
                 str1 = "前天HH:mm";
-            else
+            } else {
                 return "Before Yesterday " + new SimpleDateFormat("HH:mm", Locale.ENGLISH).format(date);
-        } else if (bool)
+            }
+        } else if (bool) {
             str1 = "MM月dd日 HH:mm";
-        else
+        } else {
             str1 = "MMM dd HH:mm";
-        if (bool)
+        }
+        if (bool) {
             return new SimpleDateFormat(str1, Locale.CHINESE).format(date);
+        }
         return new SimpleDateFormat(str1, Locale.ENGLISH).format(date);
     }
 
@@ -99,8 +104,9 @@ public class DateUtils {
 
     public static boolean isCloseEnough(long time1, long time2) {
         long l = time1 - time2;
-        if (l < 0L)
+        if (l < 0L) {
             l = -l;
+        }
         return l < INTERVAL_IN_MILLISECONDS;
     }
 

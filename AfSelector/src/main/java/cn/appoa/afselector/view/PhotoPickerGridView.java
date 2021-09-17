@@ -773,6 +773,7 @@ public class PhotoPickerGridView extends GridView {
                                     e.printStackTrace();
                                 } finally {
                                     mActivity.runOnUiThread(new Runnable() {
+                                        @Override
                                         public void run() {
                                             listener.getBase64Video(base64Video);
                                         }
@@ -799,6 +800,7 @@ public class PhotoPickerGridView extends GridView {
         if (isToBase64) {
             if (mActivity != null && !TextUtils.isEmpty(sign) && listener != null) {
                 new Thread(new Runnable() {
+                    @Override
                     public void run() {
                         String result = "";
                         if (isBase64Complete()) {
@@ -814,6 +816,7 @@ public class PhotoPickerGridView extends GridView {
                         }
                         final String base64 = result;
                         mActivity.runOnUiThread(new Runnable() {
+                            @Override
                             public void run() {
                                 listener.getBase64Photos(base64);
                             }
@@ -1119,8 +1122,9 @@ public class PhotoPickerGridView extends GridView {
                 // 如果是onMeasure调用的就立即返回
                 return convertView;
             }
-            if (holder.iv_picker_del == null || holder.iv_picker_add == null)
+            if (holder.iv_picker_del == null || holder.iv_picker_add == null) {
                 return convertView;
+            }
             if (video == null) {
                 holder.iv_video_logo.setVisibility(View.GONE);
                 String photoPath = photoPaths.get(position);

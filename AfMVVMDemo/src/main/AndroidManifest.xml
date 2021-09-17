@@ -21,8 +21,6 @@
             android:name="design_height_in_dp"
             android:value="640" />
 
-        <!-- 关于我们 -->
-        <activity android:name=".activity.AboutUsActivity" />
         <!-- 盛装Fragment的一个容器(代理)Activity -->
         <activity android:name=".base.BaseContainerActivity" />
         <!-- 启动页 -->
@@ -55,31 +53,139 @@
             </intent-filter>
 
         </activity>
+
+        <!-- MVVM方式显示UI -->
+        <activity android:name=".activity.UIActivity" />
         <!-- 登录 -->
         <activity
-            android:name=".activity.LoginActivity"
+            android:name=".activity.ui.LoginActivity"
             android:configChanges="keyboard"
             android:windowSoftInputMode="adjustPan" />
         <!-- 注册 -->
         <activity
-            android:name=".activity.RegisterActivity"
+            android:name=".activity.ui.RegisterActivity"
             android:configChanges="keyboard"
             android:windowSoftInputMode="adjustPan" />
         <!-- 修改支付密码 -->
         <activity
-            android:name=".activity.UpdatePayPwdActivity"
+            android:name=".activity.ui.UpdatePayPwdActivity"
             android:configChanges="keyboard"
             android:windowSoftInputMode="adjustPan" />
         <!-- 修改手机号 -->
         <activity
-            android:name=".activity.UpdatePhoneActivity"
+            android:name=".activity.ui.UpdatePhoneActivity"
             android:configChanges="keyboard"
             android:windowSoftInputMode="adjustPan" />
         <!-- 修改登录密码 -->
         <activity
-            android:name=".activity.UpdatePwdActivity"
+            android:name=".activity.ui.UpdatePwdActivity"
             android:configChanges="keyboard"
             android:windowSoftInputMode="adjustPan" />
+        <!-- 关于我们 -->
+        <activity android:name=".activity.ui.AboutUsActivity" />
+
+        <!-- 常用工具类 -->
+        <activity android:name=".activity.CommonUtilsActivity" />
+        <!-- AES加密工具类 -->
+        <activity android:name=".activity.utils.AESUtilsActivity" />
+        <!-- 主线程和子线程切换 -->
+        <activity android:name=".activity.utils.ThreadUtilsActivity" />
+        <!-- Activity常用方法封装 -->
+        <activity android:name=".activity.utils.AtyUtilsActivity" />
+        <!-- 时间格式化 -->
+        <activity android:name=".activity.utils.DateUtilsActivity" />
+        <!-- Json解析工具类 -->
+        <activity android:name=".activity.utils.JsonUtilsActivity" />
+        <!-- 地图导航工具类 -->
+        <activity android:name=".activity.utils.MapUtilsActivity" />
+        <!-- Md5加密工具类 -->
+        <activity android:name=".activity.utils.Md5UtilsActivity" />
+        <!-- SpannableString工具类 -->
+        <activity android:name=".activity.utils.SpannableStringUtilsActivity" />
+
+        <!-- Github优秀开源库 -->
+        <activity android:name=".activity.GithubProjectActivity" />
+        <!-- Android屏幕适配方案 -->
+        <activity android:name=".activity.github.AndroidAutoSizeActivity" />
+        <!-- 安卓工具类库 -->
+        <activity android:name=".activity.github.AndroidUtilCodeActivity" />
+        <!-- Android版本更新 -->
+        <activity android:name=".activity.github.AppUpdateActivity" />
+        <!-- Android图表 -->
+        <activity android:name=".activity.github.MPAndroidChartActivity" />
+        <!-- 安卓日历 -->
+        <activity android:name=".activity.github.NCalendarActivity" />
+        <!-- OkGo网络访问 -->
+        <activity android:name=".activity.github.OkGoActivity" />
+        <!-- 文件下载器 -->
+        <activity android:name=".activity.github.PRDownloaderActivity" />
+        <!-- QMUI界面封装 -->
+        <activity android:name=".activity.github.QMUI_AndroidActivity" />
+        <!-- android自动生成表格框架 -->
+        <activity android:name=".activity.github.SmartTableActivity" />
+        <!-- 一个使用简单且能满足日常各种需求的按钮 -->
+        <activity android:name=".activity.github.SuperButtonActivity" />
+        <!-- 强大的TextView -->
+        <activity android:name=".activity.github.SuperTextViewActivity" />
+
+        <!-- 自定义控件 -->
+        <activity android:name=".activity.CustomWidgetActivity" />
+        <!-- 轮播图 -->
+        <activity android:name=".activity.widget.BannerActivity" />
+        <!-- 可添加头布局和脚布局的GridView -->
+        <activity android:name=".activity.widget.HeaderGridViewActivity" />
+        <!-- 自动换行布局，流式布局 -->
+        <activity android:name=".activity.widget.FlowLayoutActivity" />
+        <!-- 支付密码输入框 -->
+        <activity android:name=".activity.widget.GridPasswordViewActivity" />
+        <!-- 图片截取正中间的正方形部分的ImageView -->
+        <activity android:name=".activity.widget.CenterSquareImageViewActivity" />
+        <!-- 圆形，圆角，带边框的ImageView -->
+        <activity android:name=".activity.widget.SuperImageViewActivity" />
+        <!-- 可设置最大高度的FrameLayout -->
+        <activity android:name=".activity.widget.MaxHeightLayoutActivity" />
+        <!-- 可设置宽高比的RelativeLayout -->
+        <activity android:name=".activity.widget.RatioRelativeLayoutActivity" />
+        <!-- Item侧滑删除菜单Layout -->
+        <activity android:name=".activity.widget.SwipeMenuDelLayoutActivity" />
+        <!-- ScrollView嵌套滑动布局 -->
+        <activity android:name=".activity.widget.NoScrollViewActivity" />
+        <!-- 自动适应图片高度的ViewPager -->
+        <activity android:name=".activity.widget.HeightWrapViewPagerActivity" />
+        <!-- 仿淘宝头条，向上翻页 -->
+        <activity android:name=".activity.widget.UPMarqueeViewActivity" />
+        <!-- 字母表导航，城市选择 -->
+        <activity android:name=".activity.widget.SideBarActivity" />
+        <!-- 数字增加和减小动画TextView -->
+        <activity android:name=".activity.widget.NumberAnimTextViewActivity" />
+        <!-- 滚轮控件 -->
+        <activity android:name=".activity.widget.WheelViewActivity" />
+
+        <!-- 下拉刷新 -->
+        <activity android:name=".activity.RefreshBeanActivity" />
+        <!-- 下拉刷新列表 -->
+        <activity android:name=".activity.refresh.SmartRefreshActivity" />
+
+        <!-- WebView的使用 -->
+        <activity android:name=".activity.WebViewActivity" />
+        <!-- 微信扫一扫 -->
+        <activity android:name=".activity.ZmQrCodeActivity" />
+        <!-- 微信摇一摇 -->
+        <activity android:name=".activity.ZmShakeActivity" />
+
+        <!-- 多媒体上传 -->
+        <activity android:name=".activity.UploadMediaActivity" />
+        <!-- 头像上传 -->
+        <activity android:name=".activity.upload.UploadAvatarActivity" />
+        <!-- 视频上传 -->
+        <activity android:name=".activity.upload.UploadVideoActivity" />
+        <!-- 音频上传 -->
+        <activity android:name=".activity.upload.UploadVoiceActivity" />
+        <!-- 图片上传 -->
+        <activity android:name=".activity.upload.UploadImageActivity" />
+        <!-- 图片上传编辑 -->
+        <activity android:name=".activity.upload.UploadImageEditActivity" />
+
 
     </application>
 

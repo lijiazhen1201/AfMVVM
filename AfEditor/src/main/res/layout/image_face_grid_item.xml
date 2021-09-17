@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/padding_big"
+    tools:background="@color/image_face_content_bg">
+
+    <ImageView
+        android:id="@+id/iv_icon"
+        android:layout_width="@dimen/image_face_image_big_width"
+        android:layout_height="@dimen/image_face_image_big_width"
+        android:scaleType="centerInside" />
+
+    <TextView
+        android:id="@+id/tv_text"
+        style="@style/SimpleTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/image_face_image_margin"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/text_small"
+        tools:text="描述" />
+
+</LinearLayout>

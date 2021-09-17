@@ -12,7 +12,7 @@
 
         <variable
             name="viewModel"
-            type="cn.appoa.afmvvm.viewmodel.MainViewModel" />
+            type="cn.appoa.afmvvm.viewmodel.MainMenuViewModel" />
 
     </data>
 

@@ -179,7 +179,9 @@ public class PhoneUtils {
         }
         TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
         String operator = tm != null ? tm.getSimOperator() : null;
-        if (operator == null) return null;
+        if (operator == null) {
+            return null;
+        }
         switch (operator) {
             case "46000":
             case "46002":
@@ -445,10 +447,10 @@ public class PhoneUtils {
                                 String data1 = c.getString(0);
                                 String mimetype = c.getString(1);
                                 // 10.根据类型去判断获取的data1数据并保存
-                                if (mimetype.equals("vnd.android.cursor.item/phone_v2")) {
+                                if ("vnd.android.cursor.item/phone_v2".equals(mimetype)) {
                                     // 电话
                                     map.put("phone", data1);
-                                } else if (mimetype.equals("vnd.android.cursor.item/name")) {
+                                } else if ("vnd.android.cursor.item/name".equals(mimetype)) {
                                     // 姓名
                                     map.put("name", data1);
                                 }

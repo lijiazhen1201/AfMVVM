@@ -168,8 +168,9 @@ public class JCameraView extends FrameLayout implements CameraInterface.CameraOp
                 @Override
                 public void onClick(View v) {
                     type_flash++;
-                    if (type_flash > 0x022)
+                    if (type_flash > 0x022) {
                         type_flash = TYPE_FLASH_ON;
+                    }
                     setFlashRes();
                 }
             });
@@ -315,6 +316,8 @@ public class JCameraView extends FrameLayout implements CameraInterface.CameraOp
             case MotionEvent.ACTION_UP:
                 firstTouch = true;
                 break;
+            default:
+                break;
         }
         return true;
     }
@@ -389,6 +392,8 @@ public class JCameraView extends FrameLayout implements CameraInterface.CameraOp
             case TYPE_DEFAULT:
                 mVideoView.setLayoutParams(new LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT));
                 break;
+            default:
+                break;
         }
         mSwitchCamera.setVisibility(VISIBLE);
         if (isFlashLamp) {
@@ -417,6 +422,8 @@ public class JCameraView extends FrameLayout implements CameraInterface.CameraOp
             case TYPE_SHORT:
                 break;
             case TYPE_DEFAULT:
+                break;
+            default:
                 break;
         }
         mCaptureLayout.resetCaptureLayout();
@@ -549,6 +556,8 @@ public class JCameraView extends FrameLayout implements CameraInterface.CameraOp
                     mFlashLamp.setImageResource(R.drawable.ic_flash_off);
                 }
                 setFlashMode(Camera.Parameters.FLASH_MODE_OFF, false);
+                break;
+            default:
                 break;
         }
     }

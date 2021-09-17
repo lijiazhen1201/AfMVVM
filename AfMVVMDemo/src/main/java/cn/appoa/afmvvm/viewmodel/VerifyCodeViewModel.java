@@ -87,6 +87,8 @@ public class VerifyCodeViewModel<M extends VerifyCodeModel> extends TitleBarView
             case 6:
                 codeType = "6";
                 break;
+            default:
+                break;
         }
         return codeType;
     }

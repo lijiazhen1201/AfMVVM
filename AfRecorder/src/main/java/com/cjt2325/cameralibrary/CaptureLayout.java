@@ -111,12 +111,14 @@ public class CaptureLayout extends FrameLayout {
 
     public void startTypeBtnAnimator() {
         //拍照录制结果后的动画
-        if (this.iconLeft != 0)
+        if (this.iconLeft != 0) {
             iv_custom_left.setVisibility(GONE);
-        else
+        } else {
             btn_return.setVisibility(GONE);
-        if (this.iconRight != 0)
+        }
+        if (this.iconRight != 0) {
             iv_custom_right.setVisibility(GONE);
+        }
         btn_capture.setVisibility(GONE);
         btn_cancel.setVisibility(VISIBLE);
         btn_confirm.setVisibility(VISIBLE);
@@ -300,12 +302,14 @@ public class CaptureLayout extends FrameLayout {
         btn_cancel.setVisibility(GONE);
         btn_confirm.setVisibility(GONE);
         btn_capture.setVisibility(VISIBLE);
-        if (this.iconLeft != 0)
+        if (this.iconLeft != 0) {
             iv_custom_left.setVisibility(VISIBLE);
-        else
+        } else {
             btn_return.setVisibility(VISIBLE);
-        if (this.iconRight != 0)
+        }
+        if (this.iconRight != 0) {
             iv_custom_right.setVisibility(VISIBLE);
+        }
     }
 
 
@@ -341,6 +345,8 @@ public class CaptureLayout extends FrameLayout {
                     break;
                 case JCameraView.BUTTON_STATE_BOTH:
                     txt_tip.setText(R.string.state_both);
+                    break;
+                default:
                     break;
             }
         }

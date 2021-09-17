@@ -21,7 +21,7 @@ import cn.appoa.afbase.binding.command.BindingAction;
 import cn.appoa.afbase.binding.command.BindingCommand;
 import cn.appoa.afbase.constant.AfConstant;
 import cn.appoa.afbase.mvvm.SingleLiveEvent;
-import cn.appoa.afmvvm.activity.RegisterActivity;
+import cn.appoa.afmvvm.activity.ui.RegisterActivity;
 import cn.appoa.afmvvm.bean.UserInfo;
 import cn.appoa.afmvvm.event.LoginEvent;
 import cn.appoa.afmvvm.model.LoginModel;
@@ -123,7 +123,7 @@ public class LoginViewModel extends VerifyCodeViewModel<LoginModel>
 
     @Override
     public void onCancel(Platform platform, int action) {
-        if (action == Platform.ACTION_USER_INFOR)
+        if (action == Platform.ACTION_USER_INFOR) {
             ThreadUtils.runInMain(new Runnable() {
                 @Override
                 public void run() {
@@ -131,11 +131,12 @@ public class LoginViewModel extends VerifyCodeViewModel<LoginModel>
                     ToastUtils.showShort("取消授权", false);
                 }
             });
+        }
     }
 
     @Override
     public void onError(final Platform platform, int action, Throwable t) {
-        if (action == Platform.ACTION_USER_INFOR)
+        if (action == Platform.ACTION_USER_INFOR) {
             ThreadUtils.runInMain(new Runnable() {
                 @Override
                 public void run() {
@@ -148,11 +149,12 @@ public class LoginViewModel extends VerifyCodeViewModel<LoginModel>
                     }
                 }
             });
+        }
     }
 
     @Override
     public void onComplete(final Platform platform, int action, HashMap<String, Object> res) {
-        if (action == Platform.ACTION_USER_INFOR)
+        if (action == Platform.ACTION_USER_INFOR) {
             ThreadUtils.runInMain(new Runnable() {
                 @Override
                 public void run() {
@@ -161,6 +163,7 @@ public class LoginViewModel extends VerifyCodeViewModel<LoginModel>
                     thirdLogin(platform);
                 }
             });
+        }
     }
 
     private void thirdLogin(Platform platform) {

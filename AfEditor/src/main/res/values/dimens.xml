@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="image_dialog_face_height">272dp</dimen>
+    <dimen name="image_mode_space">32dp</dimen>
+    <dimen name="image_color_width">28dp</dimen>
+    <dimen name="image_color_margin">8dp</dimen>
+    <dimen name="image_color_padding">4dp</dimen>
+
+    <dimen name="image_face_top_bar_height">52dp</dimen>
+    <dimen name="image_face_image_width">40dp</dimen>
+    <dimen name="image_face_image_margin">6dp</dimen>
+    <dimen name="image_face_image_margin_half">3dp</dimen>
+
+    <dimen name="image_face_image_big_width">56dp</dimen>
+
+</resources>

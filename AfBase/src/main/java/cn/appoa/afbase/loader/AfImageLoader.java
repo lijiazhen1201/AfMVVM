@@ -146,4 +146,12 @@ public abstract class AfImageLoader {
      * @param listener 加载图片监听
      */
     public abstract void downloadImage(String url, final LoadingBitmapListener listener);
+
+    /**
+     * 下载图片
+     *
+     * @param url      图片地址
+     * @param listener 加载图片监听
+     */
+    public abstract void downloadDrawable(String url, final LoadingDrawableListener listener);
 }

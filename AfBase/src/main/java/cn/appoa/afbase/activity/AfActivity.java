@@ -5,12 +5,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
 
-import com.google.android.material.snackbar.Snackbar;
 import com.wangzhen.statusbar.DarkStatusBar;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -29,7 +27,6 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProviders;
-import cn.appoa.afbase.R;
 import cn.appoa.afbase.dialog.DefaultLoadingDialog;
 import cn.appoa.afbase.event.AfEvent;
 import cn.appoa.afbase.mvvm.AfObserver;
@@ -41,7 +38,6 @@ import cn.appoa.afbase.slidingback.SlideBackActivity;
 import cn.appoa.afhttp.net.NetworkType;
 import cn.appoa.afpermission.grant.PermissionsManager;
 import cn.appoa.afpermission.grant.PermissionsResultAction;
-import cn.appoa.afutils.app.FastClickUtils;
 import cn.appoa.afutils.app.Foreground;
 import cn.appoa.afutils.res.ColorUtils;
 import cn.appoa.afutils.toast.ToastUtils;
@@ -648,17 +644,17 @@ public abstract class AfActivity<V extends ViewDataBinding, VM extends BaseViewM
     @Override
     public void onNetDisconnected() {
         //网络连接断开
-        Snackbar.make(findViewById(R.id.content),
-                R.string.on_net_disconnected, Snackbar.LENGTH_LONG)
-                .setAction(R.string.on_net_setting, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (FastClickUtils.isFastClick()) {
-                            return;
-                        }
-                        startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
-                    }
-                }).show();
+//        Snackbar.make(findViewById(R.id.content),
+//                R.string.on_net_disconnected, Snackbar.LENGTH_LONG)
+//                .setAction(R.string.on_net_setting, new View.OnClickListener() {
+//                    @Override
+//                    public void onClick(View v) {
+//                        if (FastClickUtils.isFastClick()) {
+//                            return;
+//                        }
+//                        startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));
+//                    }
+//                }).show();
     }
 
     @Override

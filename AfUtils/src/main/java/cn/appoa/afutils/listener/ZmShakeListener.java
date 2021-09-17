@@ -46,11 +46,13 @@ public class ZmShakeListener implements SensorEventListener {
         onShakeListener = listener;
     }
 
+    @Override
     public void onSensorChanged(SensorEvent event) {
         long currentUpdateTime = System.currentTimeMillis();
         long timeInterval = currentUpdateTime - lastUpdateTime;
-        if (timeInterval < UPTATE_INTERVAL_TIME)
+        if (timeInterval < UPTATE_INTERVAL_TIME) {
             return;
+        }
         lastUpdateTime = currentUpdateTime;
 
         float x = event.values[0];
@@ -71,6 +73,7 @@ public class ZmShakeListener implements SensorEventListener {
         }
     }
 
+    @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
 
     }

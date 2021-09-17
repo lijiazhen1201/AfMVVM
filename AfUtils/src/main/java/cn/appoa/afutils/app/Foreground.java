@@ -126,8 +126,9 @@ public class Foreground implements Application.ActivityLifecycleCallbacks {
         paused = false;
         boolean wasBackground = !foreground;
         foreground = true;
-        if (check != null)
+        if (check != null) {
             handler.removeCallbacks(check);
+        }
         if (wasBackground) {
             Log.d(TAG, "went foreground");
             for (ForegroundListener l : listeners) {
@@ -145,8 +146,9 @@ public class Foreground implements Application.ActivityLifecycleCallbacks {
     @Override
     public void onActivityPaused(Activity activity) {
         paused = true;
-        if (check != null)
+        if (check != null) {
             handler.removeCallbacks(check);
+        }
         handler.postDelayed(check = new Runnable() {
             @Override
             public void run() {

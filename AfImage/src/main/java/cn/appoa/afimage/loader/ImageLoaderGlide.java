@@ -25,6 +25,7 @@ import androidx.core.content.ContextCompat;
 import cn.appoa.afbase.app.AfApplication;
 import cn.appoa.afbase.loader.AfImageLoader;
 import cn.appoa.afbase.loader.LoadingBitmapListener;
+import cn.appoa.afbase.loader.LoadingDrawableListener;
 
 /**
  * Glide加载图片
@@ -268,6 +269,26 @@ public class ImageLoaderGlide extends AfImageLoader {
                                 listener.loadingBitmapFailed();
                             } else {
                                 listener.loadingBitmapSuccess(resource);
+                            }
+                        }
+                    });
+        }
+    }
+
+    @Override
+    public void downloadDrawable(String url, final LoadingDrawableListener listener) {
+        if (isInit && listener != null) {
+            Glide.with(AfApplication.getAppContext()).load(url).apply(new RequestOptions()
+                    .diskCacheStrategy(strategy))
+                    .into(new SimpleTarget<Drawable>() {
+
+                        @Override
+                        public void onResourceReady(@NonNull Drawable resource,
+                                                    @Nullable Transition<? super Drawable> transition) {
+                            if (resource == null) {
+                                listener.loadingDrawableFailed();
+                            } else {
+                                listener.loadingDrawableSuccess(resource);
                             }
                         }
                     });

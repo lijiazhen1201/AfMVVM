@@ -721,6 +721,9 @@ public class SlideFrameLayout extends ViewGroup {
                     return false;
                 }
             }
+
+            default:
+                break;
         }
 
         final boolean interceptForDrag = mDragHelper.shouldInterceptTouchEvent(ev);
@@ -757,6 +760,9 @@ public class SlideFrameLayout extends ViewGroup {
             case MotionEvent.ACTION_UP: {
                 break;
             }
+
+            default:
+                break;
         }
 
         return wantTouchEvents;
@@ -1075,6 +1081,7 @@ public class SlideFrameLayout extends ViewGroup {
     }
 
     static class SlidingPanelLayoutImplBase implements SlidingPanelLayoutImpl {
+        @Override
         public void invalidateChildRegion(SlideFrameLayout parent, View child) {
             ViewCompat.postInvalidateOnAnimation(parent, child.getLeft(), child.getTop(),
                     child.getRight(), child.getBottom());

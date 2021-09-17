@@ -9,6 +9,7 @@ import java.util.Comparator;
  */
 public class PinyinComparator implements Comparator<Sort> {
 
+    @Override
     public int compare(Sort s1, Sort s2) {
 
         if (TextUtils.equals(s1.getInitialLetter(), "#")) {

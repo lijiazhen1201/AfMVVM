@@ -30,13 +30,13 @@ public class Edit2PointTextWatcher implements TextWatcher {
                 et.setSelection(s.length());
             }
         }
-        if (s.toString().trim().substring(0).equals(".")) {
+        if (".".equals(s.toString().trim().substring(0))) {
             s = "0" + s;
             et.setText(s);
             et.setSelection(2);
         }
         if (s.toString().startsWith("0") && s.toString().trim().length() > 1) {
-            if (!s.toString().substring(1, 2).equals(".")) {
+            if (!".".equals(s.toString().substring(1, 2))) {
                 et.setText(s.subSequence(0, 1));
                 et.setSelection(1);
                 return;

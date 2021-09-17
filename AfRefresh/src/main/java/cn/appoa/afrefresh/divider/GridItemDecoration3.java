@@ -105,6 +105,8 @@ public class GridItemDecoration3 extends UniversalItemDecoration {
                     decoration.left = mHeight / 2;
                     decoration.right = mMargin ? mHeight : 0;
                     break;
+                default:
+                    break;
             }
         }
         return decoration;

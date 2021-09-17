@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="image_doodle">Doodle</string>
+    <string name="image_face">Face</string>
+    <string name="image_text">Text</string>
+    <string name="image_mosaic">Mosaic</string>
+    <string name="image_clip">Clip</string>
+    <string name="image_reset">Reset</string>
+    <string name="image_done">Done</string>
+    <string name="image_cancel">Cancel</string>
+    <string name="image_rotate">Rotate</string>
+    <string name="image_mosaic_tip">please directly on the image blur</string>
+    <string name="image_undo">Undo</string>
+
+</resources>

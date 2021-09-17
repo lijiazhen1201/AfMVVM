@@ -38,6 +38,12 @@ dependencies {
     //api support["ucrop"]
 }
 
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
 tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
 }

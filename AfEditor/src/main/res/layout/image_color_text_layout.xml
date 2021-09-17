@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cn.appoa.afeditor.view.IMGColorGroup xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/cg_colors"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:checkedButton="@+id/cr_white"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:padding="@dimen/image_color_padding">
+
+    <cn.appoa.afeditor.view.IMGColorRadio
+        android:id="@+id/cr_white"
+        android:layout_width="@dimen/image_color_width"
+        android:layout_height="@dimen/image_color_width"
+        android:layout_margin="@dimen/image_color_margin"
+        app:image_color="@color/image_color_white" />
+
+    <cn.appoa.afeditor.view.IMGColorRadio
+        android:layout_width="@dimen/image_color_width"
+        android:layout_height="@dimen/image_color_width"
+        android:layout_margin="@dimen/image_color_margin"
+        app:image_color="@color/image_color_black" />
+
+    <cn.appoa.afeditor.view.IMGColorRadio
+        android:layout_width="@dimen/image_color_width"
+        android:layout_height="@dimen/image_color_width"
+        android:layout_margin="@dimen/image_color_margin"
+        app:image_color="@color/image_color_red" />
+
+    <cn.appoa.afeditor.view.IMGColorRadio
+        android:layout_width="@dimen/image_color_width"
+        android:layout_height="@dimen/image_color_width"
+        android:layout_margin="@dimen/image_color_margin"
+        app:image_color="@color/image_color_cyan" />
+
+    <cn.appoa.afeditor.view.IMGColorRadio
+        android:layout_width="@dimen/image_color_width"
+        android:layout_height="@dimen/image_color_width"
+        android:layout_margin="@dimen/image_color_margin"
+        app:image_color="@color/image_color_yellow" />
+
+    <cn.appoa.afeditor.view.IMGColorRadio
+        android:layout_width="@dimen/image_color_width"
+        android:layout_height="@dimen/image_color_width"
+        android:layout_margin="@dimen/image_color_margin"
+        app:image_color="@color/image_color_blue" />
+
+</cn.appoa.afeditor.view.IMGColorGroup>

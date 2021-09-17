@@ -3,7 +3,7 @@ package cn.appoa.afui.activity;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
-import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,7 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 import cn.appoa.afbase.app.AfApplication;
-import cn.appoa.afbase.loader.LoadingBitmapListener;
+import cn.appoa.afbase.loader.LoadingDrawableListener;
 import cn.appoa.afui.R;
 import cn.appoa.afui.widget.photoview.OnPhotoTapListener;
 import cn.appoa.afui.widget.photoview.PhotoView;
@@ -40,6 +40,12 @@ public class ShowBigImageListActivity extends AppCompatActivity {
     protected ViewPager vp_image;
     protected TextView tv_image_page;
     protected int pageMax;
+    protected int page;
+    protected ArrayList<String> images;
+    /**
+     * 放大最大倍率（默认3倍）
+     */
+    protected float maximumScale;
 
     protected void initContent() {
         setContentView(R.layout.activity_show_big_image_list);
@@ -48,8 +54,9 @@ public class ShowBigImageListActivity extends AppCompatActivity {
         tv_image_page = (TextView) findViewById(R.id.tv_image_page);
 
         Intent intent = getIntent();
-        int page = intent.getIntExtra("page", 0);
-        ArrayList<String> images = intent.getStringArrayListExtra("images");
+        page = intent.getIntExtra("page", 0);
+        images = intent.getStringArrayListExtra("images");
+        maximumScale = intent.getFloatExtra("maximumScale", 3.0f);
         if (images != null && images.size() > 0) {
             pageMax = images.size();
             vp_image.setOffscreenPageLimit(pageMax);
@@ -93,16 +100,17 @@ public class ShowBigImageListActivity extends AppCompatActivity {
 
         @Override
         public View instantiateItem(ViewGroup container, int position) {
-            final PhotoView photoView = new PhotoView(container.getContext());
             String path = list.get(position);
-            AfApplication.getImageLoader().downloadImage(path, new LoadingBitmapListener() {
+            final PhotoView photoView = new PhotoView(container.getContext());
+            photoView.setMaximumScale(maximumScale);
+            AfApplication.getImageLoader().downloadDrawable(path, new LoadingDrawableListener() {
                 @Override
-                public void loadingBitmapSuccess(Bitmap bitmap) {
-                    photoView.setImageBitmap(bitmap);
+                public void loadingDrawableSuccess(Drawable drawable) {
+                    photoView.setImageDrawable(drawable);
                 }
 
                 @Override
-                public void loadingBitmapFailed() {
+                public void loadingDrawableFailed() {
 
                 }
             });
@@ -134,5 +142,6 @@ public class ShowBigImageListActivity extends AppCompatActivity {
     @Override
     public void finish() {
         super.finish();
+        overridePendingTransition(0, 0);
     }
 }

@@ -73,11 +73,13 @@ public class IOUtils {
      * @return {@code true}: 写入成功<br>{@code false}: 写入失败
      */
     public static boolean writeFileFromIS(File file, final InputStream is, boolean append) {
-        if (!FileUtils.createOrExistsFile(file) || is == null) return false;
+        if (!FileUtils.createOrExistsFile(file) || is == null) {
+            return false;
+        }
         OutputStream os = null;
         try {
             os = new BufferedOutputStream(new FileOutputStream(file, append));
-            byte data[] = new byte[1024];
+            byte[] data = new byte[1024];
             int len;
             while ((len = is.read(data, 0, 1024)) != -1) {
                 os.write(data, 0, len);
@@ -134,7 +136,9 @@ public class IOUtils {
      * @return {@code true}: 写入成功<br>{@code false}: 写入失败
      */
     public static boolean writeFileFromBytesByStream(File file, final byte[] bytes, boolean append) {
-        if (bytes == null || !FileUtils.createOrExistsFile(file)) return false;
+        if (bytes == null || !FileUtils.createOrExistsFile(file)) {
+            return false;
+        }
         BufferedOutputStream bos = null;
         try {
             bos = new BufferedOutputStream(new FileOutputStream(file, append));
@@ -195,14 +199,20 @@ public class IOUtils {
      * @return {@code true}: 写入成功<br>{@code false}: 写入失败
      */
     public static boolean writeFileFromBytesByChannel(File file, final byte[] bytes, boolean append, boolean isForce) {
-        if (bytes == null) return false;
-        if (!append && !FileUtils.createFileByDeleteOldFile(file)) return false;
+        if (bytes == null) {
+            return false;
+        }
+        if (!append && !FileUtils.createFileByDeleteOldFile(file)) {
+            return false;
+        }
         FileChannel fc = null;
         try {
             fc = new RandomAccessFile(file, "rw").getChannel();
             fc.position(fc.size());
             fc.write(ByteBuffer.wrap(bytes));
-            if (isForce) fc.force(true);
+            if (isForce) {
+                fc.force(true);
+            }
             return true;
         } catch (IOException e) {
             e.printStackTrace();
@@ -259,14 +269,20 @@ public class IOUtils {
      * @return {@code true}: 写入成功<br>{@code false}: 写入失败
      */
     public static boolean writeFileFromBytesByMap(File file, final byte[] bytes, boolean append, boolean isForce) {
-        if (bytes == null || !FileUtils.createOrExistsFile(file)) return false;
-        if (!append && !FileUtils.createFileByDeleteOldFile(file)) return false;
+        if (bytes == null || !FileUtils.createOrExistsFile(file)) {
+            return false;
+        }
+        if (!append && !FileUtils.createFileByDeleteOldFile(file)) {
+            return false;
+        }
         FileChannel fc = null;
         try {
             fc = new RandomAccessFile(file, "rw").getChannel();
             MappedByteBuffer mbb = fc.map(FileChannel.MapMode.READ_WRITE, fc.size(), bytes.length);
             mbb.put(bytes);
-            if (isForce) mbb.force();
+            if (isForce) {
+                mbb.force();
+            }
             return true;
         } catch (IOException e) {
             e.printStackTrace();
@@ -319,8 +335,12 @@ public class IOUtils {
      * @return {@code true}: 写入成功<br>{@code false}: 写入失败
      */
     public static boolean writeFileFromString(File file, String content, boolean append) {
-        if (file == null || content == null) return false;
-        if (!FileUtils.createOrExistsFile(file)) return false;
+        if (file == null || content == null) {
+            return false;
+        }
+        if (!FileUtils.createOrExistsFile(file)) {
+            return false;
+        }
         BufferedWriter bw = null;
         try {
             bw = new BufferedWriter(new FileWriter(file, append));
@@ -427,8 +447,12 @@ public class IOUtils {
      * @return 字符串链表中
      */
     public static List<String> readFile2List(File file, int st, int end, String charsetName) {
-        if (!FileUtils.isFileExists(file)) return null;
-        if (st > end) return null;
+        if (!FileUtils.isFileExists(file)) {
+            return null;
+        }
+        if (st > end) {
+            return null;
+        }
         BufferedReader reader = null;
         try {
             String line;
@@ -440,8 +464,12 @@ public class IOUtils {
                 reader = new BufferedReader(new InputStreamReader(new FileInputStream(file), charsetName));
             }
             while ((line = reader.readLine()) != null) {
-                if (curLine > end) break;
-                if (st <= curLine && curLine <= end) list.add(line);
+                if (curLine > end) {
+                    break;
+                }
+                if (st <= curLine && curLine <= end) {
+                    list.add(line);
+                }
                 ++curLine;
             }
             return list;
@@ -492,7 +520,9 @@ public class IOUtils {
      * @return 字符串
      */
     public static String readFile2String(File file, String charsetName) {
-        if (!FileUtils.isFileExists(file)) return null;
+        if (!FileUtils.isFileExists(file)) {
+            return null;
+        }
         BufferedReader reader = null;
         try {
             StringBuilder sb = new StringBuilder();
@@ -532,7 +562,9 @@ public class IOUtils {
      * @return 字符数组
      */
     public static byte[] readFile2BytesByStream(File file) {
-        if (!FileUtils.isFileExists(file)) return null;
+        if (!FileUtils.isFileExists(file)) {
+            return null;
+        }
         FileInputStream fis = null;
         ByteArrayOutputStream os = null;
         try {
@@ -569,13 +601,17 @@ public class IOUtils {
      * @return 字符数组
      */
     public static byte[] readFile2BytesByChannel(File file) {
-        if (!FileUtils.isFileExists(file)) return null;
+        if (!FileUtils.isFileExists(file)) {
+            return null;
+        }
         FileChannel fc = null;
         try {
             fc = new RandomAccessFile(file, "r").getChannel();
             ByteBuffer byteBuffer = ByteBuffer.allocate((int) fc.size());
             while (true) {
-                if (!((fc.read(byteBuffer)) > 0)) break;
+                if (!((fc.read(byteBuffer)) > 0)) {
+                    break;
+                }
             }
             return byteBuffer.array();
         } catch (IOException e) {
@@ -603,7 +639,9 @@ public class IOUtils {
      * @return 字符数组
      */
     public static byte[] readFile2BytesByMap(File file) {
-        if (!FileUtils.isFileExists(file)) return null;
+        if (!FileUtils.isFileExists(file)) {
+            return null;
+        }
         FileChannel fc = null;
         try {
             fc = new RandomAccessFile(file, "r").getChannel();
@@ -621,7 +659,9 @@ public class IOUtils {
     }
 
     private static boolean isSpace(String s) {
-        if (s == null) return true;
+        if (s == null) {
+            return true;
+        }
         for (int i = 0, len = s.length(); i < len; ++i) {
             if (!Character.isWhitespace(s.charAt(i))) {
                 return false;
@@ -636,7 +676,9 @@ public class IOUtils {
      * @param closeables closeables
      */
     public static void closeIO(Closeable... closeables) {
-        if (closeables == null) return;
+        if (closeables == null) {
+            return;
+        }
         for (Closeable closeable : closeables) {
             if (closeable != null) {
                 try {
@@ -654,7 +696,9 @@ public class IOUtils {
      * @param closeables closeables
      */
     public static void closeIOQuietly(Closeable... closeables) {
-        if (closeables == null) return;
+        if (closeables == null) {
+            return;
+        }
         for (Closeable closeable : closeables) {
             if (closeable != null) {
                 try {

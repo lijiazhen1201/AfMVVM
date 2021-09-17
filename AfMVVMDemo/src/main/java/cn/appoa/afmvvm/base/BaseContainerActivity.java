@@ -40,8 +40,8 @@ public class BaseContainerActivity extends BaseActivity<ActivityBaseContainerBin
     public static final String FRAGMENT_NAME = "fragment_name";
     public static final String FRAGMENT_BUNDLE = "fragment_bundle";
 
-    private String fragmentName;
-    private Bundle fragmentBundle;
+    protected String fragmentName;
+    protected Bundle fragmentBundle;
 
     @Override
     public void initIntent(Intent intent) {
@@ -52,7 +52,7 @@ public class BaseContainerActivity extends BaseActivity<ActivityBaseContainerBin
         fragmentBundle = intent.getBundleExtra(BaseContainerActivity.FRAGMENT_BUNDLE);
     }
 
-    private Fragment fragment = null;
+    protected Fragment fragment = null;
 
     @Override
     public int initContent(Bundle savedInstanceState) {

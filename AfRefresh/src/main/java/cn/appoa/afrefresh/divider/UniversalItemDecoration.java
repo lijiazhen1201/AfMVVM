@@ -37,7 +37,9 @@ public abstract class UniversalItemDecoration extends RecyclerView.ItemDecoratio
             int position = string2Int(child.getTag().toString(), 0);
             Decoration decoration = decorations.get(position);
 
-            if (decoration == null) continue;
+            if (decoration == null) {
+                continue;
+            }
             RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams) child.getLayoutParams();
 
             //view的上下左右包括 Margin
@@ -47,17 +49,21 @@ public abstract class UniversalItemDecoration extends RecyclerView.ItemDecoratio
             int top = child.getTop() - layoutParams.topMargin;
 
             //下面的
-            if (decoration.bottom != 0)
+            if (decoration.bottom != 0) {
                 decoration.drawItemOffsets(c, left - decoration.left, bottom, right + decoration.right, bottom + decoration.bottom);
+            }
             //上面的
-            if (decoration.top != 0)
+            if (decoration.top != 0) {
                 decoration.drawItemOffsets(c, left - decoration.left, top - decoration.top, right + decoration.right, top);
+            }
             //左边的
-            if (decoration.left != 0)
+            if (decoration.left != 0) {
                 decoration.drawItemOffsets(c, left - decoration.left, top, left, bottom);
+            }
             //右边的
-            if (decoration.right != 0)
+            if (decoration.right != 0) {
                 decoration.drawItemOffsets(c, right, top, right + decoration.right, bottom);
+            }
 
         }
 
@@ -143,8 +149,9 @@ public abstract class UniversalItemDecoration extends RecyclerView.ItemDecoratio
 
 
     public int dip2px(Context context, float dipValue) {
-        if (context == null)
+        if (context == null) {
             return 0;
+        }
         final float scale = context.getResources().getDisplayMetrics().density;
         return (int) (dipValue * scale + 0.5f);
     }

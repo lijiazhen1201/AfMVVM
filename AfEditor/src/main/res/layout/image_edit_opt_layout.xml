@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_gravity="bottom"
+    android:orientation="vertical"
+    tools:background="@color/colorBlack">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/image_bg_top"
+        android:paddingTop="@dimen/padding_normal">
+
+        <TextView
+            android:id="@+id/tv_cancel"
+            style="@style/SimpleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="onClick"
+            android:padding="@dimen/padding_big"
+            android:text="@string/image_cancel"
+            android:textColor="@color/image_color_primary"
+            android:textSize="@dimen/text_big" />
+
+        <TextView
+            android:id="@+id/tv_done"
+            style="@style/SimpleTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="top|end"
+            android:clickable="true"
+            android:focusable="true"
+            android:onClick="onClick"
+            android:padding="@dimen/padding_big"
+            android:text="@string/image_done"
+            android:textColor="@color/image_color_accent"
+            android:textSize="@dimen/text_big" />
+
+    </FrameLayout>
+
+    <Space
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1" />
+
+    <LinearLayout
+        android:id="@+id/layout_op_sub"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:visibility="invisible"
+        tools:visibility="visible">
+
+        <ViewSwitcher
+            android:id="@+id/vs_op_sub"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:measureAllChildren="true">
+
+            <include layout="@layout/image_color_opt_layout" />
+
+            <TextView
+                style="@style/SimpleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="@string/image_mosaic_tip"
+                android:textColor="@color/image_color_white"
+                android:textSize="@dimen/text_normal"
+                tools:visibility="visible" />
+
+        </ViewSwitcher>
+
+        <ImageButton
+            android:id="@+id/btn_undo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:contentDescription="@string/image_undo"
+            android:onClick="onClick"
+            android:src="@drawable/image_btn_undo" />
+
+    </LinearLayout>
+
+    <RadioGroup
+        android:id="@+id/rg_modes"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/image_bg_bottom"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:padding="@dimen/padding_great">
+
+        <RadioButton
+            android:id="@+id/rb_doodle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/image_btn_doodle"
+            android:gravity="center"
+            android:onClick="onClick"
+            android:textColor="@color/colorWhite" />
+
+        <Space
+            android:layout_width="@dimen/image_mode_space"
+            android:layout_height="wrap_content" />
+
+        <ImageButton
+            android:id="@+id/btn_face"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:contentDescription="@string/image_face"
+            android:gravity="center"
+            android:onClick="onClick"
+            android:src="@drawable/image_btn_face"
+            android:textColor="@color/colorWhite" />
+
+        <Space
+            android:layout_width="@dimen/image_mode_space"
+            android:layout_height="wrap_content" />
+
+        <ImageButton
+            android:id="@+id/btn_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:contentDescription="@string/image_text"
+            android:gravity="center"
+            android:onClick="onClick"
+            android:src="@drawable/image_btn_text"
+            android:textColor="@color/colorWhite" />
+
+        <Space
+            android:layout_width="@dimen/image_mode_space"
+            android:layout_height="wrap_content" />
+
+        <RadioButton
+            android:id="@+id/rb_mosaic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:button="@drawable/image_btn_mosaic"
+            android:gravity="center"
+            android:onClick="onClick"
+            android:textColor="@color/colorWhite" />
+
+        <Space
+            android:layout_width="@dimen/image_mode_space"
+            android:layout_height="wrap_content" />
+
+        <ImageButton
+            android:id="@+id/btn_clip"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:contentDescription="@string/image_clip"
+            android:gravity="center"
+            android:onClick="onClick"
+            android:src="@drawable/image_btn_clip"
+            android:textColor="@color/colorWhite" />
+
+    </RadioGroup>
+
+</LinearLayout>

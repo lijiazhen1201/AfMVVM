@@ -174,7 +174,7 @@ public class ZmQRCodeFragment extends Fragment implements SurfaceHolder.Callback
         characterSet = null;
 
         playBeep = true;
-        AudioManager audioService = (AudioManager) getActivity().getSystemService(getActivity().AUDIO_SERVICE);
+        AudioManager audioService = (AudioManager) getActivity().getSystemService(Activity.AUDIO_SERVICE);
         if (audioService.getRingerMode() != AudioManager.RINGER_MODE_NORMAL) {
             playBeep = false;
         }
@@ -237,6 +237,7 @@ public class ZmQRCodeFragment extends Fragment implements SurfaceHolder.Callback
      * When the beep has finished playing, rewind to queue up another one.
      */
     private final OnCompletionListener beepListener = new OnCompletionListener() {
+        @Override
         public void onCompletion(MediaPlayer mediaPlayer) {
             mediaPlayer.seekTo(0);
         }

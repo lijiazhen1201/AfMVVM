@@ -68,8 +68,9 @@ public class AppUtils {
         try {
             List<ActivityManager.RunningTaskInfo> localList =
                     localActivityManager.getRunningTasks(1);
-            if ((localList == null) || (localList.size() < 1))
+            if ((localList == null) || (localList.size() < 1)) {
                 return false;
+            }
             boolean bool = context.getPackageName().equalsIgnoreCase(
                     ((ActivityManager.RunningTaskInfo) localList.get(0)).baseActivity.getPackageName());
             LogUtils.i("isAppRunningForeground", "app running in foregroud：" + (bool));

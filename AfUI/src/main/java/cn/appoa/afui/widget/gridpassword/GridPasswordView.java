@@ -81,8 +81,9 @@ public class GridPasswordView extends LinearLayout implements PasswordView {
         TypedArray ta = context.obtainStyledAttributes(attrs, R.styleable.GridPasswordView, defStyleAttr, 0);
 
         mTextColor = ta.getColorStateList(R.styleable.GridPasswordView_gpvTextColor);
-        if (mTextColor == null)
+        if (mTextColor == null) {
             mTextColor = ColorStateList.valueOf(getResources().getColor(android.R.color.primary_text_light));
+        }
         int textSize = ta.getDimensionPixelSize(R.styleable.GridPasswordView_gpvTextSize, -1);
         if (textSize != -1) {
             this.mTextSize = PasswordUtil.px2sp(context, textSize);
@@ -92,14 +93,16 @@ public class GridPasswordView extends LinearLayout implements PasswordView {
         mLineColor = ta.getColor(R.styleable.GridPasswordView_gpvLineColor, DEFAULT_LINECOLOR);
         mGridColor = ta.getColor(R.styleable.GridPasswordView_gpvGridColor, DEFAULT_GRIDCOLOR);
         mLineDrawable = ta.getDrawable(R.styleable.GridPasswordView_gpvLineColor);
-        if (mLineDrawable == null)
+        if (mLineDrawable == null) {
             mLineDrawable = new ColorDrawable(mLineColor);
+        }
         mOuterLineDrawable = generateBackgroundDrawable();
 
         mPasswordLength = ta.getInt(R.styleable.GridPasswordView_gpvPasswordLength, DEFAULT_PASSWORDLENGTH);
         mPasswordTransformation = ta.getString(R.styleable.GridPasswordView_gpvPasswordTransformation);
-        if (TextUtils.isEmpty(mPasswordTransformation))
+        if (TextUtils.isEmpty(mPasswordTransformation)) {
             mPasswordTransformation = DEFAULT_TRANSFORMATION;
+        }
 
         mPasswordType = ta.getInt(R.styleable.GridPasswordView_gpvPasswordType, 0);
 
@@ -151,13 +154,13 @@ public class GridPasswordView extends LinearLayout implements PasswordView {
     }
 
     private void setCustomAttr(TextView view) {
-        if (mTextColor != null)
+        if (mTextColor != null) {
             view.setTextColor(mTextColor);
+        }
         view.setTextSize(mTextSize);
 
         int inputType = InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_VARIATION_PASSWORD;
         switch (mPasswordType) {
-
             case 1:
                 inputType = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD;
                 break;
@@ -168,6 +171,8 @@ public class GridPasswordView extends LinearLayout implements PasswordView {
 
             case 3:
                 inputType = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_WEB_PASSWORD;
+                break;
+            default:
                 break;
         }
         view.setInputType(inputType);
@@ -283,14 +288,16 @@ public class GridPasswordView extends LinearLayout implements PasswordView {
     };
 
     private void notifyTextChanged() {
-        if (mListener == null)
+        if (mListener == null) {
             return;
+        }
 
         String currentPsw = getPassWord();
         mListener.onTextChanged(currentPsw);
 
-        if (currentPsw.length() == mPasswordLength)
+        if (currentPsw.length() == mPasswordLength) {
             mListener.onInputFinish(currentPsw);
+        }
     }
 
     @Override
@@ -326,8 +333,9 @@ public class GridPasswordView extends LinearLayout implements PasswordView {
     public String getPassWord() {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < mPasswordArr.length; i++) {
-            if (mPasswordArr[i] != null)
+            if (mPasswordArr[i] != null) {
                 sb.append(mPasswordArr[i]);
+            }
         }
         return sb.toString();
     }
@@ -350,8 +358,9 @@ public class GridPasswordView extends LinearLayout implements PasswordView {
     public void setPassword(String password) {
         clearPassword();
 
-        if (TextUtils.isEmpty(password))
+        if (TextUtils.isEmpty(password)) {
             return;
+        }
 
         char[] pswArr = password.toCharArray();
         for (int i = 0; i < pswArr.length; i++) {
@@ -417,10 +426,14 @@ public class GridPasswordView extends LinearLayout implements PasswordView {
             case TEXTWEB:
                 inputType = InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_WEB_PASSWORD;
                 break;
+
+            default:
+                break;
         }
 
-        for (TextView textView : mViewArr)
+        for (TextView textView : mViewArr) {
             textView.setInputType(inputType);
+        }
 
         setPasswordVisibility(visible);
     }

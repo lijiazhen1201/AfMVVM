@@ -103,11 +103,13 @@ public class CameraInterface implements Camera.PreviewCallback {
 
     //获取CameraInterface单例
     public static synchronized CameraInterface getInstance() {
-        if (mCameraInterface == null)
+        if (mCameraInterface == null) {
             synchronized (CameraInterface.class) {
-                if (mCameraInterface == null)
+                if (mCameraInterface == null) {
                     mCameraInterface = new CameraInterface();
+                }
             }
+        }
         return mCameraInterface;
     }
 
@@ -121,6 +123,7 @@ public class CameraInterface implements Camera.PreviewCallback {
     }
 
     private SensorEventListener sensorEventListener = new SensorEventListener() {
+        @Override
         public void onSensorChanged(SensorEvent event) {
             if (Sensor.TYPE_ACCELEROMETER != event.sensor.getType()) {
                 return;
@@ -130,6 +133,7 @@ public class CameraInterface implements Camera.PreviewCallback {
             rotationAnimation();
         }
 
+        @Override
         public void onAccuracyChanged(Sensor sensor, int accuracy) {
         }
     };
@@ -152,6 +156,8 @@ public class CameraInterface implements Camera.PreviewCallback {
                         case 270:
                             end_rotation = 90;
                             break;
+                        default:
+                            break;
                     }
                     break;
                 case 90:
@@ -162,6 +168,8 @@ public class CameraInterface implements Camera.PreviewCallback {
                             break;
                         case 180:
                             end_rotation = -180;
+                            break;
+                        default:
                             break;
                     }
                     break;
@@ -174,6 +182,8 @@ public class CameraInterface implements Camera.PreviewCallback {
                         case 270:
                             end_rotation = 90;
                             break;
+                        default:
+                            break;
                     }
                     break;
                 case 270:
@@ -185,7 +195,11 @@ public class CameraInterface implements Camera.PreviewCallback {
                         case 180:
                             end_rotation = 180;
                             break;
+                        default:
+                            break;
                     }
+                    break;
+                default:
                     break;
             }
             ObjectAnimator animC = ObjectAnimator.ofFloat(mSwitchView, "rotation", start_rotaion, end_rotation);
@@ -252,6 +266,8 @@ public class CameraInterface implements Camera.PreviewCallback {
                 }
                 LogUtil.i("setZoom = " + nowScaleRate);
                 break;
+            default:
+                break;
         }
 
     }
@@ -267,8 +283,9 @@ public class CameraInterface implements Camera.PreviewCallback {
     }
 
     public void setFlashMode(String flashMode) {
-        if (mCamera == null)
+        if (mCamera == null) {
             return;
+        }
         Camera.Parameters params = mCamera.getParameters();
         params.setFlashMode(flashMode);
         mCamera.setParameters(params);
@@ -423,7 +440,7 @@ public class CameraInterface implements Camera.PreviewCallback {
     /**
      * 销毁Camera
      */
-    public  void doDestroyCamera() {
+    public void doDestroyCamera() {
         errorLisenter = null;
         if (null != mCamera) {
             try {
@@ -462,6 +479,8 @@ public class CameraInterface implements Camera.PreviewCallback {
                 break;
             case 270:
                 nowAngle = Math.abs(cameraAngle - angle);
+                break;
+            default:
                 break;
         }
 //
@@ -595,7 +614,7 @@ public class CameraInterface implements Camera.PreviewCallback {
         mediaRecorder.setPreviewDisplay(surface);
 
         videoFileName = "video_" + System.currentTimeMillis() + ".mp4";
-        if (saveVideoPath.equals("")) {
+        if ("".equals(saveVideoPath)) {
             saveVideoPath = Environment.getExternalStorageDirectory().getPath();
         }
         videoFileAbsPath = saveVideoPath + File.separator + videoFileName;
@@ -666,6 +685,8 @@ public class CameraInterface implements Camera.PreviewCallback {
                     break;
                 case Camera.CameraInfo.CAMERA_FACING_BACK:
                     CAMERA_POST_POSITION = info.facing;
+                    break;
+                default:
                     break;
             }
         }

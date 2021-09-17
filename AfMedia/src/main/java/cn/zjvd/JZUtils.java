@@ -62,7 +62,9 @@ public class JZUtils {
      * @return object of Activity or null if it is not Activity
      */
     public static Activity scanForActivity(Context context) {
-        if (context == null) return null;
+        if (context == null) {
+            return null;
+        }
 
         if (context instanceof Activity) {
             return (Activity) context;
@@ -97,7 +99,9 @@ public class JZUtils {
     }
 
     public static void saveProgress(Context context, Object url, long progress) {
-        if (!Jzvd.SAVE_PROGRESS) return;
+        if (!Jzvd.SAVE_PROGRESS) {
+            return;
+        }
         Log.i(TAG, "saveProgress: " + progress);
         if (progress < 5000) {
             progress = 0;
@@ -109,7 +113,9 @@ public class JZUtils {
     }
 
     public static long getSavedProgress(Context context, Object url) {
-        if (!Jzvd.SAVE_PROGRESS) return 0;
+        if (!Jzvd.SAVE_PROGRESS) {
+            return 0;
+        }
         SharedPreferences spn = context.getSharedPreferences("JZVD_PROGRESS",
                 Context.MODE_PRIVATE);
         return spn.getLong("newVersion:" + url.toString(), 0);

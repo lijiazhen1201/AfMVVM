@@ -121,6 +121,8 @@ public class LogUtils {
                 case 5:
                     Log.e(tag, msg);
                     break;
+                default:
+                    break;
             }
         }
     }

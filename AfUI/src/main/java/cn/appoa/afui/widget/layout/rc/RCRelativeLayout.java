@@ -109,27 +109,32 @@ public class RCRelativeLayout extends RelativeLayout implements Checkable, RCAtt
 
     //--- 公开接口 ----------------------------------------------------------------------------------
 
+    @Override
     public void setRatio(float ratio) {
         mRCHelper.mRatio = ratio;
         invalidate();
     }
 
+    @Override
     public void setRatio(float ratio_width, float ratio_height) {
         if (ratio_width > 0 && ratio_height >= 0) {
             setRatio(ratio_height / ratio_width);
         }
     }
 
+    @Override
     public void setClipBackground(boolean clipBackground) {
         mRCHelper.mClipBackground = clipBackground;
         invalidate();
     }
 
+    @Override
     public void setRoundAsCircle(boolean roundAsCircle) {
         mRCHelper.mRoundAsCircle = roundAsCircle;
         invalidate();
     }
 
+    @Override
     public void setRadius(int radius) {
         for (int i = 0; i < mRCHelper.radii.length; i++) {
             mRCHelper.radii[i] = radius;
@@ -137,35 +142,41 @@ public class RCRelativeLayout extends RelativeLayout implements Checkable, RCAtt
         invalidate();
     }
 
+    @Override
     public void setTopLeftRadius(int topLeftRadius) {
         mRCHelper.radii[0] = topLeftRadius;
         mRCHelper.radii[1] = topLeftRadius;
         invalidate();
     }
 
+    @Override
     public void setTopRightRadius(int topRightRadius) {
         mRCHelper.radii[2] = topRightRadius;
         mRCHelper.radii[3] = topRightRadius;
         invalidate();
     }
 
+    @Override
     public void setBottomLeftRadius(int bottomLeftRadius) {
         mRCHelper.radii[6] = bottomLeftRadius;
         mRCHelper.radii[7] = bottomLeftRadius;
         invalidate();
     }
 
+    @Override
     public void setBottomRightRadius(int bottomRightRadius) {
         mRCHelper.radii[4] = bottomRightRadius;
         mRCHelper.radii[5] = bottomRightRadius;
         invalidate();
     }
 
+    @Override
     public void setStrokeWidth(int strokeWidth) {
         mRCHelper.mStrokeWidth = strokeWidth;
         invalidate();
     }
 
+    @Override
     public void setStrokeColor(int strokeColor) {
         mRCHelper.mStrokeColor = strokeColor;
         invalidate();
@@ -173,39 +184,48 @@ public class RCRelativeLayout extends RelativeLayout implements Checkable, RCAtt
 
     @Override
     public void invalidate() {
-        if (null != mRCHelper)
+        if (null != mRCHelper) {
             mRCHelper.refreshRegion(this);
+        }
         super.invalidate();
     }
 
+    @Override
     public boolean isClipBackground() {
         return mRCHelper.mClipBackground;
     }
 
+    @Override
     public boolean isRoundAsCircle() {
         return mRCHelper.mRoundAsCircle;
     }
 
+    @Override
     public float getTopLeftRadius() {
         return mRCHelper.radii[0];
     }
 
+    @Override
     public float getTopRightRadius() {
         return mRCHelper.radii[2];
     }
 
+    @Override
     public float getBottomLeftRadius() {
         return mRCHelper.radii[4];
     }
 
+    @Override
     public float getBottomRightRadius() {
         return mRCHelper.radii[6];
     }
 
+    @Override
     public int getStrokeWidth() {
         return mRCHelper.mStrokeWidth;
     }
 
+    @Override
     public int getStrokeColor() {
         return mRCHelper.mStrokeColor;
     }

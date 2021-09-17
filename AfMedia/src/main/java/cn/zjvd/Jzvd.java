@@ -91,6 +91,8 @@ public abstract class Jzvd extends FrameLayout implements View.OnClickListener, 
                     break;
                 case AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK:
                     break;
+                default:
+                    break;
             }
         }
     };
@@ -243,7 +245,9 @@ public abstract class Jzvd extends FrameLayout implements View.OnClickListener, 
     }
 
     public static void setCurrentJzvd(Jzvd jzvd) {
-        if (CURRENT_JZVD != null) CURRENT_JZVD.reset();
+        if (CURRENT_JZVD != null) {
+            CURRENT_JZVD.reset();
+        }
         CURRENT_JZVD = jzvd;
     }
 
@@ -354,7 +358,9 @@ public abstract class Jzvd extends FrameLayout implements View.OnClickListener, 
 
     protected void clickFullscreen() {
         Log.i(TAG, "onClick fullscreen [" + this.hashCode() + "] ");
-        if (state == STATE_AUTO_COMPLETE) return;
+        if (state == STATE_AUTO_COMPLETE) {
+            return;
+        }
         if (screen == SCREEN_FULLSCREEN) {
             //quit fullscreen
             backPress();
@@ -405,6 +411,8 @@ public abstract class Jzvd extends FrameLayout implements View.OnClickListener, 
                     break;
                 case MotionEvent.ACTION_UP:
                     touchActionUp();
+                    break;
+                default:
                     break;
             }
         }
@@ -477,8 +485,9 @@ public abstract class Jzvd extends FrameLayout implements View.OnClickListener, 
         if (mChangePosition) {
             long totalTimeDuration = getDuration();
             mSeekTimePosition = (int) (mGestureDownPosition + deltaX * totalTimeDuration / mScreenWidth);
-            if (mSeekTimePosition > totalTimeDuration)
+            if (mSeekTimePosition > totalTimeDuration) {
                 mSeekTimePosition = totalTimeDuration;
+            }
             String seekTime = JZUtils.stringForTime(mSeekTimePosition);
             String totalTime = JZUtils.stringForTime(totalTimeDuration);
 
@@ -528,7 +537,9 @@ public abstract class Jzvd extends FrameLayout implements View.OnClickListener, 
         Log.i(TAG, "onStateNormal " + " [" + this.hashCode() + "] ");
         state = STATE_NORMAL;
         cancelProgressTimer();
-        if (mediaInterface != null) mediaInterface.release();
+        if (mediaInterface != null) {
+            mediaInterface.release();
+        }
     }
 
     public void onStatePreparing() {
@@ -712,7 +723,9 @@ public abstract class Jzvd extends FrameLayout implements View.OnClickListener, 
         AudioManager mAudioManager = (AudioManager) getApplicationContext().getSystemService(Context.AUDIO_SERVICE);
         mAudioManager.abandonAudioFocus(onAudioFocusChangeListener);
         JZUtils.scanForActivity(getContext()).getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        if (mediaInterface != null) mediaInterface.release();
+        if (mediaInterface != null) {
+            mediaInterface.release();
+        }
     }
 
     /**
@@ -746,6 +759,8 @@ public abstract class Jzvd extends FrameLayout implements View.OnClickListener, 
             case STATE_AUTO_COMPLETE:
                 onStateAutoComplete();
                 break;
+            default:
+                break;
         }
     }
 
@@ -759,6 +774,8 @@ public abstract class Jzvd extends FrameLayout implements View.OnClickListener, 
                 break;
             case SCREEN_TINY:
                 setScreenTiny();
+                break;
+            default:
                 break;
         }
     }
@@ -808,7 +825,9 @@ public abstract class Jzvd extends FrameLayout implements View.OnClickListener, 
 
     public void addTextureView() {
         Log.d(TAG, "addTextureView [" + this.hashCode() + "] ");
-        if (textureView != null) textureViewContainer.removeView(textureView);
+        if (textureView != null) {
+            textureViewContainer.removeView(textureView);
+        }
         textureView = new JZTextureView(getContext().getApplicationContext());
         textureView.setSurfaceTextureListener(mediaInterface);
 
@@ -827,7 +846,9 @@ public abstract class Jzvd extends FrameLayout implements View.OnClickListener, 
 
         ViewGroup vg = (ViewGroup) (JZUtils.scanForActivity(getContext())).getWindow().getDecorView();
         vg.removeView(this);
-        if (mediaInterface != null) mediaInterface.release();
+        if (mediaInterface != null) {
+            mediaInterface.release();
+        }
         CURRENT_JZVD = null;
     }
 
@@ -869,15 +890,21 @@ public abstract class Jzvd extends FrameLayout implements View.OnClickListener, 
                     seekToManulPosition = -1;//这个关键帧有没有必要做
                 }
             } else {
-                if (progress != 0) progressBar.setProgress(progress);
+                if (progress != 0) {
+                    progressBar.setProgress(progress);
+                }
             }
         }
-        if (position != 0) currentTimeTextView.setText(JZUtils.stringForTime(position));
+        if (position != 0) {
+            currentTimeTextView.setText(JZUtils.stringForTime(position));
+        }
         totalTimeTextView.setText(JZUtils.stringForTime(duration));
     }
 
     public void setBufferProgress(int bufferProgress) {
-        if (bufferProgress != 0) progressBar.setSecondaryProgress(bufferProgress);
+        if (bufferProgress != 0) {
+            progressBar.setSecondaryProgress(bufferProgress);
+        }
     }
 
     public void resetProgressAndTime() {
@@ -933,7 +960,9 @@ public abstract class Jzvd extends FrameLayout implements View.OnClickListener, 
             vpup = vpup.getParent();
         }
         if (state != STATE_PLAYING &&
-                state != STATE_PAUSE) return;
+                state != STATE_PAUSE) {
+            return;
+        }
         long time = seekBar.getProgress() * getDuration() / 100;
         seekToManulPosition = seekBar.getProgress();
         mediaInterface.seekTo(time);
@@ -1101,7 +1130,9 @@ public abstract class Jzvd extends FrameLayout implements View.OnClickListener, 
             //过滤掉用力过猛会有一个反向的大数值
             if (x < -12 || x > 12) {
                 if ((System.currentTimeMillis() - lastAutoFullscreenTime) > 2000) {
-                    if (Jzvd.CURRENT_JZVD != null) Jzvd.CURRENT_JZVD.autoFullscreen(x);
+                    if (Jzvd.CURRENT_JZVD != null) {
+                        Jzvd.CURRENT_JZVD.autoFullscreen(x);
+                    }
                     lastAutoFullscreenTime = System.currentTimeMillis();
                 }
             }

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:binding="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="cn.appoa.afui.titlebar.TitleBarViewModel" />
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/title_bar"
+            layout="@layout/title_bar"
+            binding:titleBar="@{viewModel.getTitleBarViewModel()}" />
+
+        <ScrollView xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/colorWhite"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    style="@style/SimpleTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autoLink="web"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/padding_big"
+                    android:singleLine="false"
+                    android:text="视频拍摄：\nhttps://github.com/CJT2325/CameraView" />
+
+                <TextView
+                    style="@style/SimpleTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:autoLink="web"
+                    android:gravity="center_vertical"
+                    android:padding="@dimen/padding_big"
+                    android:singleLine="false"
+                    android:text="视频播放：\nhttps://github.com/Jzvd/JZVideo" />
+
+                <TextView
+                    android:id="@+id/tv_video_upload"
+                    style="@style/SimpleTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_normal"
+                    android:layout_margin="@dimen/padding_big"
+                    android:background="@drawable/shape_solid_theme_50dp"
+                    android:text="上传视频"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/text_big" />
+
+                <TextView
+                    android:id="@+id/tv_video_path"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/padding_big" />
+
+                <TextView
+                    android:id="@+id/tv_video_play1"
+                    style="@style/SimpleTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_normal"
+                    android:layout_margin="@dimen/padding_big"
+                    android:background="@drawable/shape_solid_theme_50dp"
+                    android:text="播放本地视频"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/text_big" />
+
+                <TextView
+                    android:id="@+id/tv_video_play2"
+                    style="@style/SimpleTextView"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_normal"
+                    android:layout_margin="@dimen/padding_big"
+                    android:background="@drawable/shape_solid_theme_50dp"
+                    android:text="播放网络视频"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/text_big" />
+
+            </LinearLayout>
+
+        </ScrollView>
+    </LinearLayout>
+
+</layout>

@@ -29,6 +29,12 @@ dependencies {
     api project(':AfMedia')
 }
 
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
 tasks.withType(JavaCompile) {
     options.encoding = "UTF-8"
 }

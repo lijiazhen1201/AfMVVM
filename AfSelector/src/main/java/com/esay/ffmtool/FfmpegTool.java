@@ -55,7 +55,9 @@ public class FfmpegTool {
     public static FfmpegTool getInstance(Activity activity){
         if (instance==null){
             synchronized(FfmpegTool.class){
-                if (instance == null)instance = new FfmpegTool();
+                if (instance == null) {
+                    instance = new FfmpegTool();
+                }
             }
         }
         instance.init(activity);

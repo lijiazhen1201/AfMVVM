@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:binding="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="cn.appoa.afrefresh.mvvm.PullToRefreshViewModel" />
+
+    </data>
+
+    <com.donkingliang.consecutivescroller.ConsecutiveScrollerLayout
+        android:id="@+id/scrollerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            style="@style/SimpleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:text="轮播图"
+            android:textSize="@dimen/height_normal" />
+
+        <View style="@style/HorizontalLine" />
+
+        <TextView
+            style="@style/SimpleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:text="商品分类"
+            android:textSize="@dimen/height_normal" />
+
+        <View style="@style/HorizontalLine" />
+
+        <TextView
+            style="@style/SimpleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:text="推荐板块1"
+            android:textSize="@dimen/height_normal" />
+
+        <View style="@style/HorizontalLine" />
+
+        <TextView
+            style="@style/SimpleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:text="推荐板块2"
+            android:textSize="@dimen/height_normal" />
+
+        <View style="@style/HorizontalLine" />
+
+        <TextView
+            style="@style/SimpleTextView"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:text="推荐板块3"
+            android:textSize="@dimen/height_normal" />
+
+        <View style="@style/HorizontalLine" />
+
+        <ListView
+            android:id="@+id/lv_refresh"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:divider="@color/colorDivider"
+            android:dividerHeight="@dimen/height_divider"
+            android:overScrollMode="never"
+            android:scrollbars="none" />
+
+    </com.donkingliang.consecutivescroller.ConsecutiveScrollerLayout>
+
+</layout>

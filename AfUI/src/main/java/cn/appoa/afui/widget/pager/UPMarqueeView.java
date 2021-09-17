@@ -44,12 +44,14 @@ public class UPMarqueeView extends ViewFlipper {
         this.mContext = context;
         setFlipInterval(interval);
         Animation animIn = AnimationUtils.loadAnimation(mContext, R.anim.anim_marquee_in);
-        if (isSetAnimDuration)
+        if (isSetAnimDuration) {
             animIn.setDuration(animDuration);
+        }
         setInAnimation(animIn);
         Animation animOut = AnimationUtils.loadAnimation(mContext, R.anim.anim_marquee_out);
-        if (isSetAnimDuration)
+        if (isSetAnimDuration) {
             animOut.setDuration(animDuration);
+        }
         setOutAnimation(animOut);
     }
 
@@ -59,8 +61,9 @@ public class UPMarqueeView extends ViewFlipper {
      * @param views
      */
     public void setViews(List<View> views) {
-        if (views == null || views.size() == 0)
+        if (views == null || views.size() == 0) {
             return;
+        }
         removeAllViews();
         for (int i = 0; i < views.size(); i++) {
             addView(views.get(i));

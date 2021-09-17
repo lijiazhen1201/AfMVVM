@@ -74,12 +74,16 @@ public class ZipUtils {
      */
     public static boolean zipFiles(Collection<File> resFiles, File zipFile, String comment)
             throws IOException {
-        if (resFiles == null || zipFile == null) return false;
+        if (resFiles == null || zipFile == null) {
+            return false;
+        }
         ZipOutputStream zos = null;
         try {
             zos = new ZipOutputStream(new FileOutputStream(zipFile));
             for (File resFile : resFiles) {
-                if (!zipFile(resFile, "", zos, comment)) return false;
+                if (!zipFile(resFile, "", zos, comment)) {
+                    return false;
+                }
             }
             return true;
         } finally {
@@ -141,7 +145,9 @@ public class ZipUtils {
      */
     public static boolean zipFile(File resFile, File zipFile, String comment)
             throws IOException {
-        if (resFile == null || zipFile == null) return false;
+        if (resFile == null || zipFile == null) {
+            return false;
+        }
         ZipOutputStream zos = null;
         try {
             zos = new ZipOutputStream(new FileOutputStream(zipFile));
@@ -171,13 +177,17 @@ public class ZipUtils {
             // 如果是空文件夹那么创建它，我把'/'换为File.separator测试就不成功，eggPain
             if (fileList == null || fileList.length <= 0) {
                 ZipEntry entry = new ZipEntry(rootPath + '/');
-                if (!TextUtils.isEmpty(comment)) entry.setComment(comment);
+                if (!TextUtils.isEmpty(comment)) {
+                    entry.setComment(comment);
+                }
                 zos.putNextEntry(entry);
                 zos.closeEntry();
             } else {
                 for (File file : fileList) {
                     // 如果递归返回false则返回false
-                    if (!zipFile(file, rootPath, zos, comment)) return false;
+                    if (!zipFile(file, rootPath, zos, comment)) {
+                        return false;
+                    }
                 }
             }
         } else {
@@ -185,9 +195,11 @@ public class ZipUtils {
             try {
                 is = new BufferedInputStream(new FileInputStream(resFile));
                 ZipEntry entry = new ZipEntry(rootPath);
-                if (!TextUtils.isEmpty(comment)) entry.setComment(comment);
+                if (!TextUtils.isEmpty(comment)) {
+                    entry.setComment(comment);
+                }
                 zos.putNextEntry(entry);
-                byte buffer[] = new byte[FileUtils.KB];
+                byte[] buffer = new byte[FileUtils.KB];
                 int len;
                 while ((len = is.read(buffer, 0, FileUtils.KB)) != -1) {
                     zos.write(buffer, 0, len);
@@ -223,9 +235,13 @@ public class ZipUtils {
      */
     public static boolean unzipFiles(Collection<File> zipFiles, File destDir)
             throws IOException {
-        if (zipFiles == null || destDir == null) return false;
+        if (zipFiles == null || destDir == null) {
+            return false;
+        }
         for (File zipFile : zipFiles) {
-            if (!unzipFile(zipFile, destDir)) return false;
+            if (!unzipFile(zipFile, destDir)) {
+                return false;
+            }
         }
         return true;
     }
@@ -282,7 +298,9 @@ public class ZipUtils {
      */
     public static List<File> unzipFileByKeyword(File zipFile, File destDir, String keyword)
             throws IOException {
-        if (zipFile == null || destDir == null) return null;
+        if (zipFile == null || destDir == null) {
+            return null;
+        }
         List<File> files = new ArrayList<>();
         ZipFile zf = new ZipFile(zipFile);
         Enumeration<?> entries = zf.entries();
@@ -294,15 +312,19 @@ public class ZipUtils {
                 File file = new File(filePath);
                 files.add(file);
                 if (entry.isDirectory()) {
-                    if (!FileUtils.createOrExistsDir(file)) return null;
+                    if (!FileUtils.createOrExistsDir(file)) {
+                        return null;
+                    }
                 } else {
-                    if (!FileUtils.createOrExistsFile(file)) return null;
+                    if (!FileUtils.createOrExistsFile(file)) {
+                        return null;
+                    }
                     InputStream in = null;
                     OutputStream out = null;
                     try {
                         in = new BufferedInputStream(zf.getInputStream(entry));
                         out = new BufferedOutputStream(new FileOutputStream(file));
-                        byte buffer[] = new byte[FileUtils.KB];
+                        byte[] buffer = new byte[FileUtils.KB];
                         int len;
                         while ((len = in.read(buffer)) != -1) {
                             out.write(buffer, 0, len);
@@ -337,7 +359,9 @@ public class ZipUtils {
      */
     public static List<String> getFilesPath(File zipFile)
             throws IOException {
-        if (zipFile == null) return null;
+        if (zipFile == null) {
+            return null;
+        }
         List<String> paths = new ArrayList<>();
         Enumeration<?> entries = getEntries(zipFile);
         while (entries.hasMoreElements()) {
@@ -367,7 +391,9 @@ public class ZipUtils {
      */
     public static List<String> getComments(File zipFile)
             throws IOException {
-        if (zipFile == null) return null;
+        if (zipFile == null) {
+            return null;
+        }
         List<String> comments = new ArrayList<>();
         Enumeration<?> entries = getEntries(zipFile);
         while (entries.hasMoreElements()) {
@@ -398,12 +424,16 @@ public class ZipUtils {
      */
     public static Enumeration<?> getEntries(File zipFile)
             throws IOException {
-        if (zipFile == null) return null;
+        if (zipFile == null) {
+            return null;
+        }
         return new ZipFile(zipFile).entries();
     }
 
     private static boolean isSpace(String s) {
-        if (s == null) return true;
+        if (s == null) {
+            return true;
+        }
         for (int i = 0, len = s.length(); i < len; ++i) {
             if (!Character.isWhitespace(s.charAt(i))) {
                 return false;

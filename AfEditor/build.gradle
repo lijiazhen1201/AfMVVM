@@ -1,0 +1,40 @@
+apply plugin: 'com.android.library'
+
+def ext = rootProject.ext
+def sign = ext.sign
+def config = ext.config
+def support = ext.support
+
+android {
+    compileSdkVersion config.compileSdkVersion
+    buildToolsVersion config.buildToolsVersion
+    defaultConfig {
+        minSdkVersion config.minSdkVersion
+        targetSdkVersion config.targetSdkVersion
+        versionCode config.versionCode
+        versionName config.versionName
+    }
+    dataBinding {
+        enabled config.dataBinding
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+}
+
+dependencies {
+    api fileTree(dir: 'libs', include: ['*.jar'])
+    api project(':AfRecorder')
+}
+
+repositories {
+    flatDir {
+        dirs 'libs'
+    }
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "UTF-8"
+}

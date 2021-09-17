@@ -70,19 +70,29 @@ public class PermissionUtils {
      * @return 是否有权限 ：其中有一个获取不了就是失败了
      */
     public static boolean hasPermission(@NonNull Context context, @NonNull List<String> permissions) {
-        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) return true;
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            return true;
+        }
         for (String permission : permissions) {
             try {
                 String op = AppOpsManagerCompat.permissionToOp(permission);
-                if (TextUtils.isEmpty(op)) continue;
+                if (TextUtils.isEmpty(op)) {
+                    continue;
+                }
                 int result = AppOpsManagerCompat.noteOp(context, op, android.os.Process.myUid(), context.getPackageName());
-                if (result == AppOpsManagerCompat.MODE_IGNORED) return false;
+                if (result == AppOpsManagerCompat.MODE_IGNORED) {
+                    return false;
+                }
                 AppOpsManager appOpsManager = (AppOpsManager) context.getSystemService(Context.APP_OPS_SERVICE);
                 String ops = AppOpsManager.permissionToOp(permission);
                 int locationOp = appOpsManager.checkOp(ops, Binder.getCallingUid(), context.getPackageName());
-                if (locationOp == AppOpsManager.MODE_IGNORED) return false;
+                if (locationOp == AppOpsManager.MODE_IGNORED) {
+                    return false;
+                }
                 result = ContextCompat.checkSelfPermission(context, permission);
-                if (result != PackageManager.PERMISSION_GRANTED) return false;
+                if (result != PackageManager.PERMISSION_GRANTED) {
+                    return false;
+                }
             } catch (Exception ex) {
                 Log.e(TAG, "[hasPermission] error ", ex);
             }

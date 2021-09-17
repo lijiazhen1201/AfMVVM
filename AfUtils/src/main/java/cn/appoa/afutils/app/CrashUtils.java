@@ -65,8 +65,9 @@ public class CrashUtils implements UncaughtExceptionHandler {
      * 获取CrashHandler实例 ,单例模式
      */
     public static CrashUtils getInstance() {
-        if (instance == null)
+        if (instance == null) {
             instance = new CrashUtils();
+        }
         return instance;
     }
 
@@ -234,8 +235,9 @@ public class CrashUtils implements UncaughtExceptionHandler {
             reader = new BufferedReader(new InputStreamReader(fis, "GBK"));
             while (true) {
                 s = reader.readLine();
-                if (s == null)
+                if (s == null) {
                     break;
+                }
                 // 由于目前尚未确定以何种方式发送，所以先打出log日志。
                 Log.i(TAG + "info", s.toString());
             }

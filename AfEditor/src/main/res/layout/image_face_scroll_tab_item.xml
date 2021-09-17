@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    tools:background="@drawable/image_bg_face_bar_normal"
+    tools:layout_height="52dp"
+    tools:layout_width="46dp">
+
+    <RelativeLayout
+        android:id="@+id/btn_tab"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="@dimen/image_face_image_margin_half"
+        android:layout_marginTop="@dimen/image_face_image_margin"
+        android:layout_marginRight="@dimen/image_face_image_margin_half"
+        android:layout_marginBottom="@dimen/image_face_image_margin"
+        tools:background="@drawable/image_bg_face_bar_pressed">
+
+        <ImageView
+            android:id="@+id/iv_icon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerInParent="true"
+            android:layout_margin="@dimen/image_face_image_margin"
+            android:scaleType="centerInside" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

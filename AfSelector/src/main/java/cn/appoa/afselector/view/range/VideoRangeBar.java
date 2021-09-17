@@ -256,8 +256,12 @@ public class VideoRangeBar extends View {
     private boolean shouldMove(MotionEvent event){
         float x=event.getX();
         if(mLeftThumb.getX()+mLeftThumb.getHalfWidth()*2>x
-                &&x>mLeftThumb.getX()-mLeftThumb.getHalfWidth())return true;
-        if (mRightThumb.getX()-mRightThumb.getHalfWidth()<x&&mRightThumb.getX()+2*mRightThumb.getHalfWidth()>x)return true;
+                &&x>mLeftThumb.getX()-mLeftThumb.getHalfWidth()) {
+            return true;
+        }
+        if (mRightThumb.getX()-mRightThumb.getHalfWidth()<x&&mRightThumb.getX()+2*mRightThumb.getHalfWidth()>x) {
+            return true;
+        }
         return false;
     }
 
@@ -338,8 +342,9 @@ public class VideoRangeBar extends View {
                 mLeftIndex = 0;
                 mRightIndex = mTickCount - 1;
 
-                if (mListener != null)
+                if (mListener != null) {
                     mListener.onIndexChangeListener(this, mLeftIndex, mRightIndex);
+                }
             }
 
             createBar();
@@ -480,8 +485,9 @@ public class VideoRangeBar extends View {
         }
 
         else {
-            if (mFirstSetTickCount == true)
+            if (mFirstSetTickCount == true) {
                 mFirstSetTickCount = false;
+            }
 
             mLeftIndex = leftThumbIndex;
             mRightIndex = rightThumbIndex;
@@ -789,8 +795,9 @@ public class VideoRangeBar extends View {
      * @param thumb the thumb to press
      */
     private void pressThumb(Thumb thumb) {
-        if (mFirstSetTickCount == true)
+        if (mFirstSetTickCount == true) {
             mFirstSetTickCount = false;
+        }
         thumb.press();
         invalidate();
     }

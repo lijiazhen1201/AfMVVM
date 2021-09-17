@@ -88,6 +88,8 @@ public class RegisterViewModel extends VerifyCodeViewModel<RegisterModel> {
                     getModel().bindPhone(third_type.get(), open_id.get(), name.get(),
                             photo.get(), user_id.get(), bindPhoneEvent);
                     break;
+                default:
+                    break;
             }
         }
     });

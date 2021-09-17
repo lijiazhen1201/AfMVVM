@@ -297,10 +297,10 @@ public final class CropImage {
         // remove documents intent
         if (!includeDocuments) {
             for (Intent intent : intents) {
-                if (intent
-                        .getComponent()
-                        .getClassName()
-                        .equals("com.android.documentsui.DocumentsActivity")) {
+                if ("com.android.documentsui.DocumentsActivity"
+                        .equals(intent
+                                .getComponent()
+                                .getClassName())) {
                     intents.remove(intent);
                     break;
                 }

@@ -112,8 +112,9 @@ public class FlowLayout extends ViewGroup {
 
         for (int i = 0; i < cCount; i++) {
             View child = getChildAt(i);
-            if (child.getVisibility() == View.GONE)
+            if (child.getVisibility() == View.GONE) {
                 continue;
+            }
             MarginLayoutParams lp = (MarginLayoutParams) child.getLayoutParams();
 
             int childWidth = child.getMeasuredWidth();
@@ -158,6 +159,8 @@ public class FlowLayout extends ViewGroup {
                     break;
                 case RIGHT:
                     left = width - currentLineWidth + getPaddingLeft();
+                    break;
+                default:
                     break;
             }
 

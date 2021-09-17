@@ -149,8 +149,9 @@ public class ViewUtils {
      * @param rightDip 右边距
      */
     public static void setTabLayoutIndicator(TabLayout tabs, int leftDip, int rightDip) {
-        if (tabs == null)
+        if (tabs == null) {
             return;
+        }
         Class<?> tabLayout = tabs.getClass();
         Field tabStrip = null;
         try {

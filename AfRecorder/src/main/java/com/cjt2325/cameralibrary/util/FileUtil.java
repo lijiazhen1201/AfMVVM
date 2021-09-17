@@ -23,7 +23,7 @@ public class FileUtil {
     private static String DST_FOLDER_NAME = "JCamera";
 
     private static String initPath() {
-        if (storagePath.equals("")) {
+        if ("".equals(storagePath)) {
             storagePath = parentPath.getAbsolutePath() + File.separator + DST_FOLDER_NAME;
             File f = new File(storagePath);
             if (!f.exists()) {

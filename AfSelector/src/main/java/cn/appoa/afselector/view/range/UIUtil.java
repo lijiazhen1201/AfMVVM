@@ -31,7 +31,9 @@ public class UIUtil {
     public static long getVideoDuration(String path) {
         try {
             File file = new File(path);
-            if (!file.exists()) return 0;
+            if (!file.exists()) {
+                return 0;
+            }
             MediaMetadataRetriever mMetadataRetriever = new MediaMetadataRetriever();
             mMetadataRetriever.setDataSource(path);
             String time = mMetadataRetriever.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
@@ -51,7 +53,9 @@ public class UIUtil {
     public static String getVideoInf(String videoPath) {
         try {
             File file = new File(videoPath);
-            if (!file.exists()) return null;
+            if (!file.exists()) {
+                return null;
+            }
             MediaMetadataRetriever retr = new MediaMetadataRetriever();
             retr.setDataSource(videoPath);
             String rotation = retr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_VIDEO_ROTATION); // 视频旋转方向

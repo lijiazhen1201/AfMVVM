@@ -25,7 +25,9 @@ public class PinyinUtils {
      * @return 拼音
      */
     public static String ccs2Pinyin(CharSequence ccs, CharSequence split) {
-        if (ccs == null || ccs.length() == 0) return null;
+        if (ccs == null || ccs.length() == 0) {
+            return null;
+        }
         StringBuilder sb = new StringBuilder();
         for (int i = 0, len = ccs.length(); i < len; i++) {
             char ch = ccs.charAt(i);
@@ -47,7 +49,9 @@ public class PinyinUtils {
      * @return 拼音
      */
     public static String getPinyinFirstLetter(CharSequence ccs) {
-        if (ccs == null || ccs.length() == 0) return null;
+        if (ccs == null || ccs.length() == 0) {
+            return null;
+        }
         return ccs2Pinyin(String.valueOf(ccs.charAt(0))).substring(0, 1);
     }
 
@@ -69,7 +73,9 @@ public class PinyinUtils {
      * @return 所有汉字的首字母
      */
     public static String getPinyinFirstLetters(CharSequence ccs, CharSequence split) {
-        if (ccs == null || ccs.length() == 0) return null;
+        if (ccs == null || ccs.length() == 0) {
+            return null;
+        }
         int len = ccs.length();
         StringBuilder sb = new StringBuilder(len);
         for (int i = 0; i < len; i++) {
@@ -85,13 +91,20 @@ public class PinyinUtils {
      * @return 姓氏的拼音
      */
     public static String getSurnamePinyin(CharSequence name) {
-        if (name == null || name.length() == 0) return null;
+        if (name == null || name.length() == 0) {
+            return null;
+        }
         if (name.length() >= 2) {
             CharSequence str = name.subSequence(0, 2);
-            if (str.equals("澹台")) return "tantai";
-            else if (str.equals("尉迟")) return "yuchi";
-            else if (str.equals("万俟")) return "moqi";
-            else if (str.equals("单于")) return "chanyu";
+            if ("澹台".equals(str)) {
+                return "tantai";
+            } else if ("尉迟".equals(str)) {
+                return "yuchi";
+            } else if ("万俟".equals(str)) {
+                return "moqi";
+            } else if ("单于".equals(str)) {
+                return "chanyu";
+            }
         }
         char ch = name.charAt(0);
         if (surnames.containsKey(ch)) {
@@ -113,7 +126,9 @@ public class PinyinUtils {
      */
     public static String getSurnameFirstLetter(CharSequence name) {
         String surname = getSurnamePinyin(name);
-        if (surname == null || surname.length() == 0) return null;
+        if (surname == null || surname.length() == 0) {
+            return null;
+        }
         return String.valueOf(surname.charAt(0));
     }
 
