@@ -28,6 +28,7 @@ dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
     api project(':AfUtils')
     api support["okgo"]
+    //api support["easyhttp"]
 }
 
 repositories {

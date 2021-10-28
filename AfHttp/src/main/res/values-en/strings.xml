@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="http_response_error">The server response is unusual, please try again later</string>
+    <string name="http_data_explain_error">Data parsing is unusual, please try again later</string>
+    <string name="http_server_out_time">Server request timeout, please try again later</string>
+    <string name="http_server_error">The server connection is unusual, please try again later</string>
+    <string name="http_network_error">The request failed, please check the network Settings</string>
+    <string name="http_request_cancel">Request to be interrupted, please try again later</string>
+    <string name="http_unknown_error">Request error, an unknown error, please try again later</string>
+
+</resources>

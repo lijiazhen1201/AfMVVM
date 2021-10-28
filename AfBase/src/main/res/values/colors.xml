@@ -47,4 +47,12 @@
     <color name="colorTitleBarTextTitle">#333333</color>
     <!-- 标题栏菜单颜色 -->
     <color name="colorTitleBarTextMenu">#666666</color>
+    <!-- 弹窗标题文字颜色 -->
+    <color name="colorDialogTitle">#111111</color>
+    <!-- 弹窗内容文字颜色 -->
+    <color name="colorDialogContent">#666666</color>
+    <!-- 弹窗取消文字颜色 -->
+    <color name="colorDialogCancel">#aaaaaa</color>
+    <!-- 弹窗确定文字颜色 -->
+    <color name="colorDialogConfirm">#333333</color>
 </resources>

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorTransparent"
+    tools:background="@color/colorBlack">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginLeft="@dimen/height_small"
+        android:layout_marginRight="@dimen/height_small"
+        android:background="@drawable/shape_solid_white_5dp"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="@dimen/padding_great">
+
+            <TextView
+                android:id="@+id/tv_hint_title"
+                style="@style/SimpleTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/padding_huge"
+                android:gravity="start"
+                android:lineSpacingExtra="@dimen/padding_tiny"
+                android:singleLine="false"
+                android:text="@string/dialog_hint"
+                android:textColor="@color/colorDialogTitle"
+                android:textSize="@dimen/text_huge" />
+
+            <TextView
+                android:id="@+id/tv_hint_message"
+                style="@style/SimpleTextView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:lineSpacingExtra="@dimen/padding_bit"
+                android:maxHeight="@dimen/height_200"
+                android:minHeight="@dimen/height_large"
+                android:singleLine="false"
+                android:textColor="@color/colorDialogContent"
+                android:textSize="@dimen/text_big"
+                tools:text="内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容内容" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_big"
+            android:gravity="center_vertical|right"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/padding_normal"
+            android:paddingBottom="@dimen/padding_normal">
+
+            <TextView
+                android:id="@+id/tv_hint_cancel"
+                style="@style/SimpleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/height_little"
+                android:layout_marginRight="@dimen/padding_normal"
+                android:background="@drawable/pressed_bg_white_gray"
+                android:minWidth="@dimen/height_great"
+                android:paddingLeft="@dimen/padding_normal"
+                android:paddingRight="@dimen/padding_normal"
+                android:text="@string/dialog_cancel"
+                android:textColor="@color/colorDialogCancel"
+                android:textSize="@dimen/text_normal" />
+
+            <TextView
+                android:id="@+id/tv_hint_confirm"
+                style="@style/SimpleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/height_little"
+                android:layout_marginRight="@dimen/padding_normal"
+                android:background="@drawable/pressed_bg_white_gray"
+                android:minWidth="@dimen/height_great"
+                android:paddingLeft="@dimen/padding_normal"
+                android:paddingRight="@dimen/padding_normal"
+                android:text="@string/dialog_confirm"
+                android:textColor="@color/colorDialogConfirm"
+                android:textSize="@dimen/text_normal" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</FrameLayout>

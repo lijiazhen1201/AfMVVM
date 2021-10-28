@@ -74,6 +74,8 @@ public abstract class AfApplication extends Application
 
     /**
      * 初始化ImageLoader
+     *
+     * @return
      */
     public abstract AfImageLoader initImageLoader();
 

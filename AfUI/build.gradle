@@ -29,6 +29,7 @@ dependencies {
     api project(':AfBase')
     api support["banner"]
     api support["consecutivescroller"]
+    //api support["shapeview"]
 }
 
 repositories {

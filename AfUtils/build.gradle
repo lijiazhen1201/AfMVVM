@@ -38,9 +38,13 @@ dependencies {
     api support["legacy-support-core"]
     api support["fastjson"]
     api support["gson"]
+    api support["gsonfactory"]
     api support["mkkv"]
     api support["prdownloader"]
+    api support["toastutils"]
     //api support["devshape"]
+    //api support["commonslang"]
+    //api support["hutool"]
 }
 
 repositories {

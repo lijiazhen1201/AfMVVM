@@ -200,6 +200,8 @@ public class AreaWheelDialog extends BaseDialog
                 id3 = "";
                 name3 = "";
                 break;
+            default:
+                break;
         }
         if (items != null && items.length > 0) {
             adapter = new ArrayWheelAdapter<String>(context, items);
@@ -217,6 +219,8 @@ public class AreaWheelDialog extends BaseDialog
                 case 3:
                     id3 = provinces.get(position1).sub.get(position2).sub.get(position3).area_code;
                     name3 = provinces.get(position1).sub.get(position2).sub.get(position3).area_name;
+                    break;
+                default:
                     break;
             }
         }
