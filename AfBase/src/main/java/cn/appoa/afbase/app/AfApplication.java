@@ -20,17 +20,17 @@ public abstract class AfApplication extends Application
     /**
      * ApplicationContext
      */
-    private static Context appContext;
+    public static Context appContext;
 
     /**
      * Application
      */
-    private static Application app;
+    public static Application app;
 
     /**
      * ImageLoader
      */
-    private static AfImageLoader imageLoader;
+    public static AfImageLoader imageLoader;
 
     public static Context getAppContext() {
         return appContext;
