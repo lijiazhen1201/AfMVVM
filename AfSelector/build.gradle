@@ -15,6 +15,9 @@ android {
         versionName config.versionName
     }
     ndkVersion config.ndkVersion
+    packagingOptions {
+        doNotStrip '**/*.so'
+    }
     dataBinding {
         enabled config.dataBinding
     }
