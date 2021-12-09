@@ -14,7 +14,7 @@ android {
         versionCode config.versionCode
         versionName config.versionName
     }
-    //ndkVersion config.ndkVersion
+    ndkVersion config.ndkVersion
     dataBinding {
         enabled config.dataBinding
     }
