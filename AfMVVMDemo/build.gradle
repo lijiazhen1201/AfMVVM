@@ -61,9 +61,6 @@ android {
         }
     }
     ndkVersion config.ndkVersion
-    packagingOptions {
-        doNotStrip '**/*.so'
-    }
     dataBinding {
         enabled config.dataBinding
     }
@@ -97,7 +94,7 @@ dependencies {
     implementation support["proguard"]
     implementation support["multidex"]
     implementation project(':AfSelector')
-    //implementation 'com.github.lijiazhen1201:AfMVVM:1.3.0'
+    //implementation 'com.github.lijiazhen1201:AfMVVM:1.3.2'
 }
 
 repositories {
