@@ -77,5 +77,6 @@ ext {
             zipAlignEnabled  : true,
             shrinkResources  : true,
             dataBinding      : true,
+            ndkVersion       : "21.4.7075529",
     ]
 }
