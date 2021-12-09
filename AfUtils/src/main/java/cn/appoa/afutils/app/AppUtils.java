@@ -14,7 +14,11 @@ import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.WindowManager;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.security.MessageDigest;
 import java.util.List;
+import java.util.Locale;
 
 import cn.appoa.afutils.AfUtils;
 import cn.appoa.afutils.net.LogUtils;
@@ -206,4 +210,85 @@ public class AppUtils {
         return false;
     }
 
+    /**
+     * 获取CPU架构
+     *
+     * @return
+     */
+    public static String getCPUABI() {
+        String CPUABI = "";
+        try {
+            String os_cpuabi = new BufferedReader(new InputStreamReader(Runtime.getRuntime()
+                    .exec("getprop ro.product.cpu.abi").getInputStream())).readLine();
+            if (os_cpuabi.contains("x86")) {
+                CPUABI = "x86";
+            } else if (os_cpuabi.contains("armeabi-v7a")) {
+                CPUABI = "armeabi-v7a";
+            } else if (os_cpuabi.contains("arm64-v8a")) {
+                CPUABI = "arm64-v8a";
+            } else {
+                CPUABI = "armeabi";
+            }
+        } catch (Exception e) {
+            CPUABI = "armeabi";
+        }
+        return CPUABI;
+    }
+
+    /**
+     * 获取当前APP证书中的sha1值
+     *
+     * @param context
+     * @return
+     */
+    public static String getAppSha1(Context context) {
+        String current_sha1 = "";
+        try {
+            PackageInfo info = context.getPackageManager().getPackageInfo(context.getPackageName(),
+                    PackageManager.GET_SIGNATURES);
+            byte[] cert = info.signatures[0].toByteArray();
+            MessageDigest md = MessageDigest.getInstance("SHA1");
+            byte[] publicKey = md.digest(cert);
+            StringBuffer hexString = new StringBuffer();
+            for (int i = 0; i < publicKey.length; i++) {
+                String appendString = Integer.toHexString(0xFF & publicKey[i]).toUpperCase(Locale.US);
+                if (appendString.length() == 1)
+                    hexString.append("0");
+                hexString.append(appendString);
+                hexString.append(":");
+            }
+            String result = hexString.toString();
+            current_sha1 = result.substring(0, result.length() - 1);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return current_sha1;
+    }
+
+    /**
+     * 返回app运行状态
+     *
+     * @param context     一个context
+     * @param packageName 要判断应用的包名
+     * @return int 1:前台 2:后台 0:不存在
+     */
+    public static int isAppAlive(Context context, String packageName) {
+        ActivityManager activityManager = (ActivityManager) context
+                .getSystemService(Context.ACTIVITY_SERVICE);
+        List<ActivityManager.RunningTaskInfo> listInfos = activityManager
+                .getRunningTasks(20);
+        // 判断程序是否在栈顶
+        if (listInfos.get(0).topActivity.getPackageName().equals(packageName)) {
+            return 1;
+        } else {
+            // 判断程序是否在栈里
+            for (ActivityManager.RunningTaskInfo info : listInfos) {
+                if (info.topActivity.getPackageName().equals(packageName)) {
+                    return 2;
+                }
+            }
+            // 栈里找不到，返回0
+            return 0;
+        }
+    }
 }

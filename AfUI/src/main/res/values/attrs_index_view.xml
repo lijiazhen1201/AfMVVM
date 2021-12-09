@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- 首页导航控件 -->
+    <declare-styleable name="IndexView">
+
+
+    </declare-styleable>
+
+    <!-- 首页导航按钮 -->
+    <style name="IndexTabButton">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:button">@null</item>
+        <item name="android:textColor">@drawable/index_tab_btn_text_color</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColorHint">@color/colorTextHintIndex</item>
+        <item name="android:textSize">@dimen/index_text</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:clickable">true</item>
+        <item name="android:drawablePadding">@dimen/index_text_padding</item>
+    </style>
+
+</resources>

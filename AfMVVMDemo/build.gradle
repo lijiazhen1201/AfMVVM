@@ -93,7 +93,7 @@ dependencies {
     implementation support["proguard"]
     implementation support["multidex"]
     implementation project(':AfSelector')
-    //implementation 'com.github.lijiazhen1201:AfMVVM:1.2.6'
+    //implementation 'com.github.lijiazhen1201:AfMVVM:1.2.7'
 }
 
 repositories {

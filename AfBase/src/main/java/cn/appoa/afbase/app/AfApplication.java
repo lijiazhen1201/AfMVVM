@@ -47,6 +47,15 @@ public abstract class AfApplication extends Application
     @Override
     public void onCreate() {
         super.onCreate();
+        initApp();
+        //初始化App
+        initApplication();
+    }
+
+    /**
+     * 初始化App
+     */
+    protected void initApp() {
         appContext = getApplicationContext();
         app = this;
         Foreground.init(app);
@@ -58,8 +67,6 @@ public abstract class AfApplication extends Application
         if (imageLoader != null) {
             imageLoader.init(R.drawable.default_img, R.drawable.default_img, R.drawable.default_img, "");
         }
-        //初始化App
-        initApplication();
     }
 
     @Override

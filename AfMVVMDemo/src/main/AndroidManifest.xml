@@ -56,6 +56,11 @@
 
         <!-- MVVM方式显示UI -->
         <activity android:name=".activity.UIActivity" />
+        <!-- 主页 -->
+        <activity
+            android:name=".activity.ui.IndexActivity"
+            android:configChanges="keyboard"
+            android:windowSoftInputMode="adjustPan" />
         <!-- 登录 -->
         <activity
             android:name=".activity.ui.LoginActivity"

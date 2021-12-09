@@ -4,4 +4,12 @@
     <color name="colorPointNormal">#50000000</color>
     <!-- 轮播点(选中) -->
     <color name="colorPointSelected">#ffffff</color>
+    <!-- 底部导航文本选中颜色 -->
+    <color name="colorThemeIndex">@color/colorTheme</color>
+    <!-- 底部导航文本未选中颜色 -->
+    <color name="colorTextIndex">@color/colorText</color>
+    <!-- 底部导航提示文本颜色 -->
+    <color name="colorTextHintIndex">@color/colorTextHint</color>
+    <!-- 底部导航Tab的颜色 -->
+    <color name="colorIndexTabBg">@color/colorWhite</color>
 </resources>

@@ -2,4 +2,10 @@
 <resources>
     <!-- 轮播点宽高 -->
     <dimen name="point_width_height">8dp</dimen>
+    <!-- 底部导航高度 -->
+    <dimen name="index_height">48dp</dimen>
+    <!-- 底部导航字体大小 -->
+    <dimen name="index_text">@dimen/text_small</dimen>
+    <!-- 底部导航字体和图片间距 -->
+    <dimen name="index_text_padding">@dimen/height_divider_large</dimen>
 </resources>

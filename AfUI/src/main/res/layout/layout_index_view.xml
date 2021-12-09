@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/index_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RadioGroup
+        android:id="@+id/rg_index_tab"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/index_height"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorIndexTabBg"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" />
+
+    <View
+        android:id="@+id/index_divider_bottom"
+        style="@style/HorizontalLine"
+        android:layout_above="@+id/rg_index_tab" />
+
+    <FrameLayout
+        android:id="@+id/fl_index_fragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/index_divider_bottom" />
+
+</RelativeLayout>
