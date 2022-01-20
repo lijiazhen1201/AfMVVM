@@ -188,6 +188,16 @@ public class AtyUtils {
     /**
      * 获取launcher activity
      *
+     * @param context
+     * @return launcher activity
+     */
+    public static String getLauncherActivity(Context context) {
+        return getLauncherActivity(context, context.getPackageName());
+    }
+
+    /**
+     * 获取launcher activity
+     *
      * @param packageName 包名
      * @return launcher activity
      */

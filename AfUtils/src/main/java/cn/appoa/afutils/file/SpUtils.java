@@ -7,18 +7,31 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.Map;
 
+import cn.appoa.afutils.encrypt.storage.AES256SharedPreferences;
+
 /**
  * SharedPreferences工具类
  */
 public class SpUtils {
 
-    public static String FILE_NAME = "SpUtils";// sp文件名
+    /**
+     * sp文件名
+     */
+    public static String FILE_NAME = "SpUtils";
+    /**
+     * 是否加密
+     */
+    public static boolean IS_ENCRYPT_SP = false;
 
     private static SharedPreferences sharedPreferences;
 
     public static SharedPreferences getDefaultSharedPreferences(Context context) {
         if (sharedPreferences == null) {
-            sharedPreferences = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
+            if (IS_ENCRYPT_SP) {
+                sharedPreferences = new AES256SharedPreferences(context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE));
+            } else {
+                sharedPreferences = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE);
+            }
         }
         return sharedPreferences;
     }

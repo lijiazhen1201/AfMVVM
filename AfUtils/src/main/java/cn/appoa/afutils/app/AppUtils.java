@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -291,4 +292,36 @@ public class AppUtils {
             return 0;
         }
     }
+
+    /**
+     * 重启App
+     *
+     * @param context
+     */
+    public static void restartApp(Context context) {
+        restartApp(context, false);
+    }
+
+    /**
+     * 重启App
+     *
+     * @param context
+     * @param isKillProcess 是否杀死进程
+     */
+    public static void restartApp(Context context, boolean isKillProcess) {
+        String launcherActivity = AtyUtils.getLauncherActivity(context);
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_LAUNCHER);
+        intent.setClassName(context.getPackageName(), launcherActivity);
+        intent.addFlags(
+                Intent.FLAG_ACTIVITY_NEW_TASK
+                        | Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK
+        );
+        context.startActivity(intent);
+        if (isKillProcess) {
+            android.os.Process.killProcess(android.os.Process.myPid());
+            System.exit(0);
+        }
+    }
+
 }

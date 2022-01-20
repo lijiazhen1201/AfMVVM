@@ -101,8 +101,47 @@ public abstract class SlideBackActivity extends ActivityInterfaceImpl
         super.onCreate(savedInstanceState);
     }
 
-    @Override
-    public void setContentView(View view) {
+//    @Override
+//    public void setContentView(View view) {
+//        if (mSlideable) {
+//            // 如果找不到前一个activity的content view，则不能滑动，典型的场景就是由外部app打开单独的一界面
+//            // 例如从通知栏中打开消息中心界面，所以可能当前进程就一个消息中心的activity，此时就不能滑动退出
+//            View previewView = getPreviousActivityContentView();
+//            if (previewView == null) {
+//                mSlideable = false;
+//            }
+//        }
+//
+//        if (!mSlideable) {
+//            super.setContentView(view);
+//            return;
+//        }
+//
+//        DisplayMetrics metrics = getResources().getDisplayMetrics();
+//        // 屏幕宽的-1/3
+//        mBackPreviewViewInitOffset = -(1.f / 3) * metrics.widthPixels;
+//
+//        mSlideFrameLayout = new SlideFrameLayout(this);
+//        int size = ViewGroup.LayoutParams.MATCH_PARENT;
+//        // 将内容View添加进容器中
+//        SlideFrameLayout.LayoutParams params = new SlideFrameLayout.LayoutParams(size, size);
+//        mSlideFrameLayout.addView(view, params);
+//
+//        // 初始化
+//        mSlideFrameLayout.setShadowResource(R.drawable.sliding_back_shadow);
+//        mSlideFrameLayout.setSlideable(mSlideable);
+//        mSlideFrameLayout.setSlidingListener(this);
+//
+//        super.setContentView(mSlideFrameLayout);
+//    }
+
+
+    /**
+     * 绑定SlideFrameLayout
+     *
+     * @param view
+     */
+    protected void bindSlideFrameLayout(View view) {
         if (mSlideable) {
             // 如果找不到前一个activity的content view，则不能滑动，典型的场景就是由外部app打开单独的一界面
             // 例如从通知栏中打开消息中心界面，所以可能当前进程就一个消息中心的activity，此时就不能滑动退出
@@ -113,9 +152,11 @@ public abstract class SlideBackActivity extends ActivityInterfaceImpl
         }
 
         if (!mSlideable) {
-            super.setContentView(view);
             return;
         }
+
+        //先移除布局，再添加布局
+        ((ViewGroup) findViewById(android.R.id.content)).removeAllViews();
 
         DisplayMetrics metrics = getResources().getDisplayMetrics();
         // 屏幕宽的-1/3
@@ -242,7 +283,7 @@ public abstract class SlideBackActivity extends ActivityInterfaceImpl
      */
     private void doRealFinishForSlide() {
         finish();
-        overridePendingTransition(0, 0);
+        overridePendingTransition(0,0);
         onSlideBack();
     }
 
