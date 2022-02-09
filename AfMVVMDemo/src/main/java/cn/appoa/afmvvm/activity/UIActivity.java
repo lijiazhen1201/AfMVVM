@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import cn.appoa.afmvvm.activity.ui.AboutUsActivity;
+import cn.appoa.afmvvm.activity.ui.DrawerActivity;
+import cn.appoa.afmvvm.activity.ui.DrawerIndexActivity;
 import cn.appoa.afmvvm.activity.ui.IndexActivity;
 import cn.appoa.afmvvm.activity.ui.LoginActivity;
 import cn.appoa.afmvvm.activity.ui.UpdatePayPwdActivity;
@@ -28,7 +30,9 @@ public class UIActivity extends MainMenuActivity {
     @Override
     protected List<MainMenu> initMainMenuList() {
         List<MainMenu> dataList = new ArrayList<>();
-        dataList.add(new MainMenu("主页", IndexActivity.class));
+        dataList.add(new MainMenu("底部导航主页", IndexActivity.class));
+        dataList.add(new MainMenu("侧边栏主页", DrawerActivity.class));
+        dataList.add(new MainMenu("侧边栏+底部导航主页", DrawerIndexActivity.class));
         dataList.add(new MainMenu("登录", LoginActivity.class));
         dataList.add(new MainMenu("设置支付密码", UpdatePayPwdActivity.class));
         dataList.add(new MainMenu("修改手机号", UpdatePhoneActivity.class));

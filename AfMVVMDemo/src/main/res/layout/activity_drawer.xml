@@ -13,20 +13,10 @@
 
     </data>
 
-    <RelativeLayout
+    <cn.appoa.afui.widget.index.DrawerView
+        android:id="@+id/mDrawerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/colorWhite">
-
-        <TextView
-            android:id="@+id/tv_index"
-            style="@style/SimpleTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:text="@{viewModel.indexPage}"
-            android:textSize="@dimen/height_normal" />
-
-    </RelativeLayout>
+        android:background="@color/colorWhite" />
 
 </layout>

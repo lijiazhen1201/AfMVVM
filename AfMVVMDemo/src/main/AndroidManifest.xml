@@ -61,6 +61,16 @@
             android:name=".activity.ui.IndexActivity"
             android:configChanges="keyboard"
             android:windowSoftInputMode="adjustPan" />
+        <!-- 主页 -->
+        <activity
+            android:name=".activity.ui.DrawerActivity"
+            android:configChanges="keyboard"
+            android:windowSoftInputMode="adjustPan" />
+        <!-- 主页 -->
+        <activity
+            android:name=".activity.ui.DrawerIndexActivity"
+            android:configChanges="keyboard"
+            android:windowSoftInputMode="adjustPan" />
         <!-- 登录 -->
         <activity
             android:name=".activity.ui.LoginActivity"

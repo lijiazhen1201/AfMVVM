@@ -20,6 +20,14 @@ public class IndexFragment extends BaseFragment<FragmentIndexBinding, IndexViewM
      */
     private String pageName = "";
 
+    public static IndexFragment getInstance(String pageName) {
+        IndexFragment fragment = new IndexFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString("pageName", pageName);
+        fragment.setArguments(bundle);
+        return fragment;
+    }
+
     @Override
     public int initContent(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         return R.layout.fragment_index;

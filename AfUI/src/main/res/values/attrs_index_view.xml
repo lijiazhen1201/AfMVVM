@@ -22,4 +22,16 @@
         <item name="android:drawablePadding">@dimen/index_text_padding</item>
     </style>
 
+    <!-- 首页侧边栏控件 -->
+    <declare-styleable name="DrawerView">
+
+
+    </declare-styleable>
+
+    <!-- 首页侧边栏导航控件 -->
+    <declare-styleable name="DrawerIndexView">
+
+
+    </declare-styleable>
+
 </resources>

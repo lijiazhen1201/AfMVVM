@@ -11,11 +11,16 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 
 import androidx.annotation.DrawableRes;
+import androidx.annotation.IntDef;
 import androidx.annotation.NonNull;
+import androidx.core.view.GravityCompat;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
@@ -25,20 +30,47 @@ import cn.appoa.afui.R;
 /**
  * 带底部导航的主页控件
  */
-public class IndexView extends FrameLayout implements CompoundButton.OnCheckedChangeListener {
+public class DrawerIndexView extends FrameLayout implements CompoundButton.OnCheckedChangeListener,
+        DrawerLayout.DrawerListener {
 
-    public IndexView(Context context) {
+    public DrawerIndexView(Context context) {
         this(context, null);
     }
 
-    public IndexView(Context context, AttributeSet attrs) {
+    public DrawerIndexView(Context context, AttributeSet attrs) {
         this(context, attrs, 0);
     }
 
-    public IndexView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public DrawerIndexView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         initView(context, attrs);
     }
+
+    @IntDef(value = {GravityCompat.START, GravityCompat.END},
+            flag = true)
+    @Retention(RetentionPolicy.SOURCE)
+    private @interface DrawerIndexGravity {
+    }
+
+    /**
+     * 侧边栏方向（默认左边）
+     */
+    private @DrawerIndexGravity
+    final int edgeGravity = GravityCompat.START;
+
+    /**
+     * 侧边栏是否初始化
+     */
+    private boolean initDrawer;
+    /**
+     * 侧边Fragment
+     */
+    private IndexItem drawerItem;
+
+    /**
+     * 侧边栏
+     */
+    private DrawerLayout drawerLayout;
 
     /**
      * 根布局
@@ -75,7 +107,7 @@ public class IndexView extends FrameLayout implements CompoundButton.OnCheckedCh
     /**
      * 页面切换的监听
      */
-    private OnIndexChangeListener mOnIndexChangeListener;
+    private OnDrawerIndexChangeListener mOnDrawerIndexChangeListener;
 
     /**
      * 获取当前下标
@@ -93,13 +125,14 @@ public class IndexView extends FrameLayout implements CompoundButton.OnCheckedCh
      * @param attrs
      */
     private void initView(Context context, AttributeSet attrs) {
-        View view = View.inflate(context, R.layout.layout_index_view, this);
+        View view = View.inflate(context, R.layout.layout_drawer_index_view, this);
+        drawerLayout = view.findViewById(R.id.drawer_layout);
         indexLayout = view.findViewById(R.id.index_layout);
         rgIndexTab = view.findViewById(R.id.rg_index_tab);
         indexDividerBottom = view.findViewById(R.id.index_divider_bottom);
         flIndexFragment = view.findViewById(R.id.fl_index_fragment);
         if (attrs != null) {
-            TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.IndexView);
+            TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.DrawerIndexView);
             array.recycle();
         }
     }
@@ -110,8 +143,68 @@ public class IndexView extends FrameLayout implements CompoundButton.OnCheckedCh
      * @param manager
      * @return
      */
-    public IndexView initManager(FragmentManager manager) {
+    public DrawerIndexView initManager(FragmentManager manager) {
         mFragmentManager = manager;
+        return this;
+    }
+
+    /**
+     * 添加侧边栏
+     *
+     * @param label        文字
+     * @param fragmentName Fragment名称
+     * @return
+     */
+    public DrawerIndexView addDrawerItem(String label, @NonNull String fragmentName) {
+        return addDrawerItem(new IndexItem(label, 0, fragmentName));
+    }
+
+    /**
+     * 添加侧边栏
+     *
+     * @param label        文字
+     * @param fragmentName Fragment名称
+     * @return
+     */
+    public DrawerIndexView addDrawerItem(String label, @NonNull String fragmentName, Bundle bundle) {
+        return addDrawerItem(new IndexItem(label, 0, fragmentName, bundle));
+    }
+
+    /**
+     * 添加侧边栏
+     *
+     * @param label        文字
+     * @param icon         图标
+     * @param fragmentName Fragment名称
+     * @return
+     */
+    public DrawerIndexView addDrawerItem(String label, @DrawableRes int icon, @NonNull String fragmentName) {
+        return addDrawerItem(new IndexItem(label, icon, fragmentName));
+    }
+
+    /**
+     * 添加侧边栏
+     *
+     * @param label        文字
+     * @param icon         图标
+     * @param fragmentName Fragment名称
+     * @param bundle       传递数据
+     * @return
+     */
+    public DrawerIndexView addDrawerItem(String label, @DrawableRes int icon, @NonNull String fragmentName, Bundle bundle) {
+        return addDrawerItem(new IndexItem(label, icon, fragmentName, bundle));
+    }
+
+    /**
+     * 添加侧边栏
+     *
+     * @param drawer 侧边item
+     * @return
+     */
+    public DrawerIndexView addDrawerItem(IndexItem drawer) {
+        if (drawerItem == null) {
+            drawerItem = drawer;
+        }
         return this;
     }
 
@@ -123,7 +216,7 @@ public class IndexView extends FrameLayout implements CompoundButton.OnCheckedCh
      * @param fragmentName Fragment名称
      * @return
      */
-    public IndexView addIndexItem(String label, @DrawableRes int icon, @NonNull String fragmentName) {
+    public DrawerIndexView addIndexItem(String label, @DrawableRes int icon, @NonNull String fragmentName) {
         return addIndexItem(new IndexItem(label, icon, fragmentName));
     }
 
@@ -136,7 +229,7 @@ public class IndexView extends FrameLayout implements CompoundButton.OnCheckedCh
      * @param bundle       传递数据
      * @return
      */
-    public IndexView addIndexItem(String label, @DrawableRes int icon, @NonNull String fragmentName, Bundle bundle) {
+    public DrawerIndexView addIndexItem(String label, @DrawableRes int icon, @NonNull String fragmentName, Bundle bundle) {
         return addIndexItem(new IndexItem(label, icon, fragmentName, bundle));
     }
 
@@ -146,7 +239,7 @@ public class IndexView extends FrameLayout implements CompoundButton.OnCheckedCh
      * @param pageItem IndexItem
      * @return
      */
-    public IndexView addIndexItem(IndexItem pageItem) {
+    public DrawerIndexView addIndexItem(IndexItem pageItem) {
         if (pageItemList == null) {
             pageItemList = new ArrayList<>();
         }
@@ -166,7 +259,7 @@ public class IndexView extends FrameLayout implements CompoundButton.OnCheckedCh
      *
      * @return
      */
-    public IndexView startIndex() {
+    public DrawerIndexView startIndex() {
         return startIndex(0);
     }
 
@@ -176,7 +269,7 @@ public class IndexView extends FrameLayout implements CompoundButton.OnCheckedCh
      * @param index
      * @return
      */
-    public IndexView startIndex(int index) {
+    public DrawerIndexView startIndex(int index) {
         startIndex = index;
         rgIndexTab.postDelayed(new Runnable() {
             @Override
@@ -184,7 +277,7 @@ public class IndexView extends FrameLayout implements CompoundButton.OnCheckedCh
                 setCheckedIndex(startIndex);
             }
         }, 300);
-        return this;
+        return setDrawerOpen(false);
     }
 
     /**
@@ -242,6 +335,11 @@ public class IndexView extends FrameLayout implements CompoundButton.OnCheckedCh
     private void setTabSelection(int index) {
         currentIndex = index;
         FragmentTransaction transaction = mFragmentManager.beginTransaction();
+        // 侧边栏
+        if (!initDrawer && drawerItem != null) {
+            transaction.replace(R.id.fl_fragment_drawer, getIndexItemFragment(drawerItem));
+            initDrawer = true;
+        }
         // 隐藏全部Fragment
         for (int i = 0; i < pageItemList.size(); i++) {
             IndexItem pageItem = pageItemList.get(i);
@@ -262,8 +360,8 @@ public class IndexView extends FrameLayout implements CompoundButton.OnCheckedCh
         // 开启事务
         transaction.commitAllowingStateLoss();
         // 回调监听
-        if (mOnIndexChangeListener != null) {
-            mOnIndexChangeListener.onIndexSelected(currentIndex);
+        if (mOnDrawerIndexChangeListener != null) {
+            mOnDrawerIndexChangeListener.onIndexSelected(currentIndex);
         }
     }
 
@@ -297,6 +395,9 @@ public class IndexView extends FrameLayout implements CompoundButton.OnCheckedCh
         if (mFragmentManager == null) {
             return;
         }
+        if (drawerItem != null) {
+            mFragmentManager.putFragment(outState, drawerItem.fragmentName, drawerItem.fragment);
+        }
         if (pageItemList != null && pageItemList.size() > 0) {
             for (int i = 0; i < pageItemList.size(); i++) {
                 IndexItem pageItem = pageItemList.get(i);
@@ -316,6 +417,10 @@ public class IndexView extends FrameLayout implements CompoundButton.OnCheckedCh
         if (mFragmentManager == null || savedInstanceState == null) {
             return;
         }
+        initDrawer = false;
+        if (drawerItem != null) {
+            drawerItem.fragment = mFragmentManager.getFragment(savedInstanceState, drawerItem.fragmentName);
+        }
         if (pageItemList != null && pageItemList.size() > 0) {
             for (int i = 0; i < pageItemList.size(); i++) {
                 IndexItem pageItem = pageItemList.get(i);
@@ -325,12 +430,97 @@ public class IndexView extends FrameLayout implements CompoundButton.OnCheckedCh
     }
 
     /**
-     * 设置页面切换的监听
+     * 设置手势滑动锁定
+     *
+     * @param locked 是否锁定（锁定后手势失效）
+     */
+    public DrawerIndexView setDrawerLock(boolean locked) {
+        if (drawerLayout != null) {
+            drawerLayout.setDrawerLockMode(locked ? DrawerLayout.LOCK_MODE_LOCKED_CLOSED : DrawerLayout.LOCK_MODE_UNLOCKED);
+        }
+        return this;
+    }
+
+    /**
+     * 手势滑动锁定
+     *
+     * @return
+     */
+    public boolean getDrawerLock() {
+        if (drawerLayout != null) {
+            int lockMode = drawerLayout.getDrawerLockMode(edgeGravity);
+            return lockMode == DrawerLayout.LOCK_MODE_LOCKED_CLOSED;
+        }
+        return false;
+    }
+
+    /**
+     * 设置开启/关闭侧边栏
+     *
+     * @param opened 是否开启
+     */
+    public DrawerIndexView setDrawerOpen(boolean opened) {
+        if (drawerLayout != null) {
+            if (opened) {
+                drawerLayout.openDrawer(edgeGravity);
+            } else {
+                drawerLayout.closeDrawer(edgeGravity);
+            }
+        }
+        return this;
+    }
+
+    /**
+     * 是否开启侧边栏
+     *
+     * @return
+     */
+    public boolean getDrawerOpen() {
+        if (drawerLayout != null) {
+            return drawerLayout.isDrawerOpen(edgeGravity);
+        }
+        return false;
+    }
+
+    @Override
+    public void onDrawerSlide(View drawerView, float slideOffset) {
+        // 滑动中
+    }
+
+    @Override
+    public void onDrawerOpened(View drawerView) {
+        // 打开
+    }
+
+    @Override
+    public void onDrawerClosed(View drawerView) {
+        // 关闭
+    }
+
+    @Override
+    public void onDrawerStateChanged(int newState) {
+        // 状态改变
+        if (mOnDrawerIndexChangeListener != null) {
+            mOnDrawerIndexChangeListener.onStateChanged(newState);
+        }
+    }
+
+    /**
+     * 设置DrawerLayout的DrawerListener
+     */
+    public void setDrawerLayoutListener() {
+        setDrawerLayoutListener(this);
+    }
+
+    /**
+     * 设置DrawerLayout的DrawerListener
      *
      * @param listener
      */
-    public void setOnIndexChangeListener(OnIndexChangeListener listener) {
-        mOnIndexChangeListener = listener;
+    public void setDrawerLayoutListener(DrawerLayout.DrawerListener listener) {
+        if (drawerLayout != null) {
+            drawerLayout.addDrawerListener(listener);
+        }
     }
 
     /**
@@ -338,21 +528,37 @@ public class IndexView extends FrameLayout implements CompoundButton.OnCheckedCh
      *
      * @param listener
      */
-    public IndexView addOnIndexChangeListener(OnIndexChangeListener listener) {
-        setOnIndexChangeListener(listener);
-        return this;
+    public void setOnDrawerIndexChangeListener(OnDrawerIndexChangeListener listener) {
+        mOnDrawerIndexChangeListener = listener;
     }
 
+    /**
+     * 设置页面切换的监听
+     *
+     * @param listener
+     */
+    public DrawerIndexView addOnDrawerIndexChangeListener(OnDrawerIndexChangeListener listener) {
+        setDrawerLayoutListener();
+        setOnDrawerIndexChangeListener(listener);
+        return this;
+    }
 
     /**
      * 页面切换的监听
      */
-    public interface OnIndexChangeListener {
+    public interface OnDrawerIndexChangeListener {
         /**
          * 切换页面
          *
          * @param position
          */
         void onIndexSelected(int position);
+
+        /**
+         * 状态改变
+         *
+         * @param newState
+         */
+        void onStateChanged(int newState);
     }
 }

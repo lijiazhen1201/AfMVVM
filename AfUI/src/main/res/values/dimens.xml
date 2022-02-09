@@ -8,4 +8,6 @@
     <dimen name="index_text">@dimen/text_small</dimen>
     <!-- 底部导航字体和图片间距 -->
     <dimen name="index_text_padding">@dimen/height_divider_large</dimen>
+    <!-- 侧边栏宽度 -->
+    <dimen name="drawer_width">280dp</dimen>
 </resources>

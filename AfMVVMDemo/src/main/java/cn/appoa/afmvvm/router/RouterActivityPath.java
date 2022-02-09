@@ -13,6 +13,14 @@ public final class RouterActivityPath extends AfRouterActivityPath {
      */
     public static final String ACTIVITY_INDEX = ACTIVITY + "/index";
     /**
+     * 主页
+     */
+    public static final String ACTIVITY_DRAWER = ACTIVITY + "/drawer";
+    /**
+     * 主页
+     */
+    public static final String ACTIVITY_DRAWER_INDEX = ACTIVITY + "/drawer_index";
+    /**
      * 关于我们
      */
     public static final String ACTIVITY_ABOUT_US = ACTIVITY + "/about_us";

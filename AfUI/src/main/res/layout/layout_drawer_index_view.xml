@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/drawer_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RelativeLayout
+        android:id="@+id/index_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RadioGroup
+            android:id="@+id/rg_index_tab"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/index_height"
+            android:layout_alignParentBottom="true"
+            android:background="@color/colorIndexTabBg"
+            android:gravity="center_vertical"
+            android:orientation="horizontal" />
+
+        <View
+            android:id="@+id/index_divider_bottom"
+            style="@style/HorizontalLine"
+            android:layout_above="@+id/rg_index_tab" />
+
+        <FrameLayout
+            android:id="@+id/fl_index_fragment"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/index_divider_bottom" />
+
+    </RelativeLayout>
+
+    <FrameLayout
+        android:id="@+id/fl_fragment_drawer"
+        android:layout_width="@dimen/drawer_width"
+        android:layout_height="match_parent"
+        android:layout_gravity="start" />
+
+</androidx.drawerlayout.widget.DrawerLayout>
