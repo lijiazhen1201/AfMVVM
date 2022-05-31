@@ -158,9 +158,7 @@ public abstract class BasePopWin implements View.OnClickListener {
     @SuppressWarnings("deprecation")
     public PopupWindow initPop(View view, int width, int height) {
         // 全局变灰色
-        if (ColorUtils.isGrayColor) {
-            ColorUtils.setViewGray(view);
-        }
+        setViewGray(view);
         PopupWindow pop = new PopupWindow(view, width, height, true);
         pop.setBackgroundDrawable(new BitmapDrawable());
         pop.setInputMethodMode(PopupWindow.INPUT_METHOD_NEEDED);
@@ -206,6 +204,15 @@ public abstract class BasePopWin implements View.OnClickListener {
      */
     public PopupWindow initWrapMatchPop(View view) {
         return initPop(view, LayoutParams.WRAP_CONTENT, LayoutParams.MATCH_PARENT);
+    }
+
+    /**
+     * 全局变灰色
+     */
+    protected void setViewGray(View view) {
+        if (ColorUtils.isGrayColor) {
+            ColorUtils.setViewGray(view);
+        }
     }
 
     /**

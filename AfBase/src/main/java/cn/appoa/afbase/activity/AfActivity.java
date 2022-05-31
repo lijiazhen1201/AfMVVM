@@ -85,6 +85,13 @@ public abstract class AfActivity<V extends ViewDataBinding, VM extends BaseViewM
         // 前台监听
         Foreground.get(this).addForegroundListener(this);
         // 全局变灰色
+        setViewGray();
+    }
+
+    /**
+     * 全局变灰色
+     */
+    protected void setViewGray() {
         if (ColorUtils.isGrayColor) {
             ColorUtils.setViewGray(getWindow().getDecorView());
         }

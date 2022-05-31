@@ -168,9 +168,7 @@ public abstract class BaseDialog implements View.OnClickListener {
                              float dimAmount) {
         Dialog dialog = new AfDialog(context, R.style.SimpleDialog);
         // 全局变灰色
-        if (ColorUtils.isGrayColor) {
-            ColorUtils.setViewGray(view);
-        }
+        setViewGray(view);
         dialog.setContentView(view);
         Window window = dialog.getWindow();
         WindowManager.LayoutParams params = window.getAttributes();
@@ -181,6 +179,15 @@ public abstract class BaseDialog implements View.OnClickListener {
         window.setAttributes(params);
         window.setWindowAnimations(animId);// android.R.style.Animation_InputMethod
         return dialog;
+    }
+
+    /**
+     * 全局变灰色
+     */
+    protected void setViewGray(View view) {
+        if (ColorUtils.isGrayColor) {
+            ColorUtils.setViewGray(view);
+        }
     }
 
     /**
