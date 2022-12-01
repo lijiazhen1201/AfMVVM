@@ -16,6 +16,8 @@ import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SimpleItemAnimator;
+import cn.appoa.afutils.app.GenericsUtils;
+import cn.appoa.afutils.net.JsonUtils;
 
 /**
  * @param <T> 数据源
@@ -305,6 +307,12 @@ public abstract class PullToRefreshRecyclerViewFragment<T, VH extends BaseViewHo
      * @param response
      * @return
      */
-    public abstract List<T> filterResponse(String response);
+    public List<T> filterResponse(String response) {
+        if (JsonUtils.filterJson(response)) {
+            Class<T> clazz = GenericsUtils.getSuperClassGenericsType(getClass());
+            return JsonUtils.filterJsonParseArray(response, clazz);
+        }
+        return null;
+    }
 
 }

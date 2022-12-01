@@ -12,6 +12,7 @@ import cn.appoa.afutils.net.JsonUtils;
  * 网络访问成功的回调
  *
  * @param <T> 后台返回的data里数据
+ * @deprecated Use {@link cn.appoa.afhttp.okgo.OkGoBeansListener} Instead
  */
 public abstract class OkGoDatasListener<T> extends OkGoSuccessListener {
 

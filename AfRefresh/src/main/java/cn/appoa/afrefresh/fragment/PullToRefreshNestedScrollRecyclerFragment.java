@@ -15,6 +15,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SimpleItemAnimator;
+import cn.appoa.afutils.app.GenericsUtils;
+import cn.appoa.afutils.net.JsonUtils;
 
 /**
  * 下拉刷新的NestedScrollView(带RecyclerView)
@@ -292,6 +294,12 @@ public abstract class PullToRefreshNestedScrollRecyclerFragment<T, VH extends Ba
      * @param response
      * @return
      */
-    public abstract List<T> filterResponse(String response);
+    public List<T> filterResponse(String response){
+        if (JsonUtils.filterJson(response)) {
+            Class<T> clazz = GenericsUtils.getSuperClassGenericsType(getClass());
+            return JsonUtils.filterJsonParseArray(response, clazz);
+        }
+        return null;
+    }
 
 }
